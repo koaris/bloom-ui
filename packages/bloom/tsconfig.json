@@ -1,4 +1,4 @@
 {
-  "extends": "@koaris/ts-config/base.json",
+  "extends": "@koaris/ts-config/react.json",
   "include": ["src"],
 }
