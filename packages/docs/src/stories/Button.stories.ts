@@ -5,7 +5,7 @@ export default {
   title: 'Form/Button',
   component: Button,
   args: {
-    children: 'Send',
+    children: 'Visualizar',
     size: 'md',
     disabled: false,
     variant: 'primary',
@@ -18,7 +18,7 @@ export default {
       },
     },
     variant: {
-      options: ['primary', 'secondary', 'tertiary'],
+      options: ['primary', 'secondary'],
       control: {
         type: 'inline-radio',
       },
@@ -39,7 +39,7 @@ export const Primary: StoryObj<ButtonProps> = {}
 export const Secondary: StoryObj<ButtonProps> = {
   args: {
     variant: 'secondary',
-    children: 'Create new',
+    children: 'Ignorar',
   },
 }
 

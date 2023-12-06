@@ -6,7 +6,7 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      colors,
+      colors: colors,
       fontSize: fontSizes,
       fontWeight: fontWeights,
       fontFamily: fonts,
