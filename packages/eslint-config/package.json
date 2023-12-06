@@ -3,15 +3,6 @@
   "license": "MIT",
   "private": true,
   "main": "index.js",
-  "peerDependencies": {
-    "eslint": "^8.0.0",
-    "typescript": ">=4 <5.2.0"
-  },
-  "peerDependenciesMeta": {
-    "typescript": {
-      "optional": true
-    }
-  },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^5.25.0",
     "@typescript-eslint/parser": "^5.25.0",
