@@ -21,7 +21,7 @@ export const Button = ({
   return (
     <button
       className={twMerge(
-        'flex items-center justify-center rounded-lg px-8 py-2 text-md font-medium',
+        'flex items-center justify-center rounded-lg px-8 py-2 text-md font-medium font-default',
         className,
         variant === 'primary' && 'bg-orange-300 text-white-100',
         variant === 'secondary' && 'bg-white-100 text-orange-300 border border-orange-300',
