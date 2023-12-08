@@ -10,14 +10,16 @@
     "build": "storybook build"
   },
   "dependencies": {
-    "@koaris/eslint-config": "*",
     "@koaris/bloom": "*",
+    "@koaris/eslint-config": "*",
     "@koaris/tokens": "*",
     "@koaris/ts-config": "*",
+    "polished": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "storybook": "^7.4.6",
     "@storybook/addon-essentials": "^7.4.6",
     "@storybook/addon-interactions": "^7.4.6",
     "@storybook/addon-links": "^7.4.6",
@@ -35,7 +37,6 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
     "eslint-plugin-storybook": "^0.6.15",
-    "storybook": "^7.4.6",
     "typescript": "^5.0.2",
     "vite": "^4.4.5"
   }
