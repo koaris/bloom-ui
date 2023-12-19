@@ -1,6 +1,8 @@
 const tailwindColors = {
   white: '#FFFFFF',
   black: '#000000',
+
+  black100: '#1C2126',
   
   white100: '#FEFEFE',
   white300: '#F6F6F6',
@@ -8,7 +10,6 @@ const tailwindColors = {
   orange500: '#F36246',
 
   gray300: '#323C45',
-  gray700: '#1C2126',
 }
 
 export const colors = Object.fromEntries(
