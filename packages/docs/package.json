@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint . --fix",
     "dev": "storybook dev -p 6006",
-    "build": "build-storybook -s public"
+    "build": "storybook build"
   },
   "dependencies": {
     "@koaris/bloom": "*",
