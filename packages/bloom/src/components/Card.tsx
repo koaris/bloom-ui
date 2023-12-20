@@ -12,6 +12,7 @@ export interface CardProps extends DetailedHTMLProps<
     selected?: boolean,
     disabled?: boolean,
     image?: string // Add the image property
+    onClick?: () => void
 }
 
 export const Card = ({
@@ -19,17 +20,19 @@ export const Card = ({
   variant = 'primary', 
   selected = false,
   disabled,
+  onClick,
   ...rest
 }: CardProps) => {
   return (
     <div
       className={twMerge(
-        'flex flex-col items-center justify-center rounded-lg px-8 py-4 w-64',
+        'flex flex-col items-center justify-center rounded-lg px-8 py-4 w-64 hover:shadow-md hover:shadow-neutral-500 cursor-pointer',
         className,
         variant === 'primary' && 'bg-neutral text-neutral-1000',
         selected === true && 'border-2 border-orange-500',
         disabled === true && 'opacity-50 cursor-not-allowed'
       )}
+      onClick={onClick}
     >
       <img src={rest.image} alt={rest.title} />
       <h1 className='text-xl font-bold font-default leading-tight'>{rest.title}</h1>
