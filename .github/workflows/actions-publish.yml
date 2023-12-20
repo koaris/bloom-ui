@@ -20,7 +20,7 @@ jobs:
           node-version: '16'
 
       - name: Install the dependencies
-        run: npm ci
+        run: npm i
 
       - name: Build Storybook
         run: npm run build
