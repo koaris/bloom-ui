@@ -32,4 +32,4 @@ jobs:
         with:
           branch: gh-pages
           folder: packages/docs/storybook-static
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
