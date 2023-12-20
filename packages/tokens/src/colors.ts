@@ -1,20 +1,17 @@
 const tailwindColors = {
-  white: '#FFFFFF',
-  black: '#000000',
-
-  black100: '#1C2126',
-  
-  white100: '#FEFEFE',
-  white300: '#F6F6F6',
-
+  neutral: '#FFFFFF',
+  neutral100: '#FEFEFE',
+  neutral300: '#F6F6F6',
+  neutral500: '#999999',
+  neutral600: '#323C45',
+  neutral800: '#1C2126',
+  neutral1000: '#000000',
   orange500: '#F36246',
-
-  gray300: '#323C45',
 }
 
 export const colors = Object.fromEntries(
   Object.entries(tailwindColors).map(([key, value]) => [
-    (key === 'white' || key === 'black') ? key : key.replace(/(\D+)(\d+)/, '$1-$2'),
+    (key === 'neutral' || key === 'black') ? key : key.replace(/(\D+)(\d+)/, '$1-$2'),
     value,
   ])
 );
