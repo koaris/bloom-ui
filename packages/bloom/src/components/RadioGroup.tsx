@@ -40,8 +40,8 @@ export const RadioGroup = ({
             htmlFor={`radio${option.id}`}
             className={twMerge(
               'relative rounded-full border-2 w-6 h-6 flex items-center justify-center hover:border-orange-500 hover:cursor-pointer',
+              selectedOption === option.value ? 'bg-orange-500 border-orange-500' : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500',
               disabled === true && 'opacity-50 cursor-not-allowed',
-              selectedOption === option.value ? 'bg-orange-500 border-orange-500' : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500'
           )}
           >
             <input
@@ -53,6 +53,7 @@ export const RadioGroup = ({
               className="hidden"
               checked={selectedOption === option.value}
               onChange={() => handleOptionChange(option.value)}
+              disabled={disabled}
             />
             {selectedOption === option.value && (
               <FiCheck color="#FFFFFF" style={{ strokeWidth: 4 }} />
