@@ -1,3 +1,3 @@
 export * from './components/Button'
 export * from './components/Card'
-export * from './components/Radio'
+export * from './components/RadioGroup'
