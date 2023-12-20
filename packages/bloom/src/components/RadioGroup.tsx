@@ -14,17 +14,17 @@ export interface RadioGroupProps extends DetailedHTMLProps<
     variant?: 'primary',
     disabled?: boolean,
     options: typeof options,
+    required?: boolean
 }
 
 export const RadioGroup = ({
-  className,
   variant = 'primary',
   disabled,
   options = [
     { id: 1, value: 'option1', label: 'Opção 1' },
     { id: 2, value: 'option2', label: 'Opção 2' }
   ],
-  ...rest
+  required = false,
 }: RadioGroupProps) => {
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -49,6 +49,7 @@ export const RadioGroup = ({
               id={`radio${option.id}`}
               name="radioGroup"
               value={option.value}
+              required={required}
               className="hidden"
               checked={selectedOption === option.value}
               onChange={() => handleOptionChange(option.value)}

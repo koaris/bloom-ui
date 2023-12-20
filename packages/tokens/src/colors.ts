@@ -7,6 +7,11 @@ const tailwindColors = {
   neutral800: '#1C2126',
   neutral1000: '#000000',
   orange500: '#F36246',
+  red100: '#F7B0C8',
+  red300: '#F278A1',
+  red500: '#E91E63',
+  red700: '#DE0059',
+  red900: '#9E003F',
 }
 
 export const colors = Object.fromEntries(

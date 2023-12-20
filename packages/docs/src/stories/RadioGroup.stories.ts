@@ -7,6 +7,7 @@ export default {
   args: {
     variant: 'primary',
     disabled: false,
+    required: true,
     options: [
       { id: 1, label: 'Option 1', value: '1' },
       { id: 2, label: 'Option 2', value: '2' },
@@ -21,6 +22,11 @@ export default {
       },
     },
     disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    required: {
       control: {
         type: 'boolean',
       },
