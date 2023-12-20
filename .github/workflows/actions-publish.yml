@@ -20,10 +20,10 @@ jobs:
           node-version: '16'
 
       - name: Install the dependencies
-        run: cd packages/docs && npm ci
+        run: npm ci
 
       - name: Build Storybook
-        run: cd packages/docs && npm run build-storybook
+        run: npm run build
 
       - name: Deploy Storybook to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.5
