@@ -26,7 +26,8 @@ export const Card = ({
   return (
     <div
       className={twMerge(
-        'flex flex-col items-center justify-center rounded-lg px-8 py-4 w-64 hover:shadow-md hover:shadow-neutral-500 cursor-pointer',
+        'flex flex-col items-center justify-center rounded-lg px-8 py-4 w-64 cursor-pointer',
+        'hover:shadow-md hover:shadow-neutral-500 border-2 border-neutral-500',
         className,
         variant === 'primary' && 'bg-neutral text-neutral-1000',
         selected === true && 'border-2 border-orange-500',
