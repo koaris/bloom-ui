@@ -27,9 +27,12 @@ jobs:
       - name: Build projects
         run: npm run build
 
-      - name: Deploy Storybook to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@4.1.5
-        with:
-          branch: gh-pages
-          folder: packages/docs/storybook-static
-          token: ${{ secrets.MY_GITHUB_TOKEN }}
+      - name: Deploy Storybook
+        # This needs an Acces Token stored as "GH_TOKEN" 👇
+        run: |
+            npm install
+            npm run deploy-storybook -- --ci
+        env:
+            GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
+            branch: gh-pages
+            folder: packages/docs/storybook-static

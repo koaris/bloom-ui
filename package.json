@@ -10,5 +10,8 @@
   "devDependencies": {
     "gh-pages": "^6.1.0",
     "turbo": "^1.11.1"
+  },
+  "dependencies": {
+    "storybook-deployer": "^2.8.12"
   }
 }
