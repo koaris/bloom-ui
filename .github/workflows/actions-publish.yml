@@ -33,3 +33,4 @@ jobs:
           branch: gh-pages
           folder: packages/docs/storybook-static
           token: ${{ secrets.MY_GITHUB_TOKEN }}
+          verbose: true
