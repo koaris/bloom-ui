@@ -24,7 +24,7 @@ jobs:
           rm -rf node_modules package-lock.json
           npm i
 
-      - name: Build Storybook
+      - name: Build projects
         run: npm run build
 
       - name: Deploy Storybook to GitHub Pages
