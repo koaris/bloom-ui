@@ -14,12 +14,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Node.js environment
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: '18'
 
-      - name: Install the dependencies
+      - name: Install
         run: |
           rm -rf node_modules package-lock.json
           npm i
@@ -27,12 +27,9 @@ jobs:
       - name: Build projects
         run: npm run build
 
-      - name: Deploy Storybook
-        # This needs an Acces Token stored as "GH_TOKEN" 👇
-        run: |
-            npm install
-            npm run deploy-storybook -- --ci
-        env:
-            GH_TOKEN: ${{ secrets.MY_GITHUB_TOKEN }}
-            branch: gh-pages
-            folder: packages/docs/storybook-static
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@latest
+        with:
+          branch: gh-pages
+          folder: packages/docs/storybook-static
+          token: ${{ secrets.MY_GITHUB_TOKEN }}
