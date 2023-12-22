@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint . --fix",
     "dev": "storybook dev -p 6006",
-    "build": "storybook build -o docs-build --no-cache",
+    "build": "storybook build -o docs-build",
     "build-storybook": "storybook build"
   },
   "dependencies": {
