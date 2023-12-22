@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint . --fix",
     "dev": "storybook dev -p 6006",
-    "build": "storybook build -o docs-build",
+    "build": "storybook build -o docs-build ; touch docs-build/.nojekyll",
     "build-storybook": "storybook build"
   },
   "dependencies": {
