@@ -33,3 +33,4 @@ jobs:
           branch: gh-pages
           folder: packages/docs/docs-build
           token: ${{ secrets.MY_GITHUB_TOKEN }}
+          clean: true
