@@ -17,11 +17,12 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v3
         with:
-          node-version: '18'
+          node-version: '18.12.0'
 
       - name: Install
         run: |
           rm -rf node_modules package-lock.json
+          rm -rf packages/docs/docs-build packages/docs/node_modules
           npm i
 
       - name: Build projects
