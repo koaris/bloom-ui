@@ -13,10 +13,10 @@ const preview: Preview = {
       },
     },
     docs: {
-      theme: themes.dark,
+      theme: themes.light,
     },
     backgrounds: {
-      default: 'dark'
+      default: 'light'
     },
   },
 };

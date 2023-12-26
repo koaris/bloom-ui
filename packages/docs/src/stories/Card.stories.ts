@@ -3,7 +3,7 @@ import { Card, CardProps } from '@koaris/bloom'
 import image from '../images/koaris_gestao.svg';
 
 export default {
-  title: 'Form/Card',
+  title: 'Components/Card',
   component: Card,
   args: {
     title: 'Gestão online',
@@ -64,6 +64,8 @@ export const Large: StoryObj<CardProps> = {
 
 export const Disabled: StoryObj<CardProps> = {
   args: {
+    direction: 'row',
+    size: 'large',
     disabled: true,
   },
 }
