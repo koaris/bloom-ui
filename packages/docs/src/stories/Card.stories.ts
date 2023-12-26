@@ -12,6 +12,7 @@ export default {
     disabled: false,
     selected: true,
     direction: 'col',
+    imageSize: '184px',
   },
   argTypes: {
     image: {
