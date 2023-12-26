@@ -11,14 +11,12 @@ export interface RadioGroupProps extends DetailedHTMLProps<
     HTMLAttributes<HTMLDivElement>,
     HTMLDivElement
   > {
-    variant?: 'primary',
     disabled?: boolean,
     options: typeof options,
     required?: boolean
 }
 
 export const RadioGroup = ({
-  variant = 'primary',
   disabled,
   options = [
     { id: 1, value: 'option1', label: 'Opção 1' },

@@ -8,18 +8,12 @@ export default {
   args: {
     title: 'Gestão online',
     content: 'Otimize seus processos',
-    variant: 'primary',
     image: image,
     disabled: false,
     selected: true,
+    direction: 'col',
   },
   argTypes: {
-    variant: {
-      options: ['primary', 'secondary'],
-      control: {
-        type: 'inline-radio',
-      },
-    },
     image: {
       control: {
         type: 'file',
@@ -35,13 +29,37 @@ export default {
         type: 'boolean',
       },
     },
+    direction: {
+      options: ['col', 'row'],
+      control: {
+        type: 'inline-radio',
+      },
+    },
+    size: {
+      options: ['medium', 'large'],
+      control: {
+        type: 'inline-radio',
+      },
+    },
     onClick: {
       action: 'click',
     },
   },
 } as Meta<CardProps>
 
-export const Primary: StoryObj<CardProps> = {}
+export const Default: StoryObj<CardProps> = {
+  args: {
+    direction: 'col',
+    size: 'medium',
+  },
+}
+
+export const Large: StoryObj<CardProps> = {
+  args: {
+    direction: 'row',
+    size: 'large',
+  },
+}
 
 export const Disabled: StoryObj<CardProps> = {
   args: {

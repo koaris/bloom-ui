@@ -5,7 +5,6 @@ export default {
   title: 'Form/RadioGroup',
   component: RadioGroup,
   args: {
-    variant: 'primary',
     disabled: false,
     required: true,
     options: [
@@ -15,12 +14,6 @@ export default {
     ],
   },
   argTypes: {
-    variant: {
-      options: ['primary'],
-      control: {
-        type: 'inline-radio',
-      },
-    },
     disabled: {
       control: {
         type: 'boolean',
@@ -42,7 +35,7 @@ export default {
   },
 } as Meta<RadioGroupProps>
 
-export const Primary: StoryObj<RadioGroupProps> = {}
+export const Default: StoryObj<RadioGroupProps> = {}
 
 export const Disabled: StoryObj<RadioGroupProps> = {
   args: {

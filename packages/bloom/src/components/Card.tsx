@@ -8,17 +8,19 @@ export interface CardProps extends DetailedHTMLProps<
     HTMLAttributes<HTMLDivElement>, // Change the type to HTMLDivElement
     HTMLDivElement
   > {
-    variant?: 'primary',
     selected?: boolean,
     disabled?: boolean,
+    direction?: string,
+    size?: string,
     image?: string // Add the image property
     onClick?: () => void
 }
 
 export const Card = ({
   className,
-  variant = 'primary', 
   selected = false,
+  direction,
+  size,
   disabled,
   onClick,
   ...rest
@@ -26,18 +28,22 @@ export const Card = ({
   return (
     <div
       className={twMerge(
-        'flex flex-col items-center justify-center rounded-lg px-8 py-4 w-64 cursor-pointer',
-        'hover:shadow-md hover:shadow-neutral-500 border-2 border-neutral-500',
+        'flex items-center justify-center rounded-lg cursor-pointer bg-neutral py-4',
+        'hover:shadow-md hover:shadow-neutral-500 border border-neutral-500 text-neutral-1000',
         className,
-        variant === 'primary' && 'bg-neutral text-neutral-1000',
+        size === 'medium' && 'w-64 px-8 ',
+        size === 'large' && 'w-3/6',
+        direction === 'col' && 'flex-col',
         selected === true && 'border-2 border-orange-500',
         disabled === true && 'opacity-50 cursor-not-allowed'
       )}
       onClick={onClick}
     >
       <img src={rest.image} alt={rest.title} />
-      <h1 className='text-xl font-bold font-default leading-tight'>{rest.title}</h1>
-      <p className=''>{rest.content}</p>
+      <aside className={twMerge(direction === 'col' && 'text-center')}>
+        <h1 className='text-xl font-bold font-default leading-tight'>{rest.title}</h1>
+        <p className=''>{rest.content}</p>
+      </aside>
     </div>
   )
 }
