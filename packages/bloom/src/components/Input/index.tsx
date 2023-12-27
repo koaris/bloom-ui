@@ -13,6 +13,7 @@ export interface InputProps extends
     placeholder?: string;
     value?: string;
     error: boolean;
+    required?: boolean;
     type: 'text' | 'password' | 'date' | 'cpf' | 'phone' | 'cnpj' | 'cep';
 }
 
@@ -23,6 +24,7 @@ export const Input = ({
     placeholder,
     value,
     error,
+    required,
     type,
     onClick,
     ...rest
@@ -54,6 +56,7 @@ export const Input = ({
                     id={rest.id}
                     name={rest.name}
                     type={type}
+                    required={required}
                     className={twMerge(
                         'flex items-center justify-center rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
                         className,
@@ -73,6 +76,7 @@ export const Input = ({
                     id={rest.id}
                     name={rest.name}
                     type={type}
+                    required={required}
                     className={twMerge(
                         'flex items-center justify-center rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
                         className,
@@ -90,7 +94,7 @@ export const Input = ({
                 />
             )}
             
-            {error === true && <label htmlFor={rest.id} className='text-red-900'>Campo inválido</label>}
+            {error === true && <label htmlFor={rest.id} className='text-red-900'>Campo inválido.</label>}
         </>
     )
 }
