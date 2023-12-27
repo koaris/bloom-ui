@@ -7,6 +7,9 @@ export default {
   args: {
     value: '',
     placeholder: 'Placeholder',
+    id: 'input01',
+    name: 'input01',
+    type: "text",
   },
   argTypes: {
     disabled: {
@@ -28,10 +31,45 @@ export const Label: StoryObj<InputProps> = {
   },
 }
 
+export const Cnpj: StoryObj<InputProps> = {
+  args: {
+    label: "Cnpj",
+    type: "cnpj",
+  },
+}
+
+export const Cpf: StoryObj<InputProps> = {
+  args: {
+    label: "Cpf",
+    type: "cpf",
+  },
+}
+
+export const Cep: StoryObj<InputProps> = {
+  args: {
+    label: "Cep",
+    type: "cep",
+  },
+}
+
+export const Date: StoryObj<InputProps> = {
+  args: {
+    label: "Date",
+    type: "date",
+  },
+}
+
+export const Phone: StoryObj<InputProps> = {
+  args: {
+    label: "Phone",
+    type: "phone",
+  },
+}
+
 export const Password: StoryObj<InputProps> = {
   args: {
     label: "Senha",
-    type: "cnpj",
+    type: "password",
   },
 }
 

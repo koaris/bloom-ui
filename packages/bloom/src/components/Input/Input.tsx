@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import InputMask from 'react-input-mask'
+import MaskedInput from 'react-text-mask'
 import masks from '../Shared/masks';
 
 /**
@@ -49,24 +49,47 @@ export const Input = ({
     return (
         <>
             {label && <label htmlFor={rest.id}>{label}</label>}
-            <InputMask
-                id={rest.id}
-                type={type}
-                className={twMerge(
-                    'flex items-center justify-center rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
-                    className,
-                    disabled === true && 'opacity-50 cursor-not-allowed',
-                    selected === true && 'border-2 border-orange-500',
-                    error === true && 'border-2 border-red-900',
-                )}
-                onClick={onClick}
-                onFocus={handleFocus}
-                onChange={handleInput}
-                onBlur={handleBlur}
-                placeholder={placeholder}
-                value={inputValue}
-                mask={type as keyof typeof masks}
-            />
+            {type === 'text' || type === 'password' || type === 'date' ? (
+                <input
+                    id={rest.id}
+                    name={rest.name}
+                    type={type}
+                    className={twMerge(
+                        'flex items-center justify-center rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
+                        className,
+                        disabled === true && 'opacity-50 cursor-not-allowed',
+                        selected === true && 'border-2 border-orange-500',
+                        error === true && 'border-2 border-red-900',
+                    )}
+                    onClick={onClick}
+                    onFocus={handleFocus}
+                    onChange={handleInput}
+                    onBlur={handleBlur}
+                    placeholder={placeholder}
+                    value={inputValue}
+                />
+            ) : (
+                <MaskedInput
+                    id={rest.id}
+                    name={rest.name}
+                    type={type}
+                    className={twMerge(
+                        'flex items-center justify-center rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
+                        className,
+                        disabled === true && 'opacity-50 cursor-not-allowed',
+                        selected === true && 'border-2 border-orange-500',
+                        error === true && 'border-2 border-red-900',
+                    )}
+                    onClick={onClick}
+                    onFocus={handleFocus}
+                    onChange={handleInput}
+                    onBlur={handleBlur}
+                    placeholder={placeholder}
+                    value={inputValue}
+                    mask={masks[type as keyof typeof masks]}
+                />
+            )}
+            
             {error === true && <label htmlFor={rest.id} className='text-red-900'>Campo inválido</label>}
         </>
     )
