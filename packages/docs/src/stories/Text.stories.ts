@@ -2,8 +2,9 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { Text, TextProps } from '@koaris/bloom'
 
 export default {
-  title: 'Form/Text',
+  title: 'Typography/Text',
   component: Text,
+  tags: ['autodocs'],
   args: {
     children: "Example text"
   },
@@ -13,28 +14,26 @@ export default {
       control: {
         type: 'select',
       },
+    },
+    variant: {
+      options: ['p', 'strong', 'span'],
+      control: {
+        type: 'select',
+      },
     }
   }
 } as Meta<TextProps>
 
 export const Default: StoryObj<TextProps> = {}
 
-export const Title: StoryObj<TextProps> = {
-  args: {
-    variant: "h1",
-    size: "2xl"
-  }
-}
-
-export const Subtitle: StoryObj<TextProps> = {
-  args: {
-    variant: "h2",
-    size: "xl"
-  }
-}
-
 export const Strong: StoryObj<TextProps> = {
   args: {
     variant: "strong"
+  }
+}
+
+export const Span: StoryObj<TextProps> = {
+  args: {
+    variant: "span"
   }
 }

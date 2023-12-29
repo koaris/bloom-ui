@@ -4,6 +4,7 @@ import { Button, ButtonProps } from '@koaris/bloom'
 export default {
   title: 'Form/Button',
   component: Button,
+  tags: ['autodocs'],
   args: {
     children: 'Visualizar',
     size: 'md',

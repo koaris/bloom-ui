@@ -5,6 +5,7 @@ import image from '../images/koaris_gestao.svg';
 export default {
   title: 'Components/Card',
   component: Card,
+  tags: ['autodocs'],
   args: {
     title: 'Gestão online',
     content: 'Otimize seus processos',

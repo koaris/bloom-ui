@@ -4,6 +4,7 @@ import { Input, InputProps } from '@koaris/bloom'
 export default {
   title: 'Form/Input',
   component: Input,
+  tags: ['autodocs'],
   args: {
     value: '',
     placeholder: 'Placeholder',

@@ -4,6 +4,7 @@ import { Box, BoxProps, Text } from '@koaris/bloom'
 export default {
   title: 'Components/Box',
   component: Box,
+  tags: ['autodocs'],
   args: {
     children: <Text color='neutral'>Testando o elemento box</Text>
   }

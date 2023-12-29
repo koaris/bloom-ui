@@ -4,6 +4,7 @@ import { RadioGroup, RadioGroupProps } from '@koaris/bloom'
 export default {
   title: 'Form/RadioGroup',
   component: RadioGroup,
+  tags: ['autodocs'],
   args: {
     disabled: false,
     required: true,

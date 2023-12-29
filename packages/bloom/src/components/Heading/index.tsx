@@ -1,22 +1,20 @@
 import { twMerge } from 'tailwind-merge'
 
-export interface TextProps {
+export interface HeadingProps {
     children: React.ReactNode;
     color?: string;
-    size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
-    variant?: 'p' | 'strong' | 'span';
+    size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
+    variant?: 'h1' | 'h2' | 'h3' | 'h4';
 }
 
-export const Text = ({ 
+export const Heading = ({ 
     children,
     color = 'neutral-800',
-    size = 'md',
-    variant = 'p'
-}: TextProps) => {
+    size = 'lg',
+    variant = 'h2'
+}: HeadingProps) => {
 
     const fontSize= {
-        'xxs': 'text-xxs',
-        'xs': 'text-xs',
         'sm': 'text-sm',
         'md': 'text-md',
         'lg': 'text-lg',
