@@ -17,6 +17,11 @@ export default {
         type: 'boolean',
       },
     },
+    error: {
+      control: {
+        type: 'boolean',
+      },
+    },
     onClick: {
       action: 'click',
     },
