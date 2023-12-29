@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Box, TextArea, TextAreaProps } from '@koaris/bloom'
+import { TextArea, TextAreaProps } from '@koaris/bloom'
 
 export default {
   title: 'Form/TextArea',

@@ -1,6 +1,7 @@
 export * from './components/Card'
 export * from './components/Button'
 export * from './components/RadioGroup'
+export * from './components/Checkbox'
 export * from './components/Input'
 export * from './components/TextInput'
 export * from './components/TextArea'

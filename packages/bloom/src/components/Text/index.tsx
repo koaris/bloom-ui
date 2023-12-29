@@ -12,7 +12,7 @@ export interface TextProps extends
 
 export const Text = ({ 
     children,
-    color = 'neutral-900',
+    color = 'neutral-800',
     size = 'md',
     variant = 'p',
     className,
