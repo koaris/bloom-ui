@@ -15,9 +15,11 @@
     "@koaris/eslint-config": "*",
     "@koaris/tokens": "*",
     "@koaris/ts-config": "*",
+    "@storybook/addon-a11y": "^7.6.6",
     "polished": "^4.2.2",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-icons": "^4.12.0"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.4.6",
