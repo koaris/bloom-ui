@@ -1,17 +1,22 @@
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
 import { twMerge } from 'tailwind-merge'
 
-export interface TextProps {
-    children: React.ReactNode;
+export interface TextProps extends 
+    DetailedHTMLProps<HTMLAttributes<HTMLLabelElement>, HTMLLabelElement> {
+    children: ReactNode;
     color?: string;
     size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
-    variant?: 'p' | 'strong' | 'span';
+    variant?: 'p' | 'strong' | 'span' | 'label';
+    htmlFor?: string;
 }
 
 export const Text = ({ 
     children,
-    color = 'neutral-800',
+    color = 'neutral-900',
     size = 'md',
-    variant = 'p'
+    variant = 'p',
+    className,
+    ...rest
 }: TextProps) => {
 
     const fontSize= {
@@ -31,10 +36,10 @@ export const Text = ({
         '9xl': 'text-9xl',
     }[size];
 
-    const Tag = variant;
+    const Tag = variant as React.ElementType;
 
     return (
-        <Tag className={twMerge(`text-${color} ${fontSize}`)}>
+        <Tag {...rest} className={twMerge(`text-${color} ${fontSize}`, className)}>
             {children}
         </Tag>
     );

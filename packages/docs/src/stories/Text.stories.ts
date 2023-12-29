@@ -16,7 +16,7 @@ export default {
       },
     },
     variant: {
-      options: ['p', 'strong', 'span'],
+      options: ['p', 'strong', 'span', 'label'],
       control: {
         type: 'select',
       },
@@ -35,5 +35,11 @@ export const Strong: StoryObj<TextProps> = {
 export const Span: StoryObj<TextProps> = {
   args: {
     variant: "span"
+  }
+}
+
+export const Label: StoryObj<TextProps> = {
+  args: {
+    variant: "label"
   }
 }

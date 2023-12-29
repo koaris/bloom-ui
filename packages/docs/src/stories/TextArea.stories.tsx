@@ -28,9 +28,7 @@ export default {
   },
   decorators: [
     (Story) => (
-      <Box>
-        <Story />
-      </Box>
+      <Story />
     ),
   ]
 } as Meta<TextAreaProps>
@@ -40,7 +38,6 @@ export const Default: StoryObj<TextAreaProps> = {}
 export const Label: StoryObj<TextAreaProps> = {
   args: {
     label: "Observações",
-    color: "white"
   },
 }
 

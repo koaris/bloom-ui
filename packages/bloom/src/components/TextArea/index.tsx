@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, TextareaHTMLAttributes, useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { Text } from '../Text';
 
 
 /**
@@ -50,7 +51,7 @@ export const TextArea = ({
 
     return (
         <>
-            {rest.label && <label htmlFor={rest.id} className='leading-8'>{rest.label}</label>}
+            {rest.label && <Text htmlFor={rest.id} variant='label' color={rest.color} className='leading-8'>{rest.label}</Text>}
             <textarea
                 id={rest.id}
                 name={rest.name}

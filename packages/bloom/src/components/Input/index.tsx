@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge'
 import MaskedInput from 'react-text-mask'
 import { FiCheck, FiX } from 'react-icons/fi'
 import masks from '../Shared/masks'
+import { Text } from '../Text'
 
 
 /**
@@ -64,7 +65,7 @@ export const Input = ({
 
     return (
         <>
-            {label && <label htmlFor={rest.id} className='leading-8'>{label}</label>}
+            {label && <Text htmlFor={rest.id} variant='label' color={rest.color} className='leading-8'>{label}</Text>}
             {type === 'text' || type === 'password' || type === 'date' ? (
                 <>
                     <input

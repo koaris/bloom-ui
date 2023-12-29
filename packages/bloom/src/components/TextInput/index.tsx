@@ -1,5 +1,6 @@
 import { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
+import { Text } from '../Text';
 
 
 /**
@@ -48,7 +49,7 @@ export const TextInput = ({
 
     return (
         <>
-            {rest.label && <label htmlFor={rest.id} className='leading-6'>{rest.label}</label>}
+            {rest.label && <Text htmlFor={rest.id} variant='label' color={rest.color} className='leading-8'>{rest.label}</Text>}
             <div className={twMerge(
                     "bg-neutral-800 py-2 px-4 rounded-sm box-border flex items-baseline",
                     "hover:shadow-md hover:shadow-neutral-500 focus:outline-none",
