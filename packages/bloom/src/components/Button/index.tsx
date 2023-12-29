@@ -12,6 +12,7 @@ export interface ButtonProps
   size?: 'sm' | 'md'
   variant?: 'primary' | 'secondary'
   disabled?: boolean
+  children: string | JSX.Element
 }
 
 export const Button = ({
@@ -32,6 +33,7 @@ export const Button = ({
         variant === 'secondary' &&
           'bg-neutral text-orange-500 border border-orange-500 hover:bg-neutral-200',
         size === 'sm' && 'px-6 py-1',
+        typeof rest.children !== 'string' && 'px-4',
         disabled === true && 'opacity-50 cursor-not-allowed',
       )}
       onClick={onClick}
