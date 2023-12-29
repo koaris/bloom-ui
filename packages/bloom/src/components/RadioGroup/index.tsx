@@ -35,7 +35,7 @@ export const RadioGroup = ({
           <label
             htmlFor={`radio${option.id}`}
             className={twMerge(
-              'relative rounded-full border-2 w-6 h-6 flex items-center justify-center hover:border-orange-500 hover:cursor-pointer',
+              'relative rounded-full border-2 w-5 h-5 flex items-center justify-center hover:border-orange-500 hover:cursor-pointer',
               selectedOption === option.value
                 ? 'bg-orange-500 border-orange-500'
                 : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500',
@@ -54,7 +54,7 @@ export const RadioGroup = ({
               disabled={disabled}
             />
             {selectedOption === option.value && (
-              <FiCheck color="#FFFFFF" style={{ strokeWidth: 4 }} />
+              <FiCheck color="#FFFFFF" size={12} style={{ strokeWidth: 4 }} />
             )}
           </label>
           <span className="px-2">{option.label}</span>

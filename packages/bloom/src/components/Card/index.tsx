@@ -35,7 +35,7 @@ export const Card = ({
         'hover:shadow-md hover:shadow-neutral-500 border border-neutral-500 text-neutral-1000',
         className,
         size === 'medium' && 'w-64 px-8 py-4',
-        size === 'large' && 'w-3/6',
+        size === 'large' && 'w-96 pr-5',
         direction === 'col' && 'flex-col',
         selected === true && 'border-2 border-orange-500',
         disabled === true && 'opacity-50 cursor-not-allowed',
