@@ -1,0 +1,57 @@
+import type { StoryObj, Meta } from '@storybook/react'
+import { Box, TextArea, TextAreaProps } from '@koaris/bloom'
+
+export default {
+  title: 'Form/TextArea',
+  component: TextArea,
+  tags: ['autodocs'],
+  args: {
+    value: '',
+    placeholder: 'Placeholder',
+    id: 'input01',
+    name: 'input01'
+  },
+  argTypes: {
+    disabled: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    error: {
+      control: {
+        type: 'boolean',
+      },
+    },
+    onClick: {
+      action: 'click',
+    },
+  },
+  decorators: [
+    (Story) => (
+      <Box>
+        <Story />
+      </Box>
+    ),
+  ]
+} as Meta<TextAreaProps>
+
+export const Default: StoryObj<TextAreaProps> = {}
+
+export const Label: StoryObj<TextAreaProps> = {
+  args: {
+    label: "Observações",
+    color: "white"
+  },
+}
+
+export const Error: StoryObj<TextAreaProps> = {
+  args: {
+    error: true,
+  },
+}
+
+export const Disabled: StoryObj<TextAreaProps> = {
+  args: {
+    disabled: true,
+  },
+}

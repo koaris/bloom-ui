@@ -64,7 +64,7 @@ export const Input = ({
 
     return (
         <>
-            {label && <label htmlFor={rest.id} className='leading-6'>{label}</label>}
+            {label && <label htmlFor={rest.id} className='leading-8'>{label}</label>}
             {type === 'text' || type === 'password' || type === 'date' ? (
                 <>
                     <input
