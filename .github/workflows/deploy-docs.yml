@@ -21,7 +21,7 @@ jobs:
         run: |
           rm -rf node_modules package-lock.json
           rm -rf packages/docs/docs-build packages/docs/node_modules
-          npm ci
+          npm i
 
       - name: Build
         run: npm run build
