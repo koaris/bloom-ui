@@ -14,7 +14,7 @@ export const Box = ({
 }: BoxProps) => {
 
     return (
-        <div className={twMerge(`p-4 rounded-md ${color} bottom-1 border-s-neutral-600`, className)}>
+        <div className={twMerge(`p-6 rounded-md ${color} bottom-1 border-s-neutral-600`, className)}>
             {children}
         </div>
     );
