@@ -23,7 +23,10 @@ jobs:
             cache-dependency-path: '**/package-lock.json'
 
       - name: Install
-        run: npm i
+        run: |
+            rm -rf node_modules package-lock.json
+            rm -rf packages/docs/docs-build packages/docs/node_modules
+            npm i
 
       - name: Publish to NPM
         id: changesets
