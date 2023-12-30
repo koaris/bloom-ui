@@ -112,7 +112,7 @@ export const Input = ({
                     type={type}
                     required={required}
                     className={twMerge(
-                        'flex items-center justify-center rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
+                        'flex items-center justify-center border-2 border-neutral rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
                         className,
                         disabled === true && 'opacity-50 cursor-not-allowed',
                         selected === true && 'border-2 border-orange-500',

@@ -7,7 +7,6 @@ export default {
   tags: ['autodocs'],
   args: {
     value: '',
-    placeholder: 'Placeholder',
     id: 'input01',
     name: 'input01',
     type: "text",
@@ -28,14 +27,7 @@ export default {
     onClick: {
       action: 'click',
     },
-  },
-  /*decorators: [
-    (Story) => (
-      <Box>
-        <Story />
-      </Box>
-    ),
-  ]*/
+  }
 } as Meta<TextInputProps>
 
 export const Default: StoryObj<TextInputProps> = {}

@@ -16,7 +16,7 @@ export const Avatar = ({
 
     return (
         <RadixAvatar.Root className={twMerge(`
-            rounded-full inline-block w-12 h-12
+            rounded-full inline-block w-16 h-16
             overflow-hidden
         `)}>
             <RadixAvatar.Image className={twMerge(`
