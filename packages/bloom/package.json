@@ -1,6 +1,6 @@
 {
   "name": "@koaris/bloom-ui",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
@@ -10,8 +10,18 @@
     "dev": "concurrently --kill-others \"tailwindcss -i ./src/input.css -o ./dist/output.css --watch \" \"tsup src/index.tsx --format esm, cjs --dts --external react --watch\"",
     "lint": "eslint src/**/*.ts* --fix"
   },
-  "keywords": [],
-  "author": "",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "design-system",
+    "react"
+  ],
+  "author": "guilhermesalviano",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/guilhermesalviano/bloom-ui.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@koaris/eslint-config": "*",
