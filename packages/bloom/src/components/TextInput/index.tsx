@@ -24,6 +24,7 @@ export const TextInput = ({
     disabled,
     value,
     prefix,
+    placeholder,
     error,
     onClick,
     ...rest
@@ -51,7 +52,7 @@ export const TextInput = ({
         <>
             {rest.label && <Text htmlFor={rest.id} variant='label' color={rest.color} className='leading-8'>{rest.label}</Text>}
             <div className={twMerge(
-                    "bg-neutral-800 py-2 px-4 rounded-sm box-border flex items-baseline",
+                    "bg-neutral-800 py-2 px-4 border-2 border-neutral-800 rounded-sm box-border flex items-baseline",
                     "hover:shadow-md hover:shadow-neutral-500 focus:outline-none",
                     selected === true && 'border-2 border-orange-500',
                     disabled === true && 'opacity-50 cursor-not-allowed',
@@ -70,10 +71,11 @@ export const TextInput = ({
                     onChange={handleInput}
                     onBlur={handleBlur}
                     value={inputValue}
+                    placeholder={placeholder}
                     disabled={disabled}
                     className={twMerge(
-                        'flex items-center justify-center bg-neutral-800 rounded-sm w-full px-2 py-2 text-md',
-                        'focus:outline-none text-neutral-100',
+                        'flex items-center justify-center bg-neutral-800 rounded-sm w-full px-1 py-2 text-md',
+                        'focus:outline-none text-neutral',
                         className,
                         disabled === true && 'cursor-not-allowed',
                     )}

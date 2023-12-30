@@ -37,23 +37,23 @@ export const Label: StoryObj<InputProps> = {
   },
 }
 
-export const Cnpj: StoryObj<InputProps> = {
+export const CNPJ: StoryObj<InputProps> = {
   args: {
-    label: "Cnpj",
+    label: "CNPJ",
     type: "cnpj",
   },
 }
 
-export const Cpf: StoryObj<InputProps> = {
+export const CPF: StoryObj<InputProps> = {
   args: {
-    label: "Cpf",
+    label: "CPF",
     type: "cpf",
   },
 }
 
-export const Cep: StoryObj<InputProps> = {
+export const CEP: StoryObj<InputProps> = {
   args: {
-    label: "Cep",
+    label: "CEP",
     type: "cep",
   },
 }

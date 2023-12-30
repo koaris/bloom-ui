@@ -12,6 +12,7 @@ export default {
     name: 'input01',
     type: "text",
     prefix: 'koaris.com.br/appointment/',
+    placeholder: 'seu-user',
   },
   argTypes: {
     disabled: {

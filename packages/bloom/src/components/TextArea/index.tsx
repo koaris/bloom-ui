@@ -58,7 +58,7 @@ export const TextArea = ({
                 required={required}
                 disabled={disabled}
                 className={twMerge(
-                    'rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
+                    'rounded-sm w-full px-3 py-2 border-2 border-neutral text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
                     'resize-y h-32',
                     className,
                     disabled === true && 'opacity-50 cursor-not-allowed',
