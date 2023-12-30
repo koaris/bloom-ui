@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { RadioGroup, RadioGroupProps } from '@koaris/bloom'
+import { RadioGroup, RadioGroupProps } from '@koaris/bloom-ui'
 
 export default {
   title: 'Form/RadioGroup',

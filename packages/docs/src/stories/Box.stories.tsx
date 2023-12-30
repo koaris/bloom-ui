@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Box, BoxProps, Text } from '@koaris/bloom'
+import { Box, BoxProps, Text } from '@koaris/bloom-ui'
 
 export default {
   title: 'Components/Box',

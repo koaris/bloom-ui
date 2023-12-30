@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Heading, HeadingProps } from '@koaris/bloom'
+import { Heading, HeadingProps } from '@koaris/bloom-ui'
 
 export default {
   title: 'Typography/Heading',

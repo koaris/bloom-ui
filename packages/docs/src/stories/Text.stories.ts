@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Text, TextProps } from '@koaris/bloom'
+import { Text, TextProps } from '@koaris/bloom-ui'
 
 export default {
   title: 'Typography/Text',

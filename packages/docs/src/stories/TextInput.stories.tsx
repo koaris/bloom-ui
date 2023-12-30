@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Box, TextInput, TextInputProps } from '@koaris/bloom'
+import { Box, TextInput, TextInputProps } from '@koaris/bloom-ui'
 
 export default {
   title: 'Form/TextInput',

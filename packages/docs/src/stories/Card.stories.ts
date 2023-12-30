@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Card, CardProps } from '@koaris/bloom'
+import { Card, CardProps } from '@koaris/bloom-ui'
 import image from '../images/koaris_gestao.svg';
 
 export default {

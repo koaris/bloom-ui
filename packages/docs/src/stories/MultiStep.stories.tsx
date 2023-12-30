@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Box, MultiStep, MultiStepProps } from '@koaris/bloom'
+import { Box, MultiStep, MultiStepProps } from '@koaris/bloom-ui'
 
 export default {
   title: 'Form/Multi Step',

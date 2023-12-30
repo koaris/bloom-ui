@@ -12,7 +12,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@koaris/bloom": "*",
+    "@koaris/bloom-ui": "*",
     "@koaris/eslint-config": "*",
     "@koaris/tokens": "*",
     "@koaris/ts-config": "*",

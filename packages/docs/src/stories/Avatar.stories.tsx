@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Avatar, AvatarProps } from '@koaris/bloom'
+import { Avatar, AvatarProps } from '@koaris/bloom-ui'
 
 export default {
   title: 'Components/Avatar',

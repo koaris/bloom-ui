@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Button, ButtonProps } from '@koaris/bloom'
+import { Button, ButtonProps } from '@koaris/bloom-ui'
 import { GrLinkNext } from "react-icons/gr"
 
 export default {

@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Checkbox, CheckboxProps, Text, TextProps } from '@koaris/bloom'
+import { Checkbox, CheckboxProps, Text, TextProps } from '@koaris/bloom-ui'
 
 export default {
   title: 'Form/Checkbox',
