@@ -31,8 +31,10 @@ const config: StorybookConfig = {
   viteFinal: (config, { configType }) => {
     if (configType === "PRODUCTION") {
       config.base = '/bloom-ui/'
-      config.build = config.build || {};
-      config.build.minify = false;
+      config.build = {
+        ...config.build,
+        minify: false,
+      };
     }
 
     return config;
