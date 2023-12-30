@@ -1,5 +1,4 @@
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
-import * as RadixCheckbox from '@radix-ui/react-checkbox'
 import { FiCheck } from 'react-icons/fi'
 import { twMerge } from 'tailwind-merge'
 
@@ -23,21 +22,31 @@ export const Checkbox = ({
     }
 
     return (
-        <RadixCheckbox.Root 
-            className={twMerge(className, 'h-6 w-6 border-2 border-orange-500 flex items-center justify-center rounded mr-2',
-                'hover:border-orange-500 hover:cursor-pointer hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
-                selected ? 'bg-orange-500' : 'bg-neutral',
+        <div className="flex items-center justify-center px-2">
+            <label
+                className={twMerge(
+                'relative  border-2 w-5 h-5 flex items-center justify-center rounded-sm hover:border-orange-500 hover:cursor-pointer',
+                selected
+                    ? 'bg-orange-500 border-orange-500'
+                    : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500',
                 disabled === true && 'opacity-50 cursor-not-allowed',
-            )}
-            required={required}
-            disabled={disabled}
-            onClick={() => handleCheckboxChange(selected)}
-        >
-            <RadixCheckbox.Indicator
-                asChild
+                )}
             >
-                <FiCheck color='#FFFFFF' style={{ strokeWidth: 3 }} />
-            </RadixCheckbox.Indicator>
-        </RadixCheckbox.Root>
+                <input
+                type="checkbox"
+                required={required}
+                checked={selected}
+                onChange={() => handleCheckboxChange(selected)}
+                disabled={disabled}
+                className={twMerge('relative z-10 hidden',
+                    selected
+                    ? 'bg-orange-500 border-orange-500'
+                    : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500',)}
+                />
+                {selected && (
+                <FiCheck color="#FFFFFF" size={14} style={{ strokeWidth: 4 }} />
+                )}
+            </label>
+        </div>
     )
 }
