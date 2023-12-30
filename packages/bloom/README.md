@@ -4,7 +4,7 @@ Bloom-ui is a public design system from the Koaris Project developed with React,
 ## Installation
 Install the following package:
 ```bash
-npm i @koaris/bloom-ui-ui
+npm i @koaris/bloom-ui
 ```
 
 ## Motivation
