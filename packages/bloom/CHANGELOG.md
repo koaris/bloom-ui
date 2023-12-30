@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 3.1.0
+
+### Minor Changes
+
+- downgrade react-checkbox
+
 ## 3.0.0
 
 ### Major Changes
