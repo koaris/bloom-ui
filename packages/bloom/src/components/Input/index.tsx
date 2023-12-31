@@ -143,7 +143,7 @@ export const Input = ({
           onBlur={handleBlur}
           placeholder={placeholder}
           value={inputValue}
-          /*mask={masks[type as keyof typeof masks]}*/
+          /* mask={masks[type as keyof typeof masks]} */
         />
       )}
       {error === true && (

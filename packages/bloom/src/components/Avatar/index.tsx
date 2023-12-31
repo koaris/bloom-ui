@@ -1,5 +1,4 @@
 import { twMerge } from 'tailwind-merge'
-import * as RadixAvatar from '@radix-ui/react-avatar'
 import { FaUser } from 'react-icons/fa'
 
 export interface AvatarProps {
@@ -9,26 +8,17 @@ export interface AvatarProps {
 
 export const Avatar = ({ ...rest }: AvatarProps) => {
   return (
-    <RadixAvatar.Root
+    <div
       className={twMerge(`
-            rounded-full inline-block w-16 h-16
-            overflow-hidden
+            rounded-full w-16 h-16 overflow-hidden flex items-center
+            bg-neutral-600 justify-center
         `)}
     >
-      <RadixAvatar.Image
-        className={twMerge(`
-                w-full h-full object-cover rounded-full
-            `)}
-        {...rest}
-      />
-      <RadixAvatar.Fallback
-        className={twMerge(`
-                w-full h-full flex items-center justify-center bg-neutral-600
-                text-neutral-600
-            `)}
-      >
+      {rest.src ? (
+        <img className="w-full h-full object-cover rounded-full" {...rest} />
+      ) : (
         <FaUser color="#FFFFFF" size={24} />
-      </RadixAvatar.Fallback>
-    </RadixAvatar.Root>
+      )}
+    </div>
   )
 }
