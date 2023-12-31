@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.1.7
+
+### Patch Changes
+
+- fix tailwind tokens css
+
 ## 1.1.6
 
 ### Patch Changes
