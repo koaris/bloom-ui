@@ -3,7 +3,6 @@ import * as RadixAvatar from '@radix-ui/react-avatar'
 import { FaUser } from 'react-icons/fa'
 
 export interface AvatarProps {
-  children: React.ReactNode
   src?: string
   alt?: string
 }

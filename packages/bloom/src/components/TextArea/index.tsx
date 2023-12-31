@@ -1,3 +1,4 @@
+/* @client */
 import {
   DetailedHTMLProps,
   TextareaHTMLAttributes,

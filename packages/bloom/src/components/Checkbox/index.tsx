@@ -1,3 +1,4 @@
+/* @client */
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import { twMerge } from 'tailwind-merge'

@@ -1,4 +1,7 @@
 {
   "extends": "@koaris/ts-config/react.json",
   "include": ["src"],
+  "compilerOptions": {
+    "removeComments": false,
+  }
 }
