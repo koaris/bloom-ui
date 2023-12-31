@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.1.6
+
+### Patch Changes
+
+- adding tailwind as dependecy
+
 ## 1.1.5
 
 ### Patch Changes
