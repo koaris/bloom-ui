@@ -6,7 +6,6 @@ import {
   useState,
 } from 'react'
 import { twMerge } from 'tailwind-merge'
-import MaskedInput from 'react-text-mask'
 import { FiCheck, FiX } from 'react-icons/fi'
 import masks from '../Shared/masks'
 import { Text } from '../Text'
@@ -126,7 +125,7 @@ export const Input = ({
             )}
         </>
       ) : (
-        <MaskedInput
+        <input
           id={rest.id}
           name={rest.name}
           type={type}
@@ -144,7 +143,7 @@ export const Input = ({
           onBlur={handleBlur}
           placeholder={placeholder}
           value={inputValue}
-          mask={masks[type as keyof typeof masks]}
+          /*mask={masks[type as keyof typeof masks]}*/
         />
       )}
       {error === true && (
