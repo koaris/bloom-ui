@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.1.4
+
+### Patch Changes
+
+- remove react-text-mask
+
 ## 1.1.3
 
 ### Minor Changes
