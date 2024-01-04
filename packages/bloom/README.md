@@ -11,3 +11,6 @@ npm i @koaris/bloom-ui
 ```
 ## Usage
 View docs [here](https://guilhermesalviano.github.io/bloom-ui).
+
+## Contributions
+You can follow and make contributions in [github](https://github.com/guilhermesalviano/bloom-ui).

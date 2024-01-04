@@ -1,7 +1,9 @@
 {
   "extends": "@koaris/ts-config/react.json",
   "include": ["src"],
-  "compilerOptions": {
-    "removeComments": false,
-  }
+  "splitting": true,
+  "format": ["esm", "cjs"],
+  "dts": true,
+  "external": ["react"],
+  "entryPoints": ["src/index.tsx"],
 }
