@@ -28,18 +28,18 @@ export const Default: StoryObj<TextProps> = {}
 
 export const Strong: StoryObj<TextProps> = {
   args: {
-    variant: "strong"
+    tag: "strong"
   }
 }
 
 export const Span: StoryObj<TextProps> = {
   args: {
-    variant: "span"
+    tag: "span"
   }
 }
 
 export const Label: StoryObj<TextProps> = {
   args: {
-    variant: "label"
+    tag: "label"
   }
 }

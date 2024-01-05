@@ -1,8 +1,12 @@
 import { getContrast } from 'polished'
 import { colors } from '@koaris/tokens'
 
-export function ColorsGrid() {
-    return Object.entries(colors).map(([ key, color ]) => {
+interface ColorsGridProps {
+    type?: string
+}
+
+export function ColorsGrid({ type }: ColorsGridProps) {
+    return Object.entries(colors).filter(([ key, color ]) => type ? key.includes(type) : true).map(([ key, color ]) => {
         return (
             <div key={key} style={{
                     backgroundColor: color, 

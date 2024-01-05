@@ -3,13 +3,27 @@ import { Meta } from '@storybook/addon-docs'
 <Meta title="Home" />
 
 # Bloom-ui
-Bloom-ui is a public design system from the Koaris Project developed with React, Typescript, and Tailwind.
+Bloom-ui is a public design system from the Koaris Project developed with **React**, **Typescript**, and **Tailwindcss**.
+
+## Motivation
+Bloom-ui is a design system developed exclusively for the Koaris project with the aim of unifying the interfaces and simplifying the construction of new React projects.
 
 ## Installation
 Install the following package:
 ```bash
 npm i @koaris/bloom-ui
 ```
+## Usage
+Import design system css in your css file:
+```css
+@import "@koaris/bloom-ui/dist/tailwind.css";
+```
+Components usage:
+```tsx
+import { Text } from '@koaris/bloom-ui'
 
-## Motivation
-Bloom-ui is a design system developed exclusively for the Koaris project with the aim of unifying the interfaces and simplifying the construction of new React projects.
+<Text tag="p">Test</Text>
+```
+
+## Contributions and bug reports
+You can follow and make contributions in [github](https://github.com/guilhermesalviano/bloom-ui).

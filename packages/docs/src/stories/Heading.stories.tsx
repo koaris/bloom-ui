@@ -28,7 +28,7 @@ export const Default: StoryObj<HeadingProps> = {}
 
 export const CustomTag: StoryObj<HeadingProps> = {
   args: {
-    variant: "h1",
+    tag: "h1",
     children: "H1 html tag",
     size: "3xl"
   }

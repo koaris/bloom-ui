@@ -22,6 +22,7 @@ export const RadioGroup = ({
     { id: 2, value: 'option2', label: 'Opção 2' },
   ],
   required = false,
+  className,
 }: RadioGroupProps) => {
   const [selectedOption, setSelectedOption] = useState('')
 
@@ -41,6 +42,7 @@ export const RadioGroup = ({
                 ? 'bg-orange-500 border-orange-500'
                 : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500',
               disabled === true && 'opacity-50 cursor-not-allowed',
+              className
             )}
           >
             <input

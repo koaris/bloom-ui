@@ -19,7 +19,6 @@ export interface InputProps
     HTMLInputElement
   > {
   disabled?: boolean
-  label?: string
   placeholder?: string
   value?: string
   validated?: boolean
@@ -31,7 +30,6 @@ export interface InputProps
 export const Input = ({
   className,
   disabled,
-  label,
   placeholder,
   value,
   validated,
@@ -72,21 +70,9 @@ export const Input = ({
 
   return (
     <>
-      {label && (
-        <Text
-          htmlFor={rest.id}
-          variant="label"
-          color={rest.color}
-          className="leading-8"
-        >
-          {label}
-        </Text>
-      )}
       {type === 'text' || type === 'password' || type === 'date' ? (
         <>
           <input
-            id={rest.id}
-            name={rest.name}
             type={type}
             required={required}
             className={twMerge(
@@ -103,6 +89,7 @@ export const Input = ({
             onBlur={handleBlur}
             placeholder={placeholder}
             value={inputValue}
+            {...rest}
           />
           {type === 'password' &&
             (!hasEightCharacteres || !hasSpecialCharacteres || !hasNumber) && (
@@ -126,8 +113,6 @@ export const Input = ({
         </>
       ) : (
         <input
-          id={rest.id}
-          name={rest.name}
           type={type}
           required={required}
           className={twMerge(
@@ -143,6 +128,7 @@ export const Input = ({
           onBlur={handleBlur}
           placeholder={placeholder}
           value={inputValue}
+          {...rest}
           /* mask={masks[type as keyof typeof masks]} */
         />
       )}

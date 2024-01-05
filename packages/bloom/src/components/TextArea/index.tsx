@@ -17,7 +17,6 @@ export interface TextAreaProps
     HTMLTextAreaElement
   > {
   disabled?: boolean
-  label?: string
   placeholder?: string
   value?: string
   validated?: boolean
@@ -56,37 +55,24 @@ export const TextArea = ({
   }, [value])
 
   return (
-    <>
-      {rest.label && (
-        <Text
-          htmlFor={rest.id}
-          variant="label"
-          color={rest.color}
-          className="leading-8"
-        >
-          {rest.label}
-        </Text>
+    <textarea
+      required={required}
+      disabled={disabled}
+      className={twMerge(
+        'rounded-sm w-full px-3 py-2 border-2 border-neutral text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
+        'resize-y h-32',
+        className,
+        disabled === true && 'opacity-50 cursor-not-allowed',
+        selected === true && 'border-2 border-orange-500',
+        error === true && 'border-2 border-red-900',
       )}
-      <textarea
-        id={rest.id}
-        name={rest.name}
-        required={required}
-        disabled={disabled}
-        className={twMerge(
-          'rounded-sm w-full px-3 py-2 border-2 border-neutral text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
-          'resize-y h-32',
-          className,
-          disabled === true && 'opacity-50 cursor-not-allowed',
-          selected === true && 'border-2 border-orange-500',
-          error === true && 'border-2 border-red-900',
-        )}
-        onClick={onClick}
-        onFocus={handleFocus}
-        onChange={handleInput}
-        onBlur={handleBlur}
-        placeholder={placeholder}
-        value={inputValue}
-      />
-    </>
+      onClick={onClick}
+      onFocus={handleFocus}
+      onChange={handleInput}
+      onBlur={handleBlur}
+      placeholder={placeholder}
+      value={inputValue}
+      {...rest}
+    />
   )
 }

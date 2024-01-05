@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.0.3
+
+### Patch Changes
+
+- Update components and add new colors
+
 ## 1.0.2
 
 ### Patch Changes

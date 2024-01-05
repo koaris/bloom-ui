@@ -11,7 +11,7 @@ export interface MultiStepProps
 export const MultiStep = ({ className, size, currentStep }: MultiStepProps) => {
   return (
     <div className="w-full">
-      <Text variant="label" color="neutral-100" size="xs">
+      <Text tag="label" color="neutral-100" size="xs">
         {`Passo ${currentStep} de ${size}`}
       </Text>
       <div className={`grid gap-2 grid-cols-${size} grid-flow-col mt-1`}>
@@ -20,11 +20,11 @@ export const MultiStep = ({ className, size, currentStep }: MultiStepProps) => {
             <div
               key={index}
               className={twMerge(
-                className,
                 'h-1 rounded-full',
                 currentStep && index < currentStep
-                  ? 'bg-orange-500'
-                  : 'bg-neutral-500',
+                ? 'bg-orange-500'
+                : 'bg-neutral-500',
+                className,
               )}
             />
           )

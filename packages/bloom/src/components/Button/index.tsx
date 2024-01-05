@@ -27,7 +27,6 @@ export const Button = ({
     <button
       className={twMerge(
         'flex items-center justify-center rounded-lg px-8 py-2 text-md font-medium hover:shadow-md hover:shadow-neutral-500',
-        className,
         variant === 'primary' &&
           'bg-orange-500 text-neutral hover:bg-orange-700',
         variant === 'secondary' &&
@@ -35,6 +34,7 @@ export const Button = ({
         size === 'sm' && 'px-6 py-1',
         typeof rest.children !== 'string' && 'px-4',
         disabled === true && 'opacity-50 cursor-not-allowed',
+        className,
       )}
       onClick={onClick}
       {...rest}

@@ -6,8 +6,20 @@ export default {
   component: Box,
   tags: ['autodocs'],
   args: {
-    children: <Text color='neutral'>Testando o elemento box</Text>
+    variant: 'primary',
+    
   }
 } as Meta<BoxProps>
 
-export const Default: StoryObj<BoxProps> = {}
+export const Primary: StoryObj<BoxProps> = {
+  args: {
+    variant: 'primary',
+    children: <Text color='neutral-800'>Testando o elemento box</Text>
+  }
+}
+export const Secondary: StoryObj<BoxProps> = {
+  args: {
+    variant: 'secondary',
+    children: <Text color='neutral'>Testando o elemento box</Text>
+  }
+}

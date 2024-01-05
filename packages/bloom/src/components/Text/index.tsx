@@ -8,22 +8,8 @@ export interface TextProps
   > {
   children: ReactNode
   color?: string
-  size?:
-    | 'xxs'
-    | 'xs'
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl'
-    | '2xl'
-    | '3xl'
-    | '4xl'
-    | '5xl'
-    | '6xl'
-    | '7xl'
-    | '8xl'
-    | '9xl'
-  variant?: 'p' | 'strong' | 'span' | 'label'
+  size?: 'xxs'| 'xs'| 'sm'| 'md'| 'lg'| 'xl'| '2xl'| '3xl'| '4xl'| '5xl'| '6xl'| '7xl'| '8xl'| '9xl'
+  tag?: 'p' | 'strong' | 'span' | 'label'
   htmlFor?: string
 }
 
@@ -31,7 +17,7 @@ export const Text = ({
   children,
   color = 'neutral-800',
   size = 'md',
-  variant = 'p',
+  tag = 'p',
   className,
   ...rest
 }: TextProps) => {
@@ -52,7 +38,7 @@ export const Text = ({
     '9xl': 'text-9xl',
   }[size]
 
-  const Tag = variant as React.ElementType
+  const Tag = tag as React.ElementType
 
   return (
     <Tag {...rest} className={twMerge(`text-${color} ${fontSize}`, className)}>

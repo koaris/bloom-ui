@@ -22,7 +22,7 @@ export default {
     (Story) => (
       <div className='flex'>
         <Story />
-        <Text variant="span" children="Aceite os termos de uso." />
+        <Text tag="span" children="Aceite os termos de uso." />
       </div>
     ),
   ]

@@ -12,5 +12,16 @@ npm i @koaris/bloom-ui
 ## Usage
 View docs [here](https://guilhermesalviano.github.io/bloom-ui).
 
-## Contributions
+Import design system css in your css file:
+```css
+@import "@koaris/bloom-ui/dist/tailwind.css";
+```
+Components usage:
+```tsx
+import { Text } from '@koaris/bloom-ui'
+
+<Text tag="p">Test</Text>
+```
+
+## Contributions and bug reports
 You can follow and make contributions in [github](https://github.com/guilhermesalviano/bloom-ui).

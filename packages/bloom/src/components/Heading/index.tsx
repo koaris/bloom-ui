@@ -1,6 +1,8 @@
+import { DetailedHTMLProps, HTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export interface HeadingProps {
+export interface HeadingProps
+  extends DetailedHTMLProps<HTMLAttributes<HTMLHeadElement>, HTMLHeadElement> {
   children: React.ReactNode
   color?: string
   size?:
@@ -16,14 +18,15 @@ export interface HeadingProps {
     | '7xl'
     | '8xl'
     | '9xl'
-  variant?: 'h1' | 'h2' | 'h3' | 'h4'
+  tag?: 'h1' | 'h2' | 'h3' | 'h4'
 }
 
 export const Heading = ({
   children,
   color = 'neutral-800',
   size = 'lg',
-  variant = 'h2',
+  tag = 'h2',
+  className,
 }: HeadingProps) => {
   const fontSize = {
     sm: 'text-sm',
@@ -40,7 +43,11 @@ export const Heading = ({
     '9xl': 'text-9xl',
   }[size]
 
-  const Tag = variant
+  const Tag = tag as React.ElementType
 
-  return <Tag className={twMerge(`text-${color} ${fontSize}`)}>{children}</Tag>
+  return (
+    <Tag className={twMerge(`text-${color} ${fontSize}`, className)}>
+      {children}
+    </Tag>
+  )
 }

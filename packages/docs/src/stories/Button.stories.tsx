@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Button, ButtonProps } from '@koaris/bloom-ui'
+import { Button, ButtonProps, Text } from '@koaris/bloom-ui'
 import { GrLinkNext } from "react-icons/gr"
 
 export default {
@@ -55,9 +55,9 @@ export const WithIcon: StoryObj<ButtonProps> = {
   args: {
     children: (
       <>
-        <span style={{paddingRight: '1rem'}}>
+        <Text tag="span" color="neutral" style={{paddingRight: '1rem'}}>
           Próximo
-        </span>
+        </Text>
         <GrLinkNext />
       </>
     )

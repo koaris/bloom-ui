@@ -8,8 +8,6 @@ export default {
   args: {
     value: '',
     placeholder: 'Placeholder',
-    id: 'input01',
-    name: 'input01',
     type: "text",
   },
   argTypes: {
@@ -31,50 +29,38 @@ export default {
 
 export const Default: StoryObj<InputProps> = {}
 
-export const Label: StoryObj<InputProps> = {
-  args: {
-    label: "Nome Fantasia",
-  },
-}
-
 export const CNPJ: StoryObj<InputProps> = {
   args: {
-    label: "CNPJ",
     type: "cnpj",
   },
 }
 
 export const CPF: StoryObj<InputProps> = {
   args: {
-    label: "CPF",
     type: "cpf",
   },
 }
 
 export const CEP: StoryObj<InputProps> = {
   args: {
-    label: "CEP",
     type: "cep",
   },
 }
 
 export const Date: StoryObj<InputProps> = {
   args: {
-    label: "Date",
     type: "date",
   },
 }
 
 export const Phone: StoryObj<InputProps> = {
   args: {
-    label: "Phone",
     type: "phone",
   },
 }
 
 export const Password: StoryObj<InputProps> = {
   args: {
-    label: "Senha",
     type: "password",
   },
 }

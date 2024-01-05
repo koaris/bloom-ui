@@ -8,8 +8,6 @@ export default {
   args: {
     value: '',
     placeholder: 'Placeholder',
-    id: 'input01',
-    name: 'input01'
   },
   argTypes: {
     disabled: {
@@ -34,12 +32,6 @@ export default {
 } as Meta<TextAreaProps>
 
 export const Default: StoryObj<TextAreaProps> = {}
-
-export const Label: StoryObj<TextAreaProps> = {
-  args: {
-    label: "Observações",
-  },
-}
 
 export const Error: StoryObj<TextAreaProps> = {
   args: {

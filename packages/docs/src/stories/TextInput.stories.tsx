@@ -7,8 +7,6 @@ export default {
   tags: ['autodocs'],
   args: {
     value: '',
-    id: 'input01',
-    name: 'input01',
     type: "text",
     prefix: 'koaris.com.br/appointment/',
     placeholder: 'seu-user',
@@ -30,11 +28,11 @@ export default {
   }
 } as Meta<TextInputProps>
 
-export const Default: StoryObj<TextInputProps> = {}
+export const Primary: StoryObj<TextInputProps> = {}
 
-export const Label: StoryObj<TextInputProps> = {
+export const secondary: StoryObj<TextInputProps> = {
   args: {
-    label: "Nome Fantasia",
+    variant: "secondary",
   },
 }
 
