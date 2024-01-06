@@ -7,7 +7,7 @@
 <p align="center">
     <a href="https://www.npmjs.com/package/@koaris/bloom-ui"><img src="https://img.shields.io/npm/dt/@koaris/bloom-ui.svg" alt="Total Downloads"></a>
     <a href="https://github.com/guilhermesalviano/bloom-ui/releases"><img src="https://img.shields.io/npm/v/@koaris/bloom-ui.svg" alt="Latest Release"></a>
-    <a href="https://github.com/guilhermesalviano/bloom-ui/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@koaris/bloom-ui.svg" alt="License"></a>
+    <a href="https://github.com/guilhermesalviano/bloom-ui/blob/main/packages/bloom/LICENSE"><img src="https://img.shields.io/npm/l/@koaris/bloom-ui.svg" alt="License"></a>
 </p>
 
 Bloom-ui is a public design system from the Koaris Project developed with React, Typescript, and Tailwind.
