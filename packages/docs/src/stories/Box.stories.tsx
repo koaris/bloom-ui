@@ -7,7 +7,6 @@ export default {
   tags: ['autodocs'],
   args: {
     variant: 'primary',
-    
   }
 } as Meta<BoxProps>
 

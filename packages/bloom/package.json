@@ -1,6 +1,6 @@
 {
   "name": "@koaris/bloom-ui",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Bloom-ui is a public design system from the Koaris Project developed with React, Typescript, and Tailwind.",
   "source": "./src/index.ts",
   "main": "./dist/index.js",
@@ -25,7 +25,7 @@
     "type": "git",
     "url": "https://github.com/guilhermesalviano/bloom-ui.git"
   },
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "devDependencies": {
     "@koaris/eslint-config": "*",
     "@koaris/tokens": "*",

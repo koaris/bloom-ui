@@ -1,21 +1,15 @@
-# Bloom-ui
-# Project Name
-Storybook in: https://guilhermesalviano.github.io/bloom-ui
+<h1 align="center" style="text-decoration: none; border-bottom: none;">
+  <a href="https://guilhermesalviano.github.io/bloom-ui" target="_blank" style="text-decoration: none; color: #1C2126;  ">
+    Bloom-ui
+  </a>
+</h1>
 
-## Description
-[Provide a brief description of your project]
+<p align="center">
+    <a href="https://www.npmjs.com/package/@koaris/bloom-ui"><img src="https://img.shields.io/npm/dt/@koaris/bloom-ui.svg" alt="Total Downloads"></a>
+    <a href="https://github.com/guilhermesalviano/bloom-ui/releases"><img src="https://img.shields.io/npm/v/@koaris/bloom-ui.svg" alt="Latest Release"></a>
+    <a href="https://github.com/guilhermesalviano/bloom-ui/blob/master/LICENSE"><img src="https://img.shields.io/npm/l/@koaris/bloom-ui.svg" alt="License"></a>
+</p>
 
-## Installation
-[Provide instructions on how to install and set up the project]
+Bloom-ui is a public design system from the Koaris Project developed with React, Typescript, and Tailwind.
 
-## Usage
-[Provide instructions on how to use the project]
-
-## Contributing
-[Provide guidelines for contributing to the project]
-
-## License
-[Specify the project's license]
-
-## Contact
-[Provide contact information for the project maintainer]
+View docs [here](https://guilhermesalviano.github.io/bloom-ui).

@@ -10,11 +10,13 @@ export interface AvatarProps {
 export const Avatar = ({ className, ...rest }: AvatarProps) => {
   return (
     <div
-      className={twMerge(`
+      className={twMerge(
+        `
             rounded-full w-16 h-16 overflow-hidden flex items-center
             bg-neutral-600 justify-center`,
-            className
-    )}>
+        className,
+      )}
+    >
       {rest.src ? (
         <img className="w-full h-full object-cover rounded-full" {...rest} />
       ) : (

@@ -1,4 +1,3 @@
-/* @client */
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { FiCheck } from 'react-icons/fi'
@@ -42,7 +41,7 @@ export const RadioGroup = ({
                 ? 'bg-orange-500 border-orange-500'
                 : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500',
               disabled === true && 'opacity-50 cursor-not-allowed',
-              className
+              className,
             )}
           >
             <input

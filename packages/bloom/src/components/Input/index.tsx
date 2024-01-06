@@ -1,4 +1,3 @@
-/* @client */
 import {
   DetailedHTMLProps,
   InputHTMLAttributes,
@@ -8,7 +7,6 @@ import {
 import { twMerge } from 'tailwind-merge'
 import { FiCheck, FiX } from 'react-icons/fi'
 import masks from '../Shared/masks'
-import { Text } from '../Text'
 
 /**
  * Primary UI component for user interaction

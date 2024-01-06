@@ -22,8 +22,8 @@ export const MultiStep = ({ className, size, currentStep }: MultiStepProps) => {
               className={twMerge(
                 'h-1 rounded-full',
                 currentStep && index < currentStep
-                ? 'bg-orange-500'
-                : 'bg-neutral-500',
+                  ? 'bg-orange-500'
+                  : 'bg-neutral-500',
                 className,
               )}
             />

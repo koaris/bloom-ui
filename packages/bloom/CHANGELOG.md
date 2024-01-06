@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.0.4
+
+### Patch Changes
+
+- creating form component
+
 ## 1.0.3
 
 ### Patch Changes

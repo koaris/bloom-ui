@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge'
 export interface BoxProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
   children: React.ReactNode
-  tag?: 'form' | 'div' | 'section' |  'article' | 'aside' | 'header' | 'footer'
+  tag?: 'div' | 'section' | 'article' | 'aside' | 'header' | 'footer'
   variant?: 'primary' | 'secondary'
 }
 
@@ -20,8 +20,10 @@ export const Box = ({
     <Tag
       className={twMerge(
         'p-6 rounded-md bottom-1 border-2',
-        variant === 'primary' && 'text-neutral-800 bg-neutral-200 border-neutral-300',
-        variant === 'secondary' && 'text-neutral-200 bg-neutral-600 border-neutral-800',
+        variant === 'primary' &&
+          'text-neutral-800 bg-neutral-200 border-neutral-300',
+        variant === 'secondary' &&
+          'text-neutral-200 bg-neutral-600 border-neutral-800',
         className,
       )}
     >

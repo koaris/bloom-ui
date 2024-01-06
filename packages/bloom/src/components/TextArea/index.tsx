@@ -1,4 +1,3 @@
-/* @client */
 import {
   DetailedHTMLProps,
   TextareaHTMLAttributes,
@@ -6,11 +5,7 @@ import {
   useState,
 } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Text } from '../Text'
 
-/**
- * Primary UI component for user interaction
- */
 export interface TextAreaProps
   extends DetailedHTMLProps<
     TextareaHTMLAttributes<HTMLTextAreaElement>,

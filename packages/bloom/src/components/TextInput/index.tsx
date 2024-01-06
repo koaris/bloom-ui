@@ -1,4 +1,3 @@
-/* @client */
 import {
   DetailedHTMLProps,
   InputHTMLAttributes,
@@ -7,7 +6,6 @@ import {
   forwardRef,
 } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Text } from '../Text'
 
 export interface TextInputProps
   extends DetailedHTMLProps<
@@ -18,7 +16,7 @@ export interface TextInputProps
   placeholder?: string
   prefix?: string
   value?: string
-  variant?: 'primary' | 'secondary' 
+  variant?: 'primary' | 'secondary'
   validated?: boolean
   error: boolean
   required?: boolean
