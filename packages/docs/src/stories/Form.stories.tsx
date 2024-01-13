@@ -8,6 +8,17 @@ export default {
   args: {
     variant: 'primary',
     orientation: 'col',
+  },
+  argTypes: {
+    orientation: {
+      options: ['col', 'row'],
+      control: {
+        type: 'inline-radio',
+      },
+    },
+    children: {
+      type: 'symbol'
+    },
   }
 } as Meta<FormProps>
 

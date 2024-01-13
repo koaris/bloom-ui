@@ -34,6 +34,11 @@ export default {
       action: 'click',
     },
   },
+  decorators: [
+    (Story) => (
+      <Story className="w-30" />
+    ),
+  ]
 } as Meta<ButtonProps>
 
 export const Primary: StoryObj<ButtonProps> = {}
@@ -55,9 +60,7 @@ export const WithIcon: StoryObj<ButtonProps> = {
   args: {
     children: (
       <>
-        <Text tag="span" color="neutral" style={{paddingRight: '1rem'}}>
-          Próximo
-        </Text>
+        Próximo
         <GrLinkNext />
       </>
     )
