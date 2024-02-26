@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.0.5
+
+### Patch Changes
+
+- Create link component
+
 ## 1.0.4
 
 ### Patch Changes
