@@ -20,6 +20,11 @@ export default {
         type: 'boolean',
       },
     },
+    resize: {
+      control: {
+        type: 'boolean',
+      },
+    },
     onClick: {
       action: 'click',
     },

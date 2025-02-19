@@ -20,7 +20,7 @@ export default {
   },
   decorators: [
     (Story) => (
-      <div className='flex'>
+      <div className='flex gap-2'>
         <Story />
         <Text tag="span" children="Aceite os termos de uso." />
       </div>

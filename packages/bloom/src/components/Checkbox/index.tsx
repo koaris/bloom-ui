@@ -16,7 +16,7 @@ export const Checkbox = ({ className, required, disabled }: CheckboxProps) => {
   }
 
   return (
-    <div className="flex items-center justify-center px-2">
+    <div className="flex items-center justify-center">
       <label
         className={twMerge(
           className,
