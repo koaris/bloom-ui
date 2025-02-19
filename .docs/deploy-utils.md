@@ -5,5 +5,5 @@
   <li>npm run changeset</li>
   <li>add description</li>
   <li>npm run version-packages</li>
-  <li>npm run release - rodado pelo CI no GitHub Actions.</li>
+  <li>npm run release</li>
 </ul>

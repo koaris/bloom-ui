@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.1.0
+
+### Minor Changes
+
+- button and checkbox improvements
+
 ## 1.0.5
 
 ### Patch Changes
