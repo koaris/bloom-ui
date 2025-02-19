@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.1.1
+
+### Patch Changes
+
+- fix card css
+
 ## 1.1.0
 
 ### Minor Changes

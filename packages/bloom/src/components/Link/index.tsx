@@ -32,7 +32,7 @@ export const Link = ({
         className,
       )}
       href={url}
-      {...newPage && { target: "_blank", rel: "noopener noreferrer" }}
+      {...(newPage && { target: '_blank', rel: 'noopener noreferrer' })}
       {...rest}
     />
   )

@@ -12,7 +12,7 @@ export interface TextAreaProps
     HTMLTextAreaElement
   > {
   disabled?: boolean
-  reference?: React.RefObject<HTMLTextAreaElement>;
+  reference?: React.RefObject<HTMLTextAreaElement>
   placeholder?: string
   value?: string
   validated?: boolean

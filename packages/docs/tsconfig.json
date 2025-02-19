@@ -1,4 +1,4 @@
 {
   "extends": "@koaris/ts-config/react.json",
-  "include": ["src", "src/stories/Card.stories.ts"],
+  "include": ["src"],
 }

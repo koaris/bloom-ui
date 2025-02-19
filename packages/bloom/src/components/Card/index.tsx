@@ -43,7 +43,12 @@ export const Card = ({
       onClick={onClick}
     >
       <img src={rest.image} alt={rest.title} width={imageSize} height="auto" />
-      <aside className={twMerge(direction === 'col' && 'text-center', 'flex flex-col gap-2')}>
+      <aside
+        className={twMerge(
+          direction === 'col' && 'text-center',
+          'flex flex-col gap-2',
+        )}
+      >
         <h1 className="text-xl font-bold font-default leading-tight">
           {rest.title}
         </h1>
