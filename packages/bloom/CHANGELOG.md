@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.1.3
+
+### Patch Changes
+
+- feat: update files in production
+
 ## 1.1.2
 
 ### Patch Changes
