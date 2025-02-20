@@ -1,6 +1,6 @@
 {
   "name": "@koaris/bloom-ui",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Bloom-ui is a public design system from the Koaris Project developed with React, Typescript, and Tailwind.",
   "source": "./src/index.ts",
   "type": "module",
