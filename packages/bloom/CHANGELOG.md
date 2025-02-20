@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.1.2
+
+### Patch Changes
+
+- Optimized Tailwind configuration and build process to reduce bundle size.
+
 ## 1.1.1
 
 ### Patch Changes

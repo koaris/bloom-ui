@@ -2,8 +2,6 @@
   "extends": "@koaris/ts-config/react.json",
   "include": ["src"],
   "splitting": true,
-  "format": ["esm", "cjs"],
-  "dts": true,
   "external": ["react"],
   "entryPoints": ["src/index.tsx"],
 }

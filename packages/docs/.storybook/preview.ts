@@ -1,7 +1,7 @@
 import { themes } from "@storybook/theming";
 import type { Preview } from "@storybook/react";
 
-import '@koaris/bloom-ui/dist/tailwind.css'
+import '@koaris/bloom-ui/tailwind.css';
 
 const preview: Preview = {
   parameters: {
