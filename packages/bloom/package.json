@@ -5,6 +5,8 @@
   "source": "./src/index.ts",
   "type": "module",
   "main": "dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "dist/index.d.ts",
   "scripts": {
     "build": "NODE_ENV=production tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts  --minify && tsup",
     "dev": "concurrently --kill-others \"tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts  --minify --watch \" \"tsup --watch\"",
@@ -21,11 +23,16 @@
     "design-system",
     "react"
   ],
+  "files": [
+    "dist",
+    "README.md",
+    "tailwind.css"
+  ],
   "author": "guilhermesalviano",
   "homepage": "https://guilhermesalviano.github.io/bloom-ui",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guilhermesalviano/bloom-ui.git"
+    "url": "git+https://github.com/guilhermesalviano/bloom-ui.git"
   },
   "license": "GPL-3.0-only",
   "devDependencies": {
