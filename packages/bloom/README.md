@@ -10,12 +10,16 @@ Install the following package:
 npm i @koaris/bloom-ui
 ```
 ## Usage
-View docs [here](https://guilhermesalviano.github.io/bloom-ui).
-
-Import design system css in your css file:
+This design system is built with Tailwind, and you can import it into your project as follows:
+In your CSS file:
 ```css
-@import "@koaris/bloom-ui/dist/tailwind.css";
+@import "@koaris/bloom-ui/tailwind.css";
 ```
+Or in your JavaScript file:
+```js
+import '@koaris/bloom-ui/tailwind.css'
+```
+
 Components usage:
 ```tsx
 import { Text } from '@koaris/bloom-ui'
