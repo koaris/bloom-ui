@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.2.0
+
+### Minor Changes
+
+- configure a minor version
+
 ## 1.1.3
 
 ### Patch Changes
