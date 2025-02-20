@@ -5,3 +5,5 @@ dist
 
 .DS_Store
 .changeset
+
+packages/bloom/tailwind.css

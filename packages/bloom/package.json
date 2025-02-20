@@ -6,14 +6,16 @@
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
+  "style": "./tailwind.css",
   "scripts": {
-    "build": "tailwindcss -i ./src/styles/tailwind.css -o ./dist/tailwind.css -c ./tailwind.config.ts --minify && tsup src/index.tsx --format esm,cjs --dts --external react",
-    "dev": "concurrently --kill-others \"tailwindcss -i ./src/styles/tailwind.css -o ./dist/tailwind.css -c ./tailwind.config.ts --minify --watch \" \"tsup src/index.tsx --format esm, cjs --dts --external react --watch\"",
+    "build": "tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts --minify && tsup src/index.tsx --format esm,cjs --dts --external react",
+    "dev": "concurrently --kill-others \"tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts --minify --watch \" \"tsup src/index.tsx --format esm, cjs --dts --external react --watch\"",
     "lint": "eslint src/**/*.ts* --fix"
   },
   "files": [
     "dist",
-    "README.md"
+    "README.md",
+    "tailwind.css"
   ],
   "keywords": [
     "design-system",
