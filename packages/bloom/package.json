@@ -4,9 +4,9 @@
   "description": "Bloom-ui is a public design system from the Koaris Project developed with React, Typescript, and Tailwind.",
   "source": "./src/index.ts",
   "type": "module",
-  "main": "dist/index.mjs",
-  "module": "./dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "types": "./,dist/index.d.ts",
+  "main": "./dist/index.mjs",
+  "module": "./ist/index.mjs",
   "scripts": {
     "build": "NODE_ENV=production tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts  --minify && tsup",
     "dev": "concurrently --kill-others \"tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts  --minify --watch \" \"tsup --watch\"",
@@ -14,8 +14,9 @@
   },
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.d.ts"
+      "require": "./dist/index.cjs"
     },
     "./tailwind.css": "./tailwind.css"
   },

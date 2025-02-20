@@ -1,11 +1,11 @@
 import { defineConfig } from "tsup";
 
 export default defineConfig({
-  entry: ["src/index.tsx", "src/tailwind-preset.ts"],
-  format: ["esm"],
+  entry: ["src/index.tsx"],
+  format: ["esm", "cjs"],
   tsconfig: "./tsconfig.json",
   outExtension({ format }) {
-    return { js: ".mjs" };
+    return { js: format === "esm" ? ".mjs" : ".cjs" };
   },
   dts: true,
   external: ["react"],
