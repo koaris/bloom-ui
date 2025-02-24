@@ -14,4 +14,4 @@ Bloom-ui is a public design system from the Koaris Project developed with React,
 
 View docs [here](https://guilhermesalviano.github.io/bloom-ui).
 
-Movi este repositório para a organização [@koaris](https://github.com/koaris/bloom-ui).
+I have moved this repository to the [@koaris](https://github.com/koaris/bloom-ui) organization.
