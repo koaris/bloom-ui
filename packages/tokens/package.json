@@ -14,10 +14,10 @@
     "dist"
   ],
   "author": "guilhermesalviano",
-  "homepage": "https://guilhermesalviano.github.io/bloom-ui",
+  "homepage": "https://koaris.github.io/bloom-ui",
   "repository": {
     "type": "git",
-    "url": "https://github.com/guilhermesalviano/bloom-ui.git"
+    "url": "https://github.com/koaris/bloom-ui.git"
   },
   "keywords": [
     "tokens",
