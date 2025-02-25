@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.2.2
+
+### Patch Changes
+
+- move bloom-ui to Koaris Organization at Github
+
 ## 1.2.1
 
 ### Patch Changes
