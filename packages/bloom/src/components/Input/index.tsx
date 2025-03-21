@@ -8,7 +8,10 @@ import {
 } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { FiCheck, FiX } from 'react-icons/fi'
-import masks from '../Shared/masks'
+
+const passwordMask = {
+  password: [/^(?=.*[!@#$%^&*])/, /(?=.*[0-9])/, /.{8,}$/],
+}
 
 export type InputType = 'text' | 'password' | 'date' | 'cpf' | 'phone' | 'cnpj' | 'cep'
 
@@ -23,27 +26,16 @@ export interface InputProps
     DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
     'type'
   > {
-  /** Whether the input is disabled */
   disabled?: boolean
-  /** Placeholder text for the input */
   placeholder?: string
-  /** Current value of the input */
   value?: string
-  /** Whether the input has been validated */
   validated?: boolean
-  /** Whether the input has an error */
   error?: boolean
-  /** Whether the input is required */
   required?: boolean
-  /** Type of input to render */
   type: InputType
-  /** Custom error message to display */
   errorMessage?: string
-  /** Callback when input value changes */
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void
-  /** Label for the input field */
   label?: string
-  /** Helper text to display below the input */
   helperText?: string
 }
 
@@ -69,12 +61,13 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref,
   ) => {
     const [selected, setSelected] = useState(false)
-    const [inputValue, setInputValue] = useState(value)
+    const [inputValue, setInputValue] = useState(value || '')
     const [passwordValidation, setPasswordValidation] = useState<PasswordValidation>({
       hasEightCharacters: false,
       hasSpecialCharacters: false,
       hasNumber: false,
     })
+    const [isValid, setIsValid] = useState(false)
 
     const handleFocus = () => {
       setSelected(true)
@@ -82,28 +75,163 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
     const handleBlur = () => {
       setSelected(false)
+      validateInput(inputValue || '')
+    }
+
+    const applyMask = (value: string, type: InputType): string => {
+      let result = value
+
+      switch (type) {
+        case 'date':
+          result = value.replace(/\D/g, '')
+          if (result.length > 8) result = result.substring(0, 8)
+          if (result.length > 4) result = result.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3')
+          else if (result.length > 2) result = result.replace(/(\d{2})(\d+)/, '$1/$2')
+          break
+        case 'cpf':
+          result = value.replace(/\D/g, '')
+          if (result.length > 11) result = result.substring(0, 11)
+          if (result.length > 9) result = result.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4')
+          else if (result.length > 6) result = result.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3')
+          else if (result.length > 3) result = result.replace(/(\d{3})(\d+)/, '$1.$2')
+          break
+        case 'cnpj':
+          result = value.replace(/\D/g, '')
+          if (result.length > 14) result = result.substring(0, 14)
+          if (result.length > 12)
+            result = result.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, '$1.$2.$3/$4-$5')
+          else if (result.length > 8)
+            result = result.replace(/(\d{2})(\d{3})(\d{3})(\d+)/, '$1.$2.$3/$4')
+          else if (result.length > 5)
+            result = result.replace(/(\d{2})(\d{3})(\d+)/, '$1.$2.$3')
+          else if (result.length > 2)
+            result = result.replace(/(\d{2})(\d+)/, '$1.$2')
+          break
+        case 'cep':
+          result = value.replace(/\D/g, '')
+          if (result.length > 8) result = result.substring(0, 8)
+          if (result.length > 5) result = result.replace(/(\d{5})(\d+)/, '$1-$2')
+          break
+        case 'phone':
+          result = value.replace(/\D/g, '')
+          if (result.length > 11) result = result.substring(0, 11)
+          if (result.length > 10)
+            result = result.replace(/(\d{2})(\d{5})(\d+)/, '($1) $2-$3')
+          else if (result.length > 6)
+            result = result.replace(/(\d{2})(\d{4})(\d+)/, '($1) $2-$3')
+          else if (result.length > 2)
+            result = result.replace(/(\d{2})(\d+)/, '($1) $2')
+          break
+        default:
+          break
+      }
+
+      return result
+    }
+
+    const validateInput = (value: string): boolean => {
+      if (!value) return false
+
+      let valid = false
+
+      switch (type) {
+        case 'password':
+          valid = passwordValidation.hasEightCharacters &&
+            passwordValidation.hasSpecialCharacters &&
+            passwordValidation.hasNumber
+          break
+        case 'date':
+          valid = /^\d{2}\/\d{2}\/\d{4}$/.test(value)
+          break
+        case 'cpf':
+          valid = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(value)
+          break
+        case 'cnpj':
+          valid = /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/.test(value)
+          break
+        case 'cep':
+          valid = /^\d{5}-\d{3}$/.test(value)
+          break
+        case 'phone':
+          valid = /^\(\d{2}\) \d{5}-\d{4}$/.test(value)
+          break
+        default:
+          valid = value.length > 0
+          break
+      }
+
+      setIsValid(valid)
+      return valid
     }
 
     const handleInput = (event: ChangeEvent<HTMLInputElement>) => {
-      const newValue = event.currentTarget.value
+      let newValue = event.currentTarget.value
+
+      if (['date', 'cpf', 'phone', 'cnpj', 'cep'].includes(type)) {
+        newValue = applyMask(newValue, type)
+      }
+
+      const newEvent = {
+        ...event,
+        currentTarget: {
+          ...event.currentTarget,
+          value: newValue
+        },
+        target: {
+          ...event.target,
+          value: newValue
+        }
+      } as ChangeEvent<HTMLInputElement>
+
       setInputValue(newValue)
-      externalOnChange?.(event)
 
       if (type === 'password') {
         checkPassword(newValue)
+      } else {
+        validateInput(newValue)
       }
+
+      externalOnChange?.(newEvent)
     }
 
     useEffect(() => {
-      setInputValue(value)
-    }, [value])
+      setInputValue(value || '')
+      if (value && type === 'password') {
+        checkPassword(value)
+      } else if (value) {
+        validateInput(value)
+      }
+    }, [value, type])
 
     const checkPassword = (value: string) => {
-      setPasswordValidation({
-        hasEightCharacters: value?.match(masks.password[2]) !== null,
-        hasSpecialCharacters: value?.match(masks.password[0]) !== null,
-        hasNumber: value?.match(masks.password[1]) !== null,
-      })
+      const validationResult = {
+        hasEightCharacters: value?.match(passwordMask.password[2]) !== null,
+        hasSpecialCharacters: value?.match(passwordMask.password[0]) !== null,
+        hasNumber: value?.match(passwordMask.password[1]) !== null,
+      }
+
+      setPasswordValidation(validationResult)
+      setIsValid(
+        validationResult.hasEightCharacters &&
+        validationResult.hasSpecialCharacters &&
+        validationResult.hasNumber
+      )
+    }
+
+    const getInputType = (): string => {
+      // Map our custom types to HTML input types
+      switch (type) {
+        case 'password':
+          return 'password'
+        case 'date':
+        case 'cpf':
+        case 'phone':
+        case 'cnpj':
+        case 'cep':
+          return 'text'
+        default:
+          return 'text'
+      }
     }
 
     const inputClasses = twMerge(
@@ -111,7 +239,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       className,
       disabled && 'opacity-50 cursor-not-allowed',
       selected && 'border-2 border-orange-500',
-      validated && 'border-2 border-green-900',
+      validated && isValid && 'border-2 border-green-900',
       error && 'border-2 border-red-900',
     )
 
@@ -160,7 +288,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </label>
         )}
         <input
-          type={type}
+          type={getInputType()}
           required={required}
           disabled={disabled}
           ref={ref}
