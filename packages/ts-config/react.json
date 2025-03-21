@@ -4,6 +4,7 @@
         "jsx": "react-jsx",
         "lib": ["dom", "es2015"],
         "module": "esnext",
-        "target": "es6"
+        "target": "es2020",
+        "moduleResolution": "bundler"
     }
 }
