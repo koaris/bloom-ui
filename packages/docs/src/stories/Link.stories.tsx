@@ -34,6 +34,7 @@ export const Primary: StoryObj<LinkProps> = {
   args: {
   },
 }
+
 export const SamePage: StoryObj<LinkProps> = {
   args: {
     newPage: false
