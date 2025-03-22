@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.2.5
+
+### Patch Changes
+
+- fix input styles
+
 ## 1.2.4
 
 ### Patch Changes
