@@ -1,59 +1,135 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react'
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-/**
- * Primary UI component for user interaction
- */
+export type CardSize = 'small' | 'medium' | 'large' | 'full'
+export type CardDirection = 'row' | 'col'
+
 export interface CardProps
-  extends DetailedHTMLProps<
-    HTMLAttributes<HTMLDivElement>, // Change the type to HTMLDivElement
-    HTMLDivElement
+  extends Omit<
+    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+    'title' | 'content'
   > {
   selected?: boolean
   disabled?: boolean
-  direction?: string
-  size?: string
-  imageSize: string
-  image?: string // Add the image property
+  direction?: CardDirection
+  size?: CardSize
+  image?: string
+  imageSize?: string
+  imageAlt?: string
+  title?: ReactNode
+  content?: ReactNode
   onClick?: () => void
+  footer?: ReactNode
+  hoverable?: boolean
 }
 
-export const Card = ({
+const Card = ({
   className,
   selected = false,
-  direction,
-  size,
-  disabled,
-  imageSize,
+  direction = 'row',
+  size = 'medium',
+  disabled = false,
+  image,
+  imageSize = '100px',
+  imageAlt = '',
+  title,
+  content,
   onClick,
+  footer,
+  hoverable = true,
   ...rest
 }: CardProps) => {
+  const handleClick = () => {
+    if (!disabled && onClick) {
+      onClick()
+    }
+  }
+
+  const cardSizeClasses = {
+    small: 'max-w-xs p-3',
+    medium: 'max-w-md p-4',
+    large: 'max-w-lg p-5',
+    full: 'w-full p-5',
+  }
+
   return (
     <div
       className={twMerge(
-        'flex items-center justify-center rounded-lg cursor-pointer bg-neutral',
-        'hover:shadow-md hover:shadow-neutral-500 border border-neutral-500 text-neutral-1000',
-        size === 'medium' && 'w-64 px-8 py-4',
-        size === 'large' && 'w-96 pr-5',
-        direction === 'col' && 'flex-col',
-        selected === true && 'border-2 border-orange-500',
-        disabled === true && 'opacity-50 cursor-not-allowed',
+        'flex items-center rounded-lg bg-neutral border border-neutral-500 text-neutral-1000 transition-all duration-200',
+        direction === 'col' ? 'flex-col' : 'flex-row',
+        cardSizeClasses[size],
+        hoverable && !disabled && 'hover:shadow-md hover:shadow-neutral-500',
+        selected && 'border-2 border-orange-500',
+        disabled && 'opacity-50 cursor-not-allowed',
+        onClick && !disabled && 'cursor-pointer',
         className,
       )}
-      onClick={onClick}
+      onClick={handleClick}
+      role={onClick && !disabled ? 'button' : undefined}
+      tabIndex={onClick && !disabled ? 0 : undefined}
+      onKeyDown={(e) => {
+        if ((e.key === 'Enter' || e.key === ' ') && onClick && !disabled) {
+          e.preventDefault()
+          onClick()
+        }
+      }}
+      aria-disabled={disabled}
+      {...rest}
     >
-      <img src={rest.image} alt={rest.title} width={imageSize} height="auto" />
-      <aside
+      {image && (
+        <div
+          className={twMerge(
+            'flex-shrink-0',
+            direction === 'row' ? 'mr-4' : 'mb-4',
+            size === 'small' && direction === 'row' ? 'mr-3' : '',
+            size === 'small' && direction === 'col' ? 'mb-3' : '',
+          )}
+        >
+          <img
+            src={image}
+            alt={imageAlt}
+            width={imageSize}
+            height="auto"
+            className="rounded object-cover"
+          />
+        </div>
+      )}
+
+      <div
         className={twMerge(
-          direction === 'col' && 'text-center',
-          'flex flex-col gap-2',
+          'flex flex-col',
+          direction === 'col' && 'text-center w-full',
+          direction === 'row' && 'flex-1',
         )}
       >
-        <h1 className="text-xl font-bold font-default leading-tight">
-          {rest.title}
-        </h1>
-        <p className="text-justify">{rest.content}</p>
-      </aside>
+        {title && (
+          <h3 className="text-xl font-bold font-default leading-tight mb-2">
+            {title}
+          </h3>
+        )}
+
+        {content && (
+          <div className={twMerge(
+            'text-base',
+            direction === 'col' ? 'text-center' : 'text-left'
+          )}>
+            {content}
+          </div>
+        )}
+
+        {footer && (
+          <div className={twMerge(
+            'mt-4 pt-3 border-t border-neutral-300',
+            direction === 'col' ? 'text-center' : 'text-left'
+          )}>
+            {footer}
+          </div>
+        )}
+      </div>
     </div>
   )
 }
+
+Card.displayName = 'Card'
+
+export { Card }
