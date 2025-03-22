@@ -35,7 +35,7 @@
     "type": "git",
     "url": "git+https://github.com/koaris/bloom-ui.git"
   },
-  "license": "GPL-3.0-only",
+  "license": "MIT",
   "devDependencies": {
     "@koaris/eslint-config": "*",
     "@koaris/tokens": "*",

@@ -29,3 +29,6 @@ import { Text } from '@koaris/bloom-ui'
 
 ## Contributions and bug reports
 You can follow and make contributions in [github](https://github.com/koaris/bloom-ui).
+
+## License
+Bloom-ui is open source under the [MIT License](LICENSE.md).
