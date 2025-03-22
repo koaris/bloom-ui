@@ -11,7 +11,7 @@ export interface MultiStepProps
 export const MultiStep = ({ className, size, currentStep }: MultiStepProps) => {
   return (
     <div className="w-full">
-      <Text tag="label" color="neutral-100" size="xs">
+      <Text tag="label" color="primary" size="xs">
         {`Passo ${currentStep} de ${size}`}
       </Text>
       <div className={`grid gap-2 grid-cols-${size} grid-flow-col mt-1`}>

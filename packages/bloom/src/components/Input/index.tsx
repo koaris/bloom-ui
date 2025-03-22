@@ -13,7 +13,7 @@ const passwordMask = {
   password: [/^(?=.*[!@#$%^&*])/, /(?=.*[0-9])/, /.{8,}$/]
 }
 
-export type InputType = 'text' | 'password' | 'date' | 'cpf' | 'phone' | 'cnpj' | 'cep' | 'email'
+export type InputType = 'text' | 'password' | 'date' | 'datePicker' | 'cpf' | 'phone' | 'cnpj' | 'cep' | 'email'
 
 export interface PasswordValidation {
   hasEightCharacters: boolean
@@ -296,6 +296,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           return 'password'
         case 'email':
           return 'email'
+        case 'datePicker':
+          return 'date'
         case 'date':
         case 'cpf':
         case 'phone':

@@ -136,6 +136,14 @@ export const Date: StoryObj<InputProps> = {
   },
 }
 
+export const DatePicker: StoryObj<InputProps> = {
+  args: {
+    type: 'datePicker',
+    label: 'Select a date',
+    placeholder: 'Select your birth date',
+  },
+}
+
 export const CPF: StoryObj<InputProps> = {
   args: {
     type: 'cpf',

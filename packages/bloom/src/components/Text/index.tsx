@@ -1,45 +1,51 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 export interface TextProps
   extends DetailedHTMLProps<
-    HTMLAttributes<HTMLLabelElement>,
-    HTMLLabelElement
+    HTMLAttributes<HTMLElement>,
+    HTMLElement
   > {
-  children: ReactNode
-  color?: string
-  size?:
-    | 'xxs'
-    | 'xs'
-    | 'sm'
-    | 'md'
-    | 'lg'
-    | 'xl'
-    | '2xl'
-    | '3xl'
-    | '4xl'
-    | '5xl'
-    | '6xl'
-    | '7xl'
-    | '8xl'
-    | '9xl'
-  tag?: 'p' | 'strong' | 'span' | 'label'
-  htmlFor?: string
+  children: ReactNode;
+  color?: 'primary' | 'secondary' | 'accent' | 'neutral' | 'success' | 'warning' | 'error' | 'info';
+  colorShade?: '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
+  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
+  tag?: 'p' | 'span' | 'label' | 'strong' | 'em' | 'small' | 'div';
+  weight?: 'thin' | 'extralight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
+  tracking?: 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest';
+  leading?: 'none' | 'tight' | 'snug' | 'normal' | 'relaxed' | 'loose';
+  alignment?: 'left' | 'center' | 'right' | 'justify';
+  truncate?: boolean;
+  italic?: boolean;
+  uppercase?: boolean;
+  lowercase?: boolean;
+  capitalize?: boolean;
+  htmlFor?: string;
 }
 
-export const Text = ({
+const Text = ({
   children,
-  color = 'neutral-800',
+  color = 'neutral',
+  colorShade = '800',
   size = 'md',
   tag = 'p',
+  weight = 'normal',
+  tracking = 'normal',
+  leading = 'normal',
+  alignment = 'left',
+  truncate = false,
+  italic = false,
+  uppercase = false,
+  lowercase = false,
+  capitalize = false,
   className,
   ...rest
 }: TextProps) => {
   const fontSize = {
-    xxs: 'text-xxs',
+    xxs: 'text-xs', // fallback to xs since xxs isn't standard in Tailwind
     xs: 'text-xs',
     sm: 'text-sm',
-    md: 'text-md',
+    md: 'text-base', // fixed from 'text-md' to 'text-base'
     lg: 'text-lg',
     xl: 'text-xl',
     '2xl': 'text-2xl',
@@ -50,13 +56,80 @@ export const Text = ({
     '7xl': 'text-7xl',
     '8xl': 'text-8xl',
     '9xl': 'text-9xl',
-  }[size]
+  }[size];
 
-  const Tag = tag as React.ElementType
+  const fontWeight = {
+    thin: 'font-thin',
+    extralight: 'font-extralight',
+    light: 'font-light',
+    normal: 'font-normal',
+    medium: 'font-medium',
+    semibold: 'font-semibold',
+    bold: 'font-bold',
+    extrabold: 'font-extrabold',
+    black: 'font-black',
+  }[weight];
+
+  const letterTracking = {
+    tighter: 'tracking-tighter',
+    tight: 'tracking-tight',
+    normal: 'tracking-normal',
+    wide: 'tracking-wide',
+    wider: 'tracking-wider',
+    widest: 'tracking-widest',
+  }[tracking];
+
+  const lineHeight = {
+    none: 'leading-none',
+    tight: 'leading-tight',
+    snug: 'leading-snug',
+    normal: 'leading-normal',
+    relaxed: 'leading-relaxed',
+    loose: 'leading-loose',
+  }[leading];
+
+  const textAlignment = {
+    left: 'text-left',
+    center: 'text-center',
+    right: 'text-right',
+    justify: 'text-justify',
+  }[alignment];
+
+  const colorClass = `text-${color}-${colorShade}`;
+
+  const truncateClass = truncate ? 'truncate' : '';
+  const italicClass = italic ? 'italic' : '';
+
+  // Text transformation classes (only apply one)
+  let transformClass = '';
+  if (uppercase) transformClass = 'uppercase';
+  else if (lowercase) transformClass = 'lowercase';
+  else if (capitalize) transformClass = 'capitalize';
+
+  const Tag = tag as React.ElementType;
 
   return (
-    <Tag {...rest} className={twMerge(`text-${color} ${fontSize}`, className)}>
+    <Tag
+      className={twMerge(
+        colorClass,
+        fontSize,
+        fontWeight,
+        letterTracking,
+        lineHeight,
+        textAlignment,
+        truncateClass,
+        italicClass,
+        transformClass,
+        className
+      )}
+      {...rest}
+    >
       {children}
     </Tag>
-  )
-}
+  );
+};
+
+
+Text.displayName = 'Text'
+
+export { Text }
