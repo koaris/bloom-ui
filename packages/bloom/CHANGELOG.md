@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.2.4
+
+### Patch Changes
+
+- Fix erros in nextjs usage
+
 ## 1.2.3
 
 ### Patch Changes
