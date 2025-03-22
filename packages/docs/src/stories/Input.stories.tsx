@@ -120,6 +120,14 @@ export const Password: StoryObj<InputProps> = {
   },
 }
 
+export const Email: StoryObj<InputProps> = {
+  args: {
+    type: 'email',
+    label: 'Email',
+    placeholder: 'Enter your email',
+  },
+}
+
 export const Date: StoryObj<InputProps> = {
   args: {
     type: 'date',

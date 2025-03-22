@@ -10,7 +10,7 @@ import { twMerge } from 'tailwind-merge'
 import { FiCheck, FiX } from 'react-icons/fi'
 
 const passwordMask = {
-  password: [/^(?=.*[!@#$%^&*])/, /(?=.*[0-9])/, /.{8,}$/],
+  password: [/^(?=.*[!@#$%^&*])/, /(?=.*[0-9])/, /.{8,}$/]
 }
 
 export type InputType = 'text' | 'password' | 'date' | 'cpf' | 'phone' | 'cnpj' | 'cep' | 'email'
@@ -51,8 +51,7 @@ const phoneFormats: Record<string, PhoneFormat> = {
   'US': { countryCode: '+1', format: '($1) $2-$3' },
   'UK': { countryCode: '+44', format: '$1 $2 $3' },
   'DE': { countryCode: '+49', format: '$1 $2 $3' },
-  'FR': { countryCode: '+33', format: '$1 $2 $3 $4' },
-  // Add more countries as needed
+  'FR': { countryCode: '+33', format: '$1 $2 $3 $4' }
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -313,19 +312,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
       const format = phoneFormats[countryCode] || phoneFormats['BR']
       return (
-        <span className="absolute left-2 top-2.5 text-gray-500">
+        <span className="absolute left-3 top-1.5 text-gray-500">
           {format.countryCode}
         </span>
       )
     }
 
     const inputClasses = twMerge(
-      'flex items-center justify-center border-2 border-neutral rounded-sm w-full px-3 py-2 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none transition-all duration-200',
+      'flex items-center justify-center border-2 border-gray-400 rounded-sm w-full px-3 py-1 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none transition-all duration-200',
       className,
       disabled && 'opacity-50 cursor-not-allowed',
       selected && 'border-2 border-orange-500',
       validated && isValid && 'border-2 border-green-900',
-      error && 'border-2 border-red-900',
+      (error || (!isValid && inputValue != '')) && 'border-2 border-red-900',
       type === 'phone' && 'pl-10'
     )
 
