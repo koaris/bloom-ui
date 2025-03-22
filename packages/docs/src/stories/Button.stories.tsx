@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Button, ButtonProps, Text } from '@koaris/bloom-ui'
+import { Button, ButtonProps } from '@koaris/bloom-ui'
 import { GrLinkNext } from "react-icons/gr"
 
 export default {
@@ -11,32 +11,59 @@ export default {
     size: 'md',
     disabled: false,
     variant: 'primary',
+    loading: false,
+    fullWidth: false
   },
   argTypes: {
     size: {
-      options: ['sm', 'md'],
+      options: ['xs', 'sm', 'md', 'lg'],
       control: {
-        type: 'inline-radio',
+        type: 'select',
       },
+      description: 'Defines the size of the button'
     },
     variant: {
-      options: ['primary', 'secondary'],
+      options: ['primary', 'secondary', 'outline', 'ghost', 'link'],
       control: {
-        type: 'inline-radio',
+        type: 'select',
       },
+      description: 'Defines the visual style of the button'
     },
     disabled: {
       control: {
         type: 'boolean',
       },
+      description: 'Whether the button is disabled'
+    },
+    loading: {
+      control: {
+        type: 'boolean',
+      },
+      description: 'Whether the button is in loading state'
+    },
+    fullWidth: {
+      control: {
+        type: 'boolean',
+      },
+      description: 'Whether the button should take full width of its container'
+    },
+    startIcon: {
+      control: false,
+      description: 'Icon to display at the start of the button'
+    },
+    endIcon: {
+      control: false,
+      description: 'Icon to display at the end of the button'
     },
     onClick: {
-      action: 'click',
+      action: 'clicked',
     },
   },
   decorators: [
     (Story) => (
-      <Story className="w-30" />
+      <div className="p-4">
+        <Story />
+      </div>
     ),
   ]
 } as Meta<ButtonProps>
@@ -50,20 +77,74 @@ export const Secondary: StoryObj<ButtonProps> = {
   },
 }
 
-export const Small: StoryObj<ButtonProps> = {
+export const Outline: StoryObj<ButtonProps> = {
   args: {
-    size: 'sm',
+    variant: 'outline',
+    children: 'Outline',
   },
 }
 
-export const WithIcon: StoryObj<ButtonProps> = {
+export const Ghost: StoryObj<ButtonProps> = {
   args: {
-    children: (
-      <>
-        Próximo
-        <GrLinkNext />
-      </>
-    )
+    variant: 'ghost',
+    children: 'Ghost',
+  },
+}
+
+export const Link: StoryObj<ButtonProps> = {
+  args: {
+    variant: 'link',
+    children: 'Link Style',
+  },
+}
+
+export const ExtraSmall: StoryObj<ButtonProps> = {
+  args: {
+    size: 'xs',
+    children: 'Extra Small',
+  },
+}
+
+export const Small: StoryObj<ButtonProps> = {
+  args: {
+    size: 'sm',
+    children: 'Small',
+  },
+}
+
+export const Medium: StoryObj<ButtonProps> = {
+  args: {
+    size: 'md',
+    children: 'Medium',
+  },
+}
+
+export const Large: StoryObj<ButtonProps> = {
+  args: {
+    size: 'lg',
+    children: 'Large',
+  },
+}
+
+export const WithStartIcon: StoryObj<ButtonProps> = {
+  args: {
+    children: 'Start Icon',
+    startIcon: <GrLinkNext />
+  },
+}
+
+export const WithEndIcon: StoryObj<ButtonProps> = {
+  args: {
+    children: 'Próximo',
+    endIcon: <GrLinkNext />
+  },
+}
+
+export const WithBothIcons: StoryObj<ButtonProps> = {
+  args: {
+    children: 'Both Icons',
+    startIcon: <GrLinkNext />,
+    endIcon: <GrLinkNext />
   },
 }
 
@@ -71,4 +152,24 @@ export const Disabled: StoryObj<ButtonProps> = {
   args: {
     disabled: true,
   },
+}
+
+export const Loading: StoryObj<ButtonProps> = {
+  args: {
+    loading: true,
+  },
+}
+
+export const FullWidth: StoryObj<ButtonProps> = {
+  args: {
+    fullWidth: true,
+    children: 'Full Width Button',
+  },
+  decorators: [
+    (Story) => (
+      <div className="w-full p-4">
+        <Story />
+      </div>
+    ),
+  ]
 }
