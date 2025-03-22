@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.2.6
+
+### Patch Changes
+
+- Improve Text and Heading components
+
 ## 1.2.5
 
 ### Patch Changes
