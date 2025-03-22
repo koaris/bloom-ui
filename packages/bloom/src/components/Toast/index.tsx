@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useState, useRef } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -19,6 +20,63 @@ export interface ToastContainerProps {
     position?: ToastPosition;
     className?: string;
 }
+
+// Toast service for global state management
+class ToastService {
+    private static instance: ToastService;
+    private listeners: Set<(toasts: ToastProps[]) => void>;
+    private toasts: ToastProps[];
+
+    private constructor() {
+        this.listeners = new Set();
+        this.toasts = [];
+    }
+
+    public static getInstance(): ToastService {
+        if (!ToastService.instance) {
+            ToastService.instance = new ToastService();
+        }
+        return ToastService.instance;
+    }
+
+    public subscribe(listener: (toasts: ToastProps[]) => void): () => void {
+        this.listeners.add(listener);
+        return () => {
+            this.listeners.delete(listener);
+        };
+    }
+
+    private notify() {
+        this.listeners.forEach(listener => listener([...this.toasts]));
+    }
+
+    public showToast(toast: Omit<ToastProps, 'id' | 'onDismiss'>): string {
+        const id = `toast-${Date.now()}`;
+        this.toasts.push({
+            ...toast,
+            id,
+            onDismiss: (toastId) => this.hideToast(toastId)
+        });
+        this.notify();
+        return id;
+    }
+
+    public hideToast(id: string): void {
+        this.toasts = this.toasts.filter(toast => toast.id !== id);
+        this.notify();
+    }
+
+    public clearToasts(): void {
+        this.toasts = [];
+        this.notify();
+    }
+
+    public getToasts(): ToastProps[] {
+        return [...this.toasts];
+    }
+}
+
+export const toastService = ToastService.getInstance();
 
 export const Toast: React.FC<ToastProps> = ({
     id,
@@ -108,23 +166,26 @@ export const Toast: React.FC<ToastProps> = ({
     );
 };
 
-export const ToastContainer: React.FC<ToastContainerProps & { children?: React.ReactNode }> = ({
+export const ToastContainer: React.FC<ToastContainerProps> = ({
     position = 'top-right',
     className,
-    children,
 }) => {
-    const containerRef = useRef<{ current: HTMLDivElement | null }>({ current: null });
+    const containerRef = useRef<HTMLDivElement | null>(null);
     const [isMounted, setIsMounted] = useState(false);
+    const [toasts, setToasts] = useState<ToastProps[]>([]);
 
     useEffect(() => {
         const container = document.createElement('div');
         container.id = 'toast-root';
         container.className = 'fixed z-50 p-4';
         document.body.appendChild(container);
-        containerRef.current = { current: container };
+        containerRef.current = container;
         setIsMounted(true);
 
+        const unsubscribe = toastService.subscribe(setToasts);
+
         return () => {
+            unsubscribe();
             container.remove();
         };
     }, []);
@@ -148,53 +209,34 @@ export const ToastContainer: React.FC<ToastContainerProps & { children?: React.R
                 className
             )}
         >
-            {children}
+            {toasts.map(toast => (
+                <Toast key={toast.id} {...toast} />
+            ))}
         </div>
     );
 };
 
-// Toast context and provider remain the same
-type ToastItem = Omit<ToastProps, 'onDismiss'>;
+// Hook for using toast service
+export const useToast = () => {
+    return {
+        showToast: (toast: Omit<ToastProps, 'id' | 'onDismiss'>) =>
+            toastService.showToast(toast),
+        hideToast: (id: string) => toastService.hideToast(id),
+        clearToasts: () => toastService.clearToasts()
+    };
+};
 
-interface ToastContextType {
-    showToast: (toast: Omit<ToastItem, 'id'>) => string;
-    hideToast: (id: string) => void;
-    clearToasts: () => void;
-}
-
-export const ToastContext = React.createContext<ToastContextType | undefined>(undefined);
-
+// Toast provider component (simpler without context)
 export const ToastProvider: React.FC<{
     position?: ToastPosition;
     children: React.ReactNode;
 }> = ({ position = 'top-right', children }) => {
-    const [toasts, setToasts] = useState<ToastItem[]>([]);
-
-    const showToast = (toast: Omit<ToastItem, 'id'>) => {
-        const id = `toast-${Date.now()}`;
-        setToasts(prev => [...prev, { ...toast, id }]);
-        return id;
-    };
-
-    const hideToast = (id: string) => setToasts(prev => prev.filter(toast => toast.id !== id));
-    const clearToasts = () => setToasts([]);
-
     return (
-        <ToastContext.Provider value={{ showToast, hideToast, clearToasts }}>
+        <>
             {children}
-            <ToastContainer position={position}>
-                {toasts.map(toast => (
-                    <Toast key={toast.id} {...toast} onDismiss={hideToast} />
-                ))}
-            </ToastContainer>
-        </ToastContext.Provider>
+            <ToastContainer position={position} />
+        </>
     );
-};
-
-export const useToast = () => {
-    const context = React.useContext(ToastContext);
-    if (!context) throw new Error('useToast must be used within ToastProvider');
-    return context;
 };
 
 Toast.displayName = 'Toast';

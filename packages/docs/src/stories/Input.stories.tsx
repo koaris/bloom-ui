@@ -15,6 +15,11 @@ export default {
       options: ['text', 'password', 'date', 'cpf', 'phone', 'cnpj', 'cep'],
       description: 'Type of input to render',
     },
+    countryCode: {
+      control: 'select',
+      options: ['BR', 'US', 'UK', 'DE', 'FR'],
+      description: 'Whether the input is phone',
+    },
     disabled: {
       control: 'boolean',
       description: 'Whether the input is disabled',
@@ -63,7 +68,7 @@ export const WithLabel: StoryObj<InputProps> = {
 
 export const Required: StoryObj<InputProps> = {
   args: {
-    type: 'text',
+    type: 'email',
     label: 'Email',
     required: true,
     placeholder: 'Enter your email',
