@@ -55,11 +55,11 @@ const Card = ({
   return (
     <div
       className={twMerge(
-        'flex items-center rounded-lg bg-neutral border border-neutral-500 text-neutral-1000 transition-all duration-200',
+        'flex items-center  rounded-lg bg-orange-500 text-neutral-100 transition-all duration-200',
         direction === 'col' ? 'flex-col' : 'flex-row',
         cardSizeClasses[size],
         hoverable && !disabled && 'hover:shadow-md hover:shadow-neutral-500',
-        selected && 'border-2 border-orange-500',
+        // selected && 'border-2 border-orange-500',
         disabled && 'opacity-50 cursor-not-allowed',
         onClick && !disabled && 'cursor-pointer',
         className,
@@ -103,15 +103,15 @@ const Card = ({
         )}
       >
         {title && (
-          <h3 className="text-xl font-bold font-default leading-tight mb-2">
+          <h3 className="text-md text-left font-bold font-default leading-tight mb-1">
             {title}
           </h3>
         )}
 
         {content && (
           <div className={twMerge(
-            'text-base',
-            direction === 'col' ? 'text-center' : 'text-left'
+            'text-sm text-left',
+            // direction === 'col' ? 'text-left' : 'text-left'
           )}>
             {content}
           </div>
@@ -119,8 +119,7 @@ const Card = ({
 
         {footer && (
           <div className={twMerge(
-            'mt-4 pt-3 border-t border-neutral-300',
-            direction === 'col' ? 'text-center' : 'text-left'
+            'pt-2 text-sm border-t border-neutral-300 text-left',
           )}>
             {footer}
           </div>

@@ -61,7 +61,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         className={twMerge(
           'relative font-medium rounded-sm transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-opacity-50',
+          'focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md focus:ring-opacity-50',
           variantClasses[variant],
           sizeClasses[size],
           fullWidth ? 'w-full' : 'max-w-[180px]',

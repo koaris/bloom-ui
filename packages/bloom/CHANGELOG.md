@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.3.0
+
+### Minor Changes
+
+- 5acb6b7: Refactor button and card styles
+
 ## 1.2.6
 
 ### Patch Changes
