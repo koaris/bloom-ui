@@ -30,6 +30,22 @@ npm i
 npm run dev
 ```
 
+### Changeset
+This project uses Changeset with GitHub Actions to manage versioning. To create a new version, follow these steps:
+
+1. **Create a changeset:**
+   ```bash
+   npm run changeset
+   ```
+
+2. **Update versions:**
+   ```bash
+   npm run version-packages
+   ```
+
+3. **Publish to GitHub:**
+   Push your changes to GitHub, and the automated workflow will handle the release.
+
 ## Usage
 This design system is built with Tailwind, and you can import it into your project as follows:
 
