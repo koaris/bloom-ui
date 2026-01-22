@@ -8,12 +8,9 @@ const meta: Meta<typeof Text> = {
   tags: ['autodocs'],
   args: {
     children: 'Sample Text',
-    color: 'neutral',
-    colorShade: '800',
     size: 'md',
     tag: 'p',
     weight: 'normal',
-    tracking: 'normal',
     leading: 'normal',
     alignment: 'left',
     truncate: false,
@@ -33,13 +30,6 @@ const meta: Meta<typeof Text> = {
         type: 'select',
       },
       description: 'Color theme of the text',
-    },
-    colorShade: {
-      options: ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'],
-      control: {
-        type: 'select',
-      },
-      description: 'Shade of the selected color',
     },
     size: {
       options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'],
@@ -61,13 +51,6 @@ const meta: Meta<typeof Text> = {
         type: 'select',
       },
       description: 'Font weight of the text',
-    },
-    tracking: {
-      options: ['tighter', 'tight', 'normal', 'wide', 'wider', 'widest'],
-      control: {
-        type: 'select',
-      },
-      description: 'Letter spacing (tracking) of the text',
     },
     leading: {
       options: ['none', 'tight', 'snug', 'normal', 'relaxed', 'loose'],

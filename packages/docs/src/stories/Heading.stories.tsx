@@ -9,21 +9,6 @@ const meta: Meta<typeof Heading> = {
     layout: 'centered',
   },
   argTypes: {
-    color: {
-      control: 'select',
-      options: ['primary', 'secondary', 'accent', 'neutral', 'success', 'warning', 'error', 'info'],
-      description: 'Color theme of the heading',
-    },
-    colorShade: {
-      control: 'select',
-      options: ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900'],
-      description: 'Shade intensity of the color',
-    },
-    size: {
-      control: 'select',
-      options: ['sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'],
-      description: 'Font size of the heading',
-    },
     tag: {
       control: 'select',
       options: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
@@ -66,7 +51,7 @@ export const Default: Story = {
   args: {
     children: 'Default Heading',
     color: 'neutral',
-    colorShade: '800',
+    // colorShade: '800',
     size: 'lg',
     tag: 'h2',
     weight: 'bold',
@@ -81,8 +66,8 @@ export const Primary: Story = {
   args: {
     children: 'Primary Heading',
     color: 'primary',
-    colorShade: '600',
-    size: '2xl',
+    // colorShade: '600',
+    // size: '2xl',
     tag: 'h1',
   },
 };
@@ -91,8 +76,8 @@ export const Secondary: Story = {
   args: {
     children: 'Secondary Heading',
     color: 'secondary',
-    colorShade: '600',
-    size: 'xl',
+    // colorShade: '600',
+    // size: 'xl',
     tag: 'h2',
   },
 };
@@ -115,14 +100,14 @@ export const Sizes: Story = {
 export const Colors: Story = {
   render: () => (
     <div className="space-y-2">
-      <Heading color="primary" colorShade="600">Primary Heading</Heading>
-      <Heading color="secondary" colorShade="600">Secondary Heading</Heading>
-      <Heading color="accent" colorShade="600">Accent Heading</Heading>
-      <Heading color="success" colorShade="600">Success Heading</Heading>
-      <Heading color="warning" colorShade="600">Warning Heading</Heading>
-      <Heading color="error" colorShade="600">Error Heading</Heading>
-      <Heading color="info" colorShade="600">Info Heading</Heading>
-      <Heading color="neutral" colorShade="800">Neutral Heading</Heading>
+      <Heading color="primary" className="text-neutral-600">Primary Heading</Heading>
+      <Heading color="secondary" className="text-neutral-600">Secondary Heading</Heading>
+      <Heading color="accent" className="text-neutral-600">Accent Heading</Heading>
+      <Heading color="success" className="text-neutral-600">Success Heading</Heading>
+      <Heading color="warning" className="text-neutral-600">Warning Heading</Heading>
+      <Heading color="error" className="text-neutral-600">Error Heading</Heading>
+      <Heading color="info" className="text-neutral-600">Info Heading</Heading>
+      <Heading color="neutral" className="text-neutral-800">Neutral Heading</Heading>
     </div>
   ),
 };

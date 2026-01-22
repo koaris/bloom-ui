@@ -7,8 +7,6 @@ export interface TextProps
     HTMLElement
   > {
   children: ReactNode;
-  color?: 'primary' | 'secondary' | 'accent' | 'neutral' | 'success' | 'warning' | 'error' | 'info';
-  colorShade?: '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
   size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
   tag?: 'p' | 'span' | 'label' | 'strong' | 'em' | 'small' | 'div';
   weight?: 'thin' | 'extralight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
@@ -24,8 +22,6 @@ export interface TextProps
 
 const Text = ({
   children,
-  color = 'neutral',
-  colorShade = '900',
   size = 'md',
   tag = 'p',
   weight = 'normal',
@@ -84,8 +80,6 @@ const Text = ({
     justify: 'text-justify',
   }[alignment];
 
-  const colorClass = `text-${color}-${colorShade}`;
-
   const truncateClass = truncate ? 'truncate' : '';
   const italicClass = italic ? 'italic' : '';
 
@@ -100,7 +94,7 @@ const Text = ({
   return (
     <Tag
       className={twMerge(
-        colorClass,
+        className="text-neutral-900",
         fontSize,
         fontWeight,
         lineHeight,

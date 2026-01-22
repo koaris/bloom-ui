@@ -15,7 +15,7 @@ export function ColorsGrid({ type }: ColorsGridProps) {
                 }}
             >
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontFamily: 'monospace' }}>
-                    <strong>bg-{key}</strong>
+                    <strong>{key}</strong>
                     <span>{color}</span>
                 </div>
             </div>

@@ -4,8 +4,6 @@ import { twMerge } from 'tailwind-merge';
 export interface HeadingProps
   extends DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
   children: React.ReactNode;
-  color?: 'primary' | 'secondary' | 'accent' | 'neutral' | 'success' | 'warning' | 'error' | 'info';
-  colorShade?: '50' | '100' | '200' | '300' | '400' | '500' | '600' | '700' | '800' | '900';
   size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
   tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
   weight?: 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold';
@@ -17,8 +15,6 @@ export interface HeadingProps
 
 export const Heading = ({
   children,
-  color = 'neutral',
-  colorShade = '900',
   size = 'lg',
   tag = 'h2',
   weight = 'bold',
@@ -67,8 +63,6 @@ export const Heading = ({
     right: 'text-right',
   }[alignment];
 
-  const colorClass = `text-${color}-${colorShade}`;
-
   const truncateClass = truncate ? 'truncate' : '';
   const uppercaseClass = uppercase ? 'uppercase' : '';
 
@@ -77,8 +71,7 @@ export const Heading = ({
   return (
     <Tag
       className={twMerge(
-        colorClass,
-        fontSize,
+        fontSize, "text-neutral-900",
         fontWeight,
         letterTracking,
         textAlignment,

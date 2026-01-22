@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.3.2
+
+### Patch Changes
+
+- fix: colors in heading/text don't respect the tokens
+
 ## 1.3.1
 
 ### Patch Changes
