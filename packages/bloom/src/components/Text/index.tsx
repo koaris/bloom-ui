@@ -12,7 +12,6 @@ export interface TextProps
   size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
   tag?: 'p' | 'span' | 'label' | 'strong' | 'em' | 'small' | 'div';
   weight?: 'thin' | 'extralight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
-  tracking?: 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest';
   leading?: 'none' | 'tight' | 'snug' | 'normal' | 'relaxed' | 'loose';
   alignment?: 'left' | 'center' | 'right' | 'justify';
   truncate?: boolean;
@@ -26,11 +25,10 @@ export interface TextProps
 const Text = ({
   children,
   color = 'neutral',
-  colorShade = '800',
+  colorShade = '900',
   size = 'md',
   tag = 'p',
   weight = 'normal',
-  tracking = 'normal',
   leading = 'normal',
   alignment = 'left',
   truncate = false,
@@ -70,15 +68,6 @@ const Text = ({
     black: 'font-black',
   }[weight];
 
-  const letterTracking = {
-    tighter: 'tracking-tighter',
-    tight: 'tracking-tight',
-    normal: 'tracking-normal',
-    wide: 'tracking-wide',
-    wider: 'tracking-wider',
-    widest: 'tracking-widest',
-  }[tracking];
-
   const lineHeight = {
     none: 'leading-none',
     tight: 'leading-tight',
@@ -114,7 +103,6 @@ const Text = ({
         colorClass,
         fontSize,
         fontWeight,
-        letterTracking,
         lineHeight,
         textAlignment,
         truncateClass,

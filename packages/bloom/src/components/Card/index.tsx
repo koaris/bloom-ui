@@ -55,7 +55,7 @@ const Card = ({
   return (
     <div
       className={twMerge(
-        'flex items-center  rounded-lg bg-orange-500 text-neutral-100 transition-all duration-200',
+        'min-h-[302px] max-w-[306px] flex items-center justify-around rounded-lg bg-orange-500 text-neutral-100 transition-all duration-200',
         direction === 'col' ? 'flex-col' : 'flex-row',
         cardSizeClasses[size],
         hoverable && !disabled && 'hover:shadow-md hover:shadow-neutral-500',

@@ -1,6 +1,6 @@
 {
   "name": "@koaris/tokens",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Design tokens for the Koaris Technologies's bloom-ui design system. These tokens define the visual design primitives such as colors, typography, spacing, etc., providing a consistent style across the entire bloom-ui design system.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

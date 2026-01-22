@@ -1,5 +1,11 @@
 # @koaris/tokens
 
+## 1.0.4
+
+### Patch Changes
+
+- card and heading improvements
+
 ## 1.0.3
 
 ### Patch Changes

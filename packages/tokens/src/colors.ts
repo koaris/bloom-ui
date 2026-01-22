@@ -7,6 +7,7 @@ const tailwindColors = {
   neutral500: '#9D9D9D',
   neutral600: '#323C45',
   neutral800: '#1C2126',
+  neutral900: '#333333',
   neutral1000: '#000000',
 
   orange300: '#F29F46',

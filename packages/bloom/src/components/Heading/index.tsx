@@ -18,7 +18,7 @@ export interface HeadingProps
 export const Heading = ({
   children,
   color = 'neutral',
-  colorShade = '800',
+  colorShade = '900',
   size = 'lg',
   tag = 'h2',
   weight = 'bold',
