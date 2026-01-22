@@ -17,13 +17,27 @@ View docs [here](https://koaris.github.io/bloom-ui).
 ## Motivation
 Bloom-ui is a design system developed exclusively for the Koaris project with the aim of unifying the interfaces and simplifying the construction of new React projects.
 
-## Installation
+## Contributing
+This project uses Turborepo and Storybook. Follow these commands to set up and run the project:
+
+**Install dependencies:**
+```bash
+npm i
+```
+
+**Start the development server:**
+```bash
+npm run dev
+```
+
+## Usage
+This design system is built with Tailwind, and you can import it into your project as follows:
+
+### Installation
 Install the following package:
 ```bash
 npm i @koaris/bloom-ui
 ```
-## Usage
-This design system is built with Tailwind, and you can import it into your project as follows:
 In your CSS file:
 ```css
 @import "@koaris/bloom-ui/tailwind.css";
