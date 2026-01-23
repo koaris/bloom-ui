@@ -2,7 +2,6 @@
   "extends": "@koaris/ts-config/react.json",
   "include": [
     "src",
-    "../docs/src/stories/Input.stories.tsx"
   ],
   "splitting": true,
   "external": [
