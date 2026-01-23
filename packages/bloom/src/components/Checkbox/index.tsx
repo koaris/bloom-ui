@@ -20,7 +20,7 @@ export const Checkbox = ({ className, required, disabled }: CheckboxProps) => {
       <label
         className={twMerge(
           className,
-          'relative  border-2 w-5 h-5 flex items-center justify-center rounded-sm hover:border-orange-500 hover:cursor-pointer',
+          'relative  border-2 w-5 h-5 flex items-center justify-center rounded-xs hover:border-orange-500 hover:cursor-pointer',
           selected
             ? 'bg-orange-500 border-orange-500'
             : 'border-neutral-500 hover:shadow-md hover:shadow-orange-500',

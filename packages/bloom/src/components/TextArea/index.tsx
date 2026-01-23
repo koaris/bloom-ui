@@ -168,7 +168,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const isOverLimit = hasMaxLength && characterCount > maxLength
 
     const textareaClasses = twMerge(
-      'w-full border-2 rounded-sm focus:outline-none transition-all duration-200',
+      'w-full border-2 rounded-xs focus:outline-hidden transition-all duration-200',
       'hover:shadow-md hover:shadow-neutral-500',
       sizeStyles[size],
       variantStyles[variant],

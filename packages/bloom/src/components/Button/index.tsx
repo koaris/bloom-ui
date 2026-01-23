@@ -44,8 +44,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const variantClasses = {
-      primary: 'bg-orange-500 text-neutral hover:bg-orange-700 focus:ring-orange-500',
-      secondary: 'bg-neutral text-orange-500 border border-orange-500 hover:text-neutral hover:bg-orange-500 focus:ring-orange-500',
+      primary: 'bg-orange-500 text-neutral-100 hover:bg-orange-700 hover:text-white focus:ring-orange-500',
+      secondary: 'bg-neutral text-orange-500 border border-orange-500 hover:text-white hover:bg-orange-500 focus:ring-orange-500',
       outline: 'bg-transparent text-orange-500 border border-orange-500 hover:bg-orange-50 focus:ring-orange-500',
       ghost: 'bg-transparent text-orange-500 hover:bg-orange-50 focus:ring-orange-500',
       link: 'bg-transparent text-orange-500 hover:underline p-0 h-auto shadow-none focus:ring-0',
@@ -60,8 +60,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={twMerge(
-          'relative font-medium rounded-sm transition-all duration-200',
-          'focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-md focus:ring-opacity-50',
+          'relative font-medium rounded-xs transition-all duration-200 hover:cursor-pointer',
+          'focus:outline-hidden focus:ring-2 focus:ring-offset-2 rounded-md focus:ring-opacity-50',
           variantClasses[variant],
           sizeClasses[size],
           fullWidth ? 'w-full' : 'max-w-[180px]',

@@ -78,7 +78,7 @@ export const Toggle = ({
           ${active ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'}
           ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
           transition-colors duration-300 ease-in-out 
-          focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
+          focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
         `)}
       >
         <span className={`

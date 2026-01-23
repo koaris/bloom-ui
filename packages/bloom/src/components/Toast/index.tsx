@@ -143,7 +143,7 @@ export const Toast: React.FC<ToastProps> = ({
             )}
             role="alert"
         >
-            <div className={`flex-shrink-0 mr-3 text-${variant}-500`}>
+            <div className={`shrink-0 mr-3 text-${variant}-500`}>
                 {icons[variant]}
             </div>
             <div className="flex-1">

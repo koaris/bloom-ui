@@ -321,7 +321,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     }
 
     const inputClasses = twMerge(
-      'flex items-center justify-center border-2 border-gray-400 rounded-sm w-full px-3 py-1 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-none transition-all duration-200',
+      'flex items-center justify-center border-2 border-gray-400 rounded-xs w-full px-3 py-1 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-hidden transition-all duration-200',
       className,
       disabled && 'opacity-50 cursor-not-allowed',
       selected && 'border-2 border-orange-500',

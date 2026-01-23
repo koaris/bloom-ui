@@ -79,7 +79,7 @@ const Card = ({
       {image && (
         <div
           className={twMerge(
-            'flex-shrink-0',
+            'shrink-0',
             direction === 'row' ? 'mr-4' : 'mb-4',
             size === 'small' && direction === 'row' ? 'mr-3' : '',
             size === 'small' && direction === 'col' ? 'mb-3' : '',
@@ -90,7 +90,7 @@ const Card = ({
             alt={imageAlt}
             width={imageSize}
             height="auto"
-            className="rounded object-cover"
+            className="rounded-sm object-cover"
           />
         </div>
       )}
@@ -103,7 +103,7 @@ const Card = ({
         )}
       >
         {title && (
-          <h3 className="text-md text-left font-bold font-default leading-tight mb-1">
+          <h3 className="text-md text-left font-bold leading-tight mb-1">
             {title}
           </h3>
         )}

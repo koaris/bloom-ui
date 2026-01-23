@@ -61,8 +61,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     return (
       <div
         className={twMerge(
-          ' py-2 px-4 border-2 rounded-sm box-border flex items-baseline bg-neutral-200',
-          'hover:shadow-md hover:shadow-neutral-500 focus:outline-none',
+          ' py-2 px-4 border-2 rounded-xs box-border flex items-baseline bg-neutral-200',
+          'hover:shadow-md hover:shadow-neutral-500 focus:outline-hidden',
           variant === 'secondary' && 'bg-neutral-800 border-neutral-800 ',
           selected === true && 'border-2 border-orange-500',
           disabled === true && 'opacity-50 cursor-not-allowed',
@@ -84,8 +84,8 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           disabled={disabled}
           ref={ref}
           className={twMerge(
-            'flex items-center justify-center bg-neutral-200 rounded-sm w-full px-1 py-2 text-md',
-            'focus:outline-none text-neutral-800',
+            'flex items-center justify-center bg-neutral-200 rounded-xs w-full px-1 py-2 text-md',
+            'focus:outline-hidden text-neutral-800',
             disabled === true && 'cursor-not-allowed',
             variant === 'secondary' && 'bg-neutral-800 text-neutral',
             className,
