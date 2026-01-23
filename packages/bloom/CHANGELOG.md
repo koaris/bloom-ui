@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.3.3
+
+### Patch Changes
+
+- update tailwind version to v4
+
 ## 1.3.2
 
 ### Patch Changes
