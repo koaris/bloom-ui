@@ -4,11 +4,10 @@ import { twMerge } from 'tailwind-merge'
 /**
  * Primary UI component for user interaction
  */
-export interface LinkProps
-  extends DetailedHTMLProps<
-    AnchorHTMLAttributes<HTMLAnchorElement>,
-    HTMLAnchorElement
-  > {
+export interface LinkProps extends DetailedHTMLProps<
+  AnchorHTMLAttributes<HTMLAnchorElement>,
+  HTMLAnchorElement
+> {
   url: string
   newPage: boolean
   disabled?: boolean
@@ -20,7 +19,6 @@ export const Link = ({
   disabled,
   url,
   newPage = true,
-  onClick,
   ...rest
 }: LinkProps) => {
   return (

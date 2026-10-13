@@ -7,11 +7,10 @@ import {
 } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export interface TextInputProps
-  extends DetailedHTMLProps<
-    InputHTMLAttributes<HTMLInputElement>,
-    HTMLInputElement
-  > {
+export interface TextInputProps extends DetailedHTMLProps<
+  InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+> {
   disabled?: boolean
   placeholder?: string
   prefix?: string

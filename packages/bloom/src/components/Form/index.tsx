@@ -1,11 +1,10 @@
 import { DetailedHTMLProps, FormHTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export interface FormProps
-  extends DetailedHTMLProps<
-    FormHTMLAttributes<HTMLFormElement>,
-    HTMLFormElement
-  > {
+export interface FormProps extends DetailedHTMLProps<
+  FormHTMLAttributes<HTMLFormElement>,
+  HTMLFormElement
+> {
   children: React.ReactNode
   variant?: 'primary' | 'secondary'
   orientation?: 'row' | 'col'

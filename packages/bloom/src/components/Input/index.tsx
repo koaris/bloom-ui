@@ -2,6 +2,7 @@ import {
   DetailedHTMLProps,
   InputHTMLAttributes,
   useEffect,
+  useRef,
   useState,
   forwardRef,
   ChangeEvent,
@@ -10,10 +11,19 @@ import { twMerge } from 'tailwind-merge'
 import { FiCheck, FiX } from 'react-icons/fi'
 
 const passwordMask = {
-  password: [/^(?=.*[!@#$%^&*])/, /(?=.*[0-9])/, /.{8,}$/]
+  password: [/^(?=.*[!@#$%^&*])/, /(?=.*[0-9])/, /.{8,}$/],
 }
 
-export type InputType = 'text' | 'password' | 'date' | 'datePicker' | 'cpf' | 'phone' | 'cnpj' | 'cep' | 'email'
+export type InputType =
+  | 'text'
+  | 'password'
+  | 'date'
+  | 'datePicker'
+  | 'cpf'
+  | 'phone'
+  | 'cnpj'
+  | 'cep'
+  | 'email'
 
 export interface PasswordValidation {
   hasEightCharacters: boolean
@@ -26,11 +36,10 @@ export interface PhoneFormat {
   format: string
 }
 
-export interface InputProps
-  extends Omit<
-    DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-    'type'
-  > {
+export interface InputProps extends Omit<
+  DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
+  'type'
+> {
   disabled?: boolean
   placeholder?: string
   value?: string
@@ -47,11 +56,11 @@ export interface InputProps
 
 // Common phone formats by country
 const phoneFormats: Record<string, PhoneFormat> = {
-  'BR': { countryCode: '+55', format: '($1) $2-$3' },
-  'US': { countryCode: '+1', format: '($1) $2-$3' },
-  'UK': { countryCode: '+44', format: '$1 $2 $3' },
-  'DE': { countryCode: '+49', format: '$1 $2 $3' },
-  'FR': { countryCode: '+33', format: '$1 $2 $3 $4' }
+  BR: { countryCode: '+55', format: '($1) $2-$3' },
+  US: { countryCode: '+1', format: '($1) $2-$3' },
+  UK: { countryCode: '+44', format: '$1 $2 $3' },
+  DE: { countryCode: '+49', format: '$1 $2 $3' },
+  FR: { countryCode: '+33', format: '$1 $2 $3 $4' },
 }
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -78,11 +87,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     const [selected, setSelected] = useState(false)
     const [inputValue, setInputValue] = useState(value || '')
-    const [passwordValidation, setPasswordValidation] = useState<PasswordValidation>({
-      hasEightCharacters: false,
-      hasSpecialCharacters: false,
-      hasNumber: false,
-    })
+    const [passwordValidation, setPasswordValidation] =
+      useState<PasswordValidation>({
+        hasEightCharacters: false,
+        hasSpecialCharacters: false,
+        hasNumber: false,
+      })
     const [isValid, setIsValid] = useState(false)
 
     const handleFocus = () => {
@@ -101,21 +111,29 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         case 'date':
           result = value.replace(/\D/g, '')
           if (result.length > 8) result = result.substring(0, 8)
-          if (result.length > 4) result = result.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3')
-          else if (result.length > 2) result = result.replace(/(\d{2})(\d+)/, '$1/$2')
+          if (result.length > 4)
+            result = result.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3')
+          else if (result.length > 2)
+            result = result.replace(/(\d{2})(\d+)/, '$1/$2')
           break
         case 'cpf':
           result = value.replace(/\D/g, '')
           if (result.length > 11) result = result.substring(0, 11)
-          if (result.length > 9) result = result.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4')
-          else if (result.length > 6) result = result.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3')
-          else if (result.length > 3) result = result.replace(/(\d{3})(\d+)/, '$1.$2')
+          if (result.length > 9)
+            result = result.replace(/(\d{3})(\d{3})(\d{3})(\d+)/, '$1.$2.$3-$4')
+          else if (result.length > 6)
+            result = result.replace(/(\d{3})(\d{3})(\d+)/, '$1.$2.$3')
+          else if (result.length > 3)
+            result = result.replace(/(\d{3})(\d+)/, '$1.$2')
           break
         case 'cnpj':
           result = value.replace(/\D/g, '')
           if (result.length > 14) result = result.substring(0, 14)
           if (result.length > 12)
-            result = result.replace(/(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/, '$1.$2.$3/$4-$5')
+            result = result.replace(
+              /(\d{2})(\d{3})(\d{3})(\d{4})(\d+)/,
+              '$1.$2.$3/$4-$5',
+            )
           else if (result.length > 8)
             result = result.replace(/(\d{2})(\d{3})(\d{3})(\d+)/, '$1.$2.$3/$4')
           else if (result.length > 5)
@@ -126,7 +144,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         case 'cep':
           result = value.replace(/\D/g, '')
           if (result.length > 8) result = result.substring(0, 8)
-          if (result.length > 5) result = result.replace(/(\d{5})(\d+)/, '$1-$2')
+          if (result.length > 5)
+            result = result.replace(/(\d{5})(\d+)/, '$1-$2')
           break
         case 'phone':
           result = applyPhoneMask(value, countryCode)
@@ -145,9 +164,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const applyPhoneMask = (value: string, countryCode: string): string => {
       // Remove all non-digit characters
       let digits = value.replace(/\D/g, '')
-
-      // Get format for country or use default (Brazil)
-      const format = phoneFormats[countryCode] || phoneFormats['BR']
 
       // Different formatting logic based on country
       switch (countryCode) {
@@ -195,7 +211,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
       switch (type) {
         case 'password':
-          valid = passwordValidation.hasEightCharacters &&
+          valid =
+            passwordValidation.hasEightCharacters &&
             passwordValidation.hasSpecialCharacters &&
             passwordValidation.hasNumber
           break
@@ -214,7 +231,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         case 'phone':
           // Validation depends on country code
           if (countryCode === 'BR') {
-            valid = /^\(\d{2}\) \d{5}-\d{4}$/.test(value) || /^\(\d{2}\) \d{4}-\d{4}$/.test(value)
+            valid =
+              /^\(\d{2}\) \d{5}-\d{4}$/.test(value) ||
+              /^\(\d{2}\) \d{4}-\d{4}$/.test(value)
           } else if (countryCode === 'US') {
             valid = /^\(\d{3}\) \d{3}-\d{4}$/.test(value)
           } else {
@@ -224,7 +243,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           break
         case 'email':
           // RFC 5322 compliant email regex
-          valid = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(value)
+          valid =
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/.test(
+              value,
+            )
           break
         default:
           valid = value.length > 0
@@ -246,12 +268,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         ...event,
         currentTarget: {
           ...event.currentTarget,
-          value: newValue
+          value: newValue,
         },
         target: {
           ...event.target,
-          value: newValue
-        }
+          value: newValue,
+        },
       } as ChangeEvent<HTMLInputElement>
 
       setInputValue(newValue)
@@ -265,15 +287,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       externalOnChange?.(newEvent)
     }
 
-    useEffect(() => {
-      setInputValue(value || '')
-      if (value && type === 'password') {
-        checkPassword(value)
-      } else if (value) {
-        validateInput(value)
-      }
-    }, [value, type])
-
     const checkPassword = (value: string) => {
       const validationResult = {
         hasEightCharacters: value?.match(passwordMask.password[2]) !== null,
@@ -284,10 +297,24 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       setPasswordValidation(validationResult)
       setIsValid(
         validationResult.hasEightCharacters &&
-        validationResult.hasSpecialCharacters &&
-        validationResult.hasNumber
+          validationResult.hasSpecialCharacters &&
+          validationResult.hasNumber,
       )
     }
+
+    const validateInputRef = useRef(validateInput)
+    const checkPasswordRef = useRef(checkPassword)
+    validateInputRef.current = validateInput
+    checkPasswordRef.current = checkPassword
+
+    useEffect(() => {
+      setInputValue(value || '')
+      if (value && type === 'password') {
+        checkPasswordRef.current(value)
+      } else if (value) {
+        validateInputRef.current(value)
+      }
+    }, [value, type])
 
     const getInputType = (): string => {
       // Map our custom types to HTML input types
@@ -312,7 +339,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     const renderPhonePrefix = () => {
       if (type !== 'phone') return null
 
-      const format = phoneFormats[countryCode] || phoneFormats['BR']
+      const format = phoneFormats[countryCode] || phoneFormats.BR
       return (
         <span className="absolute left-3 top-1.5 text-gray-500">
           {format.countryCode}
@@ -326,8 +353,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       disabled && 'opacity-50 cursor-not-allowed',
       selected && 'border-2 border-orange-500',
       validated && isValid && 'border-2 border-green-900',
-      (error || (!isValid && inputValue != '')) && 'border-2 border-red-900',
-      type === 'phone' && 'pl-10'
+      (error || (!isValid && inputValue !== '')) && 'border-2 border-red-900',
+      type === 'phone' && 'pl-10',
     )
 
     const renderPasswordValidation = () => {
@@ -390,13 +417,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             placeholder={placeholder}
             value={inputValue}
             aria-invalid={error}
-            aria-describedby={error ? `${id}-error` : helperText ? `${id}-helper` : undefined}
+            aria-describedby={
+              error ? `${id}-error` : helperText ? `${id}-helper` : undefined
+            }
             {...rest}
           />
         </div>
         {renderPasswordValidation()}
         {error && (
-          <p id={`${id}-error`} className="mt-1 text-sm text-red-900" role="alert">
+          <p
+            id={`${id}-error`}
+            className="mt-1 text-sm text-red-900"
+            role="alert"
+          >
             {errorMessage || 'Invalid field.'}
           </p>
         )}

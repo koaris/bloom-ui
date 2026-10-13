@@ -2,6 +2,7 @@ import {
   DetailedHTMLProps,
   TextareaHTMLAttributes,
   useEffect,
+  useRef,
   useState,
   forwardRef,
   ChangeEvent,
@@ -12,14 +13,13 @@ export type TextAreaSize = 'sm' | 'md' | 'lg'
 export type TextAreaVariant = 'primary' | 'secondary' | 'outline'
 export type TextAreaType = 'text' | 'markdown' | 'code' | 'json'
 
-export interface TextAreaProps
-  extends Omit<
-    DetailedHTMLProps<
-      TextareaHTMLAttributes<HTMLTextAreaElement>,
-      HTMLTextAreaElement
-    >,
-    'type'
-  > {
+export interface TextAreaProps extends Omit<
+  DetailedHTMLProps<
+    TextareaHTMLAttributes<HTMLTextAreaElement>,
+    HTMLTextAreaElement
+  >,
+  'type'
+> {
   disabled?: boolean
   placeholder?: string
   value?: string
@@ -139,13 +139,13 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       validateInput(newValue)
 
       if (autoGrow) {
-        const textareaLineHeight = 24; // Approximate line height in pixels
+        const textareaLineHeight = 24 // Approximate line height in pixels
         const newRows = Math.max(
           minRows,
           Math.min(
             maxRows,
-            Math.floor(event.currentTarget.scrollHeight / textareaLineHeight)
-          )
+            Math.floor(event.currentTarget.scrollHeight / textareaLineHeight),
+          ),
         )
         setRows(newRows)
       }
@@ -155,10 +155,13 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       }
     }
 
+    const validateInputRef = useRef(validateInput)
+    validateInputRef.current = validateInput
+
     useEffect(() => {
       setInputValue(value || '')
       if (value) {
-        validateInput(value)
+        validateInputRef.current(value)
       }
     }, [value, required, maxLength])
 
@@ -177,7 +180,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       selected && 'border-orange-500',
       validated && isValid && 'border-green-500',
       (error || (!isValid && inputValue !== '')) && 'border-red-900',
-      className
+      className,
     )
 
     return (
@@ -228,8 +231,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           )}
           {showCount && hasMaxLength && (
             <p
-              className={`text-sm ml-auto ${isOverLimit ? 'text-red-600' : 'text-gray-500'
-                }`}
+              className={`text-sm ml-auto ${
+                isOverLimit ? 'text-red-600' : 'text-gray-500'
+              }`}
             >
               {characterCount}/{maxLength}
             </p>
@@ -237,7 +241,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         </div>
       </div>
     )
-  }
+  },
 )
 
 TextArea.displayName = 'TextArea'

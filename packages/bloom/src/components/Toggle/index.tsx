@@ -1,15 +1,17 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react'
 import { twMerge } from 'tailwind-merge'
 
-export interface ToggleProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface ToggleProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> {
   disabled?: boolean
-  active: boolean;
+  active: boolean
   label: string
-  setActive: (active: boolean) => void;
-  size?: 'sm' | 'md' | 'lg';
-  hideLabel?: boolean;
-  id?: string;
+  setActive: (active: boolean) => void
+  size?: 'sm' | 'md' | 'lg'
+  hideLabel?: boolean
+  id?: string
 }
 
 export const Toggle = ({
@@ -24,7 +26,7 @@ export const Toggle = ({
   ...rest
 }: ToggleProps) => {
   // Generate a unique ID if none is provided
-  const toggleId = id || `toggle-${Math.random().toString(36).substring(2, 9)}`;
+  const toggleId = id || `toggle-${Math.random().toString(36).substring(2, 9)}`
 
   // Size variants
   const sizeClasses = {
@@ -43,25 +45,22 @@ export const Toggle = ({
       knob: 'h-5 w-5',
       translate: active ? 'translate-x-8' : 'translate-x-1',
     },
-  };
+  }
 
-  const selectedSize = sizeClasses[size];
+  const selectedSize = sizeClasses[size]
 
   // Handle keyboard events for accessibility
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
+      e.preventDefault()
       if (!disabled) {
-        setActive(!active);
+        setActive(!active)
       }
     }
-  };
+  }
 
   return (
-    <div
-      className={twMerge("flex items-center gap-3", className)}
-      {...rest}
-    >
+    <div className={twMerge('flex items-center gap-3', className)} {...rest}>
       <button
         type="button"
         role="switch"
@@ -81,12 +80,14 @@ export const Toggle = ({
           focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
         `)}
       >
-        <span className={`
+        <span
+          className={`
           inline-block transform rounded-full bg-white shadow-md
           ${selectedSize.knob}
           ${selectedSize.translate}
           transition-transform duration-300 ease-in-out
-        `} />
+        `}
+        />
       </button>
       {!hideLabel && (
         <label

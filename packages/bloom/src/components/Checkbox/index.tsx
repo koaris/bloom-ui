@@ -2,8 +2,10 @@ import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { FiCheck } from 'react-icons/fi'
 import { twMerge } from 'tailwind-merge'
 
-export interface CheckboxProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface CheckboxProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> {
   disabled?: boolean
   required?: boolean
 }

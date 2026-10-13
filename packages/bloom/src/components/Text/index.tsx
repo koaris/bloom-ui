@@ -1,23 +1,45 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-export interface TextProps
-  extends DetailedHTMLProps<
-    HTMLAttributes<HTMLElement>,
-    HTMLElement
-  > {
-  children: ReactNode;
-  size?: 'xxs' | 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
-  tag?: 'p' | 'span' | 'label' | 'strong' | 'em' | 'small' | 'div';
-  weight?: 'thin' | 'extralight' | 'light' | 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold' | 'black';
-  leading?: 'none' | 'tight' | 'snug' | 'normal' | 'relaxed' | 'loose';
-  alignment?: 'left' | 'center' | 'right' | 'justify';
-  truncate?: boolean;
-  italic?: boolean;
-  uppercase?: boolean;
-  lowercase?: boolean;
-  capitalize?: boolean;
-  htmlFor?: string;
+export interface TextProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLElement>,
+  HTMLElement
+> {
+  children: ReactNode
+  size?:
+    | 'xxs'
+    | 'xs'
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | '4xl'
+    | '5xl'
+    | '6xl'
+    | '7xl'
+    | '8xl'
+    | '9xl'
+  tag?: 'p' | 'span' | 'label' | 'strong' | 'em' | 'small' | 'div'
+  weight?:
+    | 'thin'
+    | 'extralight'
+    | 'light'
+    | 'normal'
+    | 'medium'
+    | 'semibold'
+    | 'bold'
+    | 'extrabold'
+    | 'black'
+  leading?: 'none' | 'tight' | 'snug' | 'normal' | 'relaxed' | 'loose'
+  alignment?: 'left' | 'center' | 'right' | 'justify'
+  truncate?: boolean
+  italic?: boolean
+  uppercase?: boolean
+  lowercase?: boolean
+  capitalize?: boolean
+  htmlFor?: string
 }
 
 const Text = ({
@@ -50,7 +72,7 @@ const Text = ({
     '7xl': 'text-7xl',
     '8xl': 'text-8xl',
     '9xl': 'text-9xl',
-  }[size];
+  }[size]
 
   const fontWeight = {
     thin: 'font-thin',
@@ -62,7 +84,7 @@ const Text = ({
     bold: 'font-bold',
     extrabold: 'font-extrabold',
     black: 'font-black',
-  }[weight];
+  }[weight]
 
   const lineHeight = {
     none: 'leading-none',
@@ -71,30 +93,30 @@ const Text = ({
     normal: 'leading-normal',
     relaxed: 'leading-relaxed',
     loose: 'leading-loose',
-  }[leading];
+  }[leading]
 
   const textAlignment = {
     left: 'text-left',
     center: 'text-center',
     right: 'text-right',
     justify: 'text-justify',
-  }[alignment];
+  }[alignment]
 
-  const truncateClass = truncate ? 'truncate' : '';
-  const italicClass = italic ? 'italic' : '';
+  const truncateClass = truncate ? 'truncate' : ''
+  const italicClass = italic ? 'italic' : ''
 
   // Text transformation classes (only apply one)
-  let transformClass = '';
-  if (uppercase) transformClass = 'uppercase';
-  else if (lowercase) transformClass = 'lowercase';
-  else if (capitalize) transformClass = 'capitalize';
+  let transformClass = ''
+  if (uppercase) transformClass = 'uppercase'
+  else if (lowercase) transformClass = 'lowercase'
+  else if (capitalize) transformClass = 'capitalize'
 
-  const Tag = tag as React.ElementType;
+  const Tag = tag as React.ElementType
 
   return (
     <Tag
       className={twMerge(
-        className="text-neutral-900",
+        (className = 'text-neutral-900'),
         fontSize,
         fontWeight,
         lineHeight,
@@ -102,15 +124,14 @@ const Text = ({
         truncateClass,
         italicClass,
         transformClass,
-        className
+        className,
       )}
       {...rest}
     >
       {children}
     </Tag>
-  );
-};
-
+  )
+}
 
 Text.displayName = 'Text'
 

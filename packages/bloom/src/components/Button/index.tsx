@@ -1,14 +1,19 @@
-import { DetailedHTMLProps, ButtonHTMLAttributes, ReactNode, forwardRef } from 'react'
+import {
+  DetailedHTMLProps,
+  ButtonHTMLAttributes,
+  ReactNode,
+  forwardRef,
+} from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg'
-export type ButtonVariant = 'primary' | 'secondary' | 'outline' | 'ghost' | 'link'
+export type ButtonVariant =
+  'primary' | 'secondary' | 'outline' | 'ghost' | 'link'
 
-export interface ButtonProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+export interface ButtonProps extends DetailedHTMLProps<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  HTMLButtonElement
+> {
   size?: ButtonSize
   variant?: ButtonVariant
   disabled?: boolean
@@ -34,7 +39,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       ...rest
     },
-    ref
+    ref,
   ) => {
     const sizeClasses = {
       xs: 'px-3 py-1 text-xs',
@@ -44,10 +49,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     }
 
     const variantClasses = {
-      primary: 'bg-orange-500 text-neutral-100 hover:bg-orange-700 hover:text-white focus:ring-orange-500',
-      secondary: 'bg-neutral text-orange-500 border border-orange-500 hover:text-white hover:bg-orange-500 focus:ring-orange-500',
-      outline: 'bg-transparent text-orange-500 border border-orange-500 hover:bg-orange-50 focus:ring-orange-500',
-      ghost: 'bg-transparent text-orange-500 hover:bg-orange-50 focus:ring-orange-500',
+      primary:
+        'bg-orange-500 text-neutral-100 hover:bg-orange-700 hover:text-white focus:ring-orange-500',
+      secondary:
+        'bg-neutral text-orange-500 border border-orange-500 hover:text-white hover:bg-orange-500 focus:ring-orange-500',
+      outline:
+        'bg-transparent text-orange-500 border border-orange-500 hover:bg-orange-50 focus:ring-orange-500',
+      ghost:
+        'bg-transparent text-orange-500 hover:bg-orange-50 focus:ring-orange-500',
       link: 'bg-transparent text-orange-500 hover:underline p-0 h-auto shadow-none focus:ring-0',
     }
 
@@ -66,7 +75,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           sizeClasses[size],
           fullWidth ? 'w-full' : 'max-w-[180px]',
           'inline-flex items-center justify-center gap-2',
-          (disabled || loading) && 'opacity-50 cursor-not-allowed hover:shadow-none hover:bg-opacity-100',
+          (disabled || loading) &&
+            'opacity-50 cursor-not-allowed hover:shadow-none hover:bg-opacity-100',
           className,
         )}
         onClick={handleClick}
@@ -106,7 +116,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         </span>
       </button>
     )
-  }
+  },
 )
 
 Button.displayName = 'Button'

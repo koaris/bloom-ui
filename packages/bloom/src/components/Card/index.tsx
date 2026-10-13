@@ -4,11 +4,10 @@ import { twMerge } from 'tailwind-merge'
 export type CardSize = 'small' | 'medium' | 'large' | 'full'
 export type CardDirection = 'row' | 'col'
 
-export interface CardProps
-  extends Omit<
-    DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-    'title' | 'content'
-  > {
+export interface CardProps extends Omit<
+  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
+  'title' | 'content'
+> {
   selected?: boolean
   disabled?: boolean
   direction?: CardDirection
@@ -59,7 +58,7 @@ const Card = ({
         direction === 'col' ? 'flex-col' : 'flex-row',
         cardSizeClasses[size],
         hoverable && !disabled && 'hover:shadow-md hover:shadow-neutral-500',
-        // selected && 'border-2 border-orange-500',
+        selected && 'border-2 border-orange-500',
         disabled && 'opacity-50 cursor-not-allowed',
         onClick && !disabled && 'cursor-pointer',
         className,
@@ -109,18 +108,15 @@ const Card = ({
         )}
 
         {content && (
-          <div className={twMerge(
-            'text-sm text-left',
-            // direction === 'col' ? 'text-left' : 'text-left'
-          )}>
-            {content}
-          </div>
+          <div className="text-sm text-left">{content}</div>
         )}
 
         {footer && (
-          <div className={twMerge(
-            'pt-2 text-sm border-t border-neutral-300 text-left',
-          )}>
+          <div
+            className={twMerge(
+              'pt-2 text-sm border-t border-neutral-300 text-left',
+            )}
+          >
             {footer}
           </div>
         )}

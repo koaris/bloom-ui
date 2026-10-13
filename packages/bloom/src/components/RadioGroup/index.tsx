@@ -7,8 +7,10 @@ const options = [
   { id: 2, value: 'option2', label: 'Opção 2' },
 ]
 
-export interface RadioGroupProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
+export interface RadioGroupProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLDivElement>,
+  HTMLDivElement
+> {
   disabled?: boolean
   options: typeof options
   required?: boolean

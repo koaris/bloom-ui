@@ -1,16 +1,30 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react';
-import { twMerge } from 'tailwind-merge';
+import { DetailedHTMLProps, HTMLAttributes } from 'react'
+import { twMerge } from 'tailwind-merge'
 
-export interface HeadingProps
-  extends DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement> {
-  children: React.ReactNode;
-  size?: 'sm' | 'md' | 'lg' | 'xl' | '2xl' | '3xl' | '4xl' | '5xl' | '6xl' | '7xl' | '8xl' | '9xl';
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
-  weight?: 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold';
-  tracking?: 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest';
-  alignment?: 'left' | 'center' | 'right';
-  truncate?: boolean;
-  uppercase?: boolean;
+export interface HeadingProps extends DetailedHTMLProps<
+  HTMLAttributes<HTMLHeadingElement>,
+  HTMLHeadingElement
+> {
+  children: React.ReactNode
+  size?:
+    | 'sm'
+    | 'md'
+    | 'lg'
+    | 'xl'
+    | '2xl'
+    | '3xl'
+    | '4xl'
+    | '5xl'
+    | '6xl'
+    | '7xl'
+    | '8xl'
+    | '9xl'
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  weight?: 'normal' | 'medium' | 'semibold' | 'bold' | 'extrabold'
+  tracking?: 'tighter' | 'tight' | 'normal' | 'wide' | 'wider' | 'widest'
+  alignment?: 'left' | 'center' | 'right'
+  truncate?: boolean
+  uppercase?: boolean
 }
 
 export const Heading = ({
@@ -38,7 +52,7 @@ export const Heading = ({
     '7xl': 'text-7xl',
     '8xl': 'text-8xl',
     '9xl': 'text-9xl',
-  }[size];
+  }[size]
 
   const fontWeight = {
     normal: 'font-normal',
@@ -46,7 +60,7 @@ export const Heading = ({
     semibold: 'font-semibold',
     bold: 'font-bold',
     extrabold: 'font-extrabold',
-  }[weight];
+  }[weight]
 
   const letterTracking = {
     tighter: 'tracking-tighter',
@@ -55,33 +69,34 @@ export const Heading = ({
     wide: 'tracking-wide',
     wider: 'tracking-wider',
     widest: 'tracking-widest',
-  }[tracking];
+  }[tracking]
 
   const textAlignment = {
     left: 'text-left',
     center: 'text-center',
     right: 'text-right',
-  }[alignment];
+  }[alignment]
 
-  const truncateClass = truncate ? 'truncate' : '';
-  const uppercaseClass = uppercase ? 'uppercase' : '';
+  const truncateClass = truncate ? 'truncate' : ''
+  const uppercaseClass = uppercase ? 'uppercase' : ''
 
-  const Tag = tag as React.ElementType;
+  const Tag = tag as React.ElementType
 
   return (
     <Tag
       className={twMerge(
-        fontSize, "text-neutral-900",
+        fontSize,
+        'text-neutral-900',
         fontWeight,
         letterTracking,
         textAlignment,
         truncateClass,
         uppercaseClass,
-        className
+        className,
       )}
       {...rest}
     >
       {children}
     </Tag>
-  );
-};
+  )
+}

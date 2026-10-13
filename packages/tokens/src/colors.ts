@@ -28,7 +28,9 @@ const tailwindColors = {
 
 export const colors = Object.fromEntries(
   Object.entries(tailwindColors).map(([key, value]) => [
-    (key === 'neutral' || key === 'black') ? key : key.replace(/(\D+)(\d+)/, '$1-$2'),
+    key === 'neutral' || key === 'black'
+      ? key
+      : key.replace(/(\D+)(\d+)/, '$1-$2'),
     value,
-  ])
-);
+  ]),
+)

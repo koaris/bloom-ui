@@ -7,7 +7,7 @@ export interface AvatarProps {
   className?: string
 }
 
-export const Avatar = ({ className, ...rest }: AvatarProps) => {
+export const Avatar = ({ className, src, alt = '', ...rest }: AvatarProps) => {
   return (
     <div
       className={twMerge(
@@ -17,8 +17,13 @@ export const Avatar = ({ className, ...rest }: AvatarProps) => {
         className,
       )}
     >
-      {rest.src ? (
-        <img className="w-full h-full object-cover rounded-full" {...rest} />
+      {src ? (
+        <img
+          className="w-full h-full object-cover rounded-full"
+          src={src}
+          alt={alt}
+          {...rest}
+        />
       ) : (
         <FaUser color="#FFFFFF" size={24} />
       )}
