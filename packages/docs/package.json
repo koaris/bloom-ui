@@ -8,7 +8,6 @@
     "lint": "eslint . --fix",
     "dev": "storybook dev -p 6006",
     "build": "storybook build -o docs-build && touch docs-build/.nojekyll",
-    "deploy-storybook": "storybook-to-ghpages",
     "build-storybook": "storybook build"
   },
   "dependencies": {
@@ -28,7 +27,6 @@
     "@storybook/addon-links": "8.6.19",
     "@storybook/react": "8.6.19",
     "@storybook/react-vite": "8.6.19",
-    "@storybook/storybook-deployer": "^2.8.16",
     "@storybook/test": "8.6.19",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",

@@ -4,26 +4,26 @@ on:
   push:
     branches: [ "main" ]
 
+permissions:
+  contents: write
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: 'npm'
           cache-dependency-path: '**/package-lock.json'
 
       - name: Install
-        run: |
-          rm -rf node_modules package-lock.json
-          rm -rf packages/docs/docs-build packages/docs/node_modules
-          npm i
+        run: npm ci
 
       - name: Build
         run: npm run build
@@ -31,7 +31,8 @@ jobs:
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
       - name: Deploy storybook
-        working-directory: ./packages/docs
-        run: npm run deploy-storybook -- --ci --existing-output-dir=docs-build
-        env:
-          GH_TOKEN: ${{ github.actor }}:${{ secrets.MY_GITHUB_TOKEN }}
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./packages/docs/docs-build
+          publish_branch: gh-pages
