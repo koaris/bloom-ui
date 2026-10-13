@@ -58,5 +58,9 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.18",
     "react-icons": "^4.12.0"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   }
 }

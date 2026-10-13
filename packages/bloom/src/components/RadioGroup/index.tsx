@@ -2,7 +2,7 @@ import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { FiCheck } from 'react-icons/fi'
 
-type RadioOption = {
+export type RadioOption = {
   id: number
   value: string
   label: string
