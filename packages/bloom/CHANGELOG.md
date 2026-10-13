@@ -1,5 +1,11 @@
 # @koaris/bloom-ui
 
+## 1.3.4
+
+### Patch Changes
+
+- 21a7719: Remove default exports of Button, Loading, Skeleton, and Toast; named exports are unchanged.
+
 ## 1.3.3
 
 ### Patch Changes
