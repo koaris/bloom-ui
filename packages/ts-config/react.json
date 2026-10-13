@@ -2,7 +2,7 @@
     "extends": "./base.json",
     "compilerOptions": {
         "jsx": "react-jsx",
-        "lib": ["dom", "es2015"],
+        "lib": ["dom", "es2020"],
         "module": "esnext",
         "target": "es2020",
         "moduleResolution": "bundler"

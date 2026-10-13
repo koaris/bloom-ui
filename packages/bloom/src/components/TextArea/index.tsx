@@ -123,7 +123,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           JSON.parse(value)
           setIsValid(true)
           return true
-        } catch (e) {
+        } catch {
           setIsValid(false)
           return false
         }

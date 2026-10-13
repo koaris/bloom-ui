@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint . --fix",
     "dev": "storybook dev -p 6006",
-    "build": "storybook build -o docs-build ; touch docs-build/.nojekyll",
+    "build": "storybook build -o docs-build && touch docs-build/.nojekyll",
     "deploy-storybook": "storybook-to-ghpages",
     "build-storybook": "storybook build"
   },
@@ -16,25 +16,26 @@
     "@koaris/eslint-config": "*",
     "@koaris/tokens": "*",
     "@koaris/ts-config": "*",
-    "@storybook/addon-a11y": "^7.6.6",
+    "@storybook/addon-a11y": "8.6.19",
     "polished": "^4.2.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.12.0"
   },
   "devDependencies": {
-    "@storybook/addon-essentials": "^7.4.6",
-    "@storybook/addon-interactions": "^7.4.6",
-    "@storybook/addon-links": "^7.4.6",
-    "@storybook/react": "^7.4.6",
-    "@storybook/react-vite": "^7.4.6",
+    "@storybook/addon-essentials": "8.6.19",
+    "@storybook/addon-interactions": "8.6.19",
+    "@storybook/addon-links": "8.6.19",
+    "@storybook/react": "8.6.19",
+    "@storybook/react-vite": "8.6.19",
     "@storybook/storybook-deployer": "^2.8.16",
+    "@storybook/test": "8.6.19",
     "@types/react": "^18.2.15",
     "@types/react-dom": "^18.2.7",
-    "@vitejs/plugin-react": "^4.0.3",
-    "eslint": "^8.45.0",
-    "storybook": "^7.4.6",
-    "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "@vitejs/plugin-react": "^4.7.0",
+    "eslint": "^8.57.1",
+    "storybook": "8.6.19",
+    "typescript": "~5.9.3",
+    "vite": "^6.4.4"
   }
 }

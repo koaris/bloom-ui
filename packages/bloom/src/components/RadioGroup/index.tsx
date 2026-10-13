@@ -2,17 +2,18 @@ import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 import { FiCheck } from 'react-icons/fi'
 
-const options = [
-  { id: 1, value: 'option1', label: 'Opção 1' },
-  { id: 2, value: 'option2', label: 'Opção 2' },
-]
+type RadioOption = {
+  id: number
+  value: string
+  label: string
+}
 
 export interface RadioGroupProps extends DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
   HTMLDivElement
 > {
   disabled?: boolean
-  options: typeof options
+  options: RadioOption[]
   required?: boolean
 }
 
