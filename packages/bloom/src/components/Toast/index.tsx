@@ -267,4 +267,3 @@ export const ToastProvider: React.FC<{
 
 Toast.displayName = 'Toast'
 ToastContainer.displayName = 'ToastContainer'
-export default Toast

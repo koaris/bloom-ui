@@ -95,5 +95,3 @@ export const Loading: React.FC<LoadingProps> = ({
 }
 
 Loading.displayName = 'Loading'
-
-export default Loading

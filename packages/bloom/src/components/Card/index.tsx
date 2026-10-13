@@ -107,9 +107,7 @@ const Card = ({
           </h3>
         )}
 
-        {content && (
-          <div className="text-sm text-left">{content}</div>
-        )}
+        {content && <div className="text-sm text-left">{content}</div>}
 
         {footer && (
           <div

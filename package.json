@@ -12,7 +12,6 @@
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.1",
-    "gh-pages": "^6.1.0",
     "turbo": "^1.11.1"
   }
 }

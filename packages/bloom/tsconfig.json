@@ -1,13 +1,6 @@
 {
   "extends": "@koaris/ts-config/react.json",
   "include": [
-    "src",
-  ],
-  "splitting": true,
-  "external": [
-    "react"
-  ],
-  "entryPoints": [
-    "src/index.tsx"
-  ],
+    "src"
+  ]
 }
