@@ -1,10 +1,31 @@
 /*
  * Koris theme — sets the accent to the Koris brand orange.
- * Import after '@koaris/tokens/theme.css'. Overrides only the accent.
+ * Import after '@koaris/tokens/theme.css'. Overrides the accent pair.
+ *
+ * Contrast (WCAG, computed): #fefefe on the orange fill #f36246 is only
+ * 3.13:1, so the fill text is the dark ink #1c2126 (5.13:1) and accent
+ * text on light surfaces uses the darkened orange #c2410c (5.18:1 on
+ * white). In dark mode the brighter accent itself is text-safe on
+ * neutral-800 (#f36246 on #1c2126 = 5.13:1), matching the default theme.
  */
 :root,
 :host,
-.dark,
 .light {
   --accent: #f36246;
+  --accent-foreground: #1c2126;
+  --accent-text: #c2410c;
+}
+
+.dark {
+  --accent: #f36246;
+  --accent-foreground: #1c2126;
+  --accent-text: #f36246;
+}
+
+/* Classless roots follow the system preference; :where() keeps this below
+   any explicit theme/pin. */
+@media (prefers-color-scheme: dark) {
+  :where(:root:not(.light):not(.dark)) {
+    --accent-text: #f36246;
+  }
 }

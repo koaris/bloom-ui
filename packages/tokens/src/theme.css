@@ -105,16 +105,14 @@
 /* ------------------------------------------------------------------ */
 :root,
 :host {
-  /* TODO(v2.1): the default accent pair fails WCAG AA for the text sizes
-   * Button uses: #fefefe on #f36246 = 3.13:1 (primary button text) and
-   * #f36246 on white = 3.16:1 (secondary/outline/ghost/link), where AA
-   * requires 4.5:1. Do NOT just darken the brand accent — ship a
-   * text-safe pair instead, e.g. a darker --accent-strong used for text
-   * and the primary background (the Koaris rust #c13f27 gives 5.2:1 with
-   * white). Tracked for the next minor; leaving the brand color as-is for
-   * the 2.0 release. */
   --accent: #f36246; /* orange-500 */
-  --accent-foreground: #fefefe; /* neutral-100 */
+  /* Dark ink instead of near-white: 5.13:1 on the #f36246 fill (AA >= 4.5).
+     The near-white #fefefe only reached 3.13:1. */
+  --accent-foreground: #1c2126; /* neutral-800 */
+  /* Text-safe accent for text on light surfaces (secondary/outline/ghost/
+     link buttons): 5.18:1 on white. Same hue as the accent fill, darkened.
+     The raw accent #f36246 is only 3.16:1 on white. */
+  --accent-text: #c2410c;
   --ink: #1c2126; /* neutral-800 */
   --surface: #ffffff; /* neutral */
   --muted: #f6f6f6; /* neutral-200 */
@@ -129,7 +127,8 @@
 /* `.light` re-lights a subtree inside a `.dark` ancestor. */
 .light {
   --accent: #f36246;
-  --accent-foreground: #fefefe;
+  --accent-foreground: #1c2126;
+  --accent-text: #c2410c;
   --ink: #1c2126;
   --surface: #ffffff;
   --muted: #f6f6f6;
@@ -147,7 +146,11 @@
 /* ------------------------------------------------------------------ */
 .dark {
   --accent: #f36246;
-  --accent-foreground: #fefefe;
+  --accent-foreground: #1c2126;
+  /* On the dark surface the brighter accent reads as text: 5.13:1 on
+     neutral-800 (#1c2126). The darkened light variant (#c2410c) would
+     drop to 3.13:1 here. */
+  --accent-text: #f36246;
   --ink: #f6f6f6; /* neutral-200 */
   --surface: #1c2126; /* neutral-800 */
   --muted: #323c45; /* neutral-600 */
@@ -173,6 +176,8 @@
     --muted-foreground: #9d9d9d;
     --border: #323c45;
     --rule: var(--border);
+    /* accent-foreground stays #1c2126 (5.13:1 on the fill in both modes). */
+    --accent-text: #f36246;
     color-scheme: dark;
   }
 }
@@ -183,6 +188,7 @@
 @theme inline {
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-accent-text: var(--accent-text);
   --color-ink: var(--ink);
   --color-surface: var(--surface);
   --color-muted: var(--muted);
