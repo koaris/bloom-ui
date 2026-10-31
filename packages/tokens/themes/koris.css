@@ -1,0 +1,10 @@
+/*
+ * Koris theme — sets the accent to the Koris brand orange.
+ * Import after '@koaris/tokens/theme.css'. Overrides only the accent.
+ */
+:root,
+:host,
+.dark,
+.light {
+  --accent: #f36246;
+}

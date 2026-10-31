@@ -9,59 +9,59 @@ export default {
     size: {
       control: 'select',
       options: ['sm', 'md', 'lg'],
-      description: 'Controls the size of the textarea'
+      description: 'Controls the size of the textarea',
     },
     variant: {
       control: 'select',
       options: ['primary', 'secondary', 'outline'],
-      description: 'Visual style variant of the textarea'
+      description: 'Visual style variant of the textarea',
     },
     resize: {
       control: 'select',
       options: ['none', 'vertical', 'horizontal', 'both'],
-      description: 'Controls how the textarea can be resized'
+      description: 'Controls how the textarea can be resized',
     },
     type: {
       control: 'select',
       options: ['text', 'markdown', 'code', 'json'],
-      description: 'Specifies the type of content for the textarea'
+      description: 'Specifies the type of content for the textarea',
     },
     disabled: {
       control: 'boolean',
-      description: 'Disables the textarea'
+      description: 'Disables the textarea',
     },
     required: {
       control: 'boolean',
-      description: 'Marks the textarea as required'
+      description: 'Marks the textarea as required',
     },
     error: {
       control: 'boolean',
-      description: 'Shows the textarea in an error state'
+      description: 'Shows the textarea in an error state',
     },
     validated: {
       control: 'boolean',
-      description: 'Shows the textarea in a validated state'
+      description: 'Shows the textarea in a validated state',
     },
     showCount: {
       control: 'boolean',
-      description: 'Shows character count when maxLength is specified'
+      description: 'Shows character count when maxLength is specified',
     },
     autoGrow: {
       control: 'boolean',
-      description: 'Automatically adjusts height based on content'
+      description: 'Automatically adjusts height based on content',
     },
     minRows: {
       control: 'number',
-      description: 'Minimum number of rows to display'
+      description: 'Minimum number of rows to display',
     },
     maxRows: {
       control: 'number',
-      description: 'Maximum number of rows when using autoGrow'
+      description: 'Maximum number of rows when using autoGrow',
     },
     maxLength: {
       control: 'number',
-      description: 'Maximum character limit'
-    }
+      description: 'Maximum character limit',
+    },
   },
   args: {
     size: 'md',
@@ -75,8 +75,8 @@ export default {
     showCount: false,
     autoGrow: false,
     minRows: 3,
-    maxRows: 8
-  }
+    maxRows: 8,
+  },
 } as Meta<TextAreaProps>
 
 // Base template for consistent layout
@@ -85,7 +85,7 @@ const Template: StoryObj<TextAreaProps> = {
     <div style={{ maxWidth: '600px' }}>
       <TextArea {...args} />
     </div>
-  )
+  ),
 }
 
 export const Default: StoryObj<TextAreaProps> = {
@@ -93,8 +93,8 @@ export const Default: StoryObj<TextAreaProps> = {
   args: {
     placeholder: 'Enter your text here...',
     label: 'Message',
-    helperText: 'Type your message in the field above'
-  }
+    helperText: 'Type your message in the field above',
+  },
 }
 
 export const WithLabel: StoryObj<TextAreaProps> = {
@@ -102,8 +102,8 @@ export const WithLabel: StoryObj<TextAreaProps> = {
   args: {
     label: 'Your feedback',
     placeholder: 'Tell us what you think...',
-    helperText: 'Your feedback helps us improve'
-  }
+    helperText: 'Your feedback helps us improve',
+  },
 }
 
 export const Required: StoryObj<TextAreaProps> = {
@@ -112,8 +112,8 @@ export const Required: StoryObj<TextAreaProps> = {
     label: 'Description',
     required: true,
     placeholder: 'This field is required',
-    helperText: 'This field cannot be left empty'
-  }
+    helperText: 'This field cannot be left empty',
+  },
 }
 
 export const WithError: StoryObj<TextAreaProps> = {
@@ -122,8 +122,8 @@ export const WithError: StoryObj<TextAreaProps> = {
     label: 'Error state',
     error: true,
     errorMessage: 'Please provide a valid input',
-    value: 'Invalid input'
-  }
+    value: 'Invalid input',
+  },
 }
 
 export const Disabled: StoryObj<TextAreaProps> = {
@@ -132,8 +132,8 @@ export const Disabled: StoryObj<TextAreaProps> = {
     label: 'Disabled textarea',
     disabled: true,
     value: 'This textarea is disabled',
-    helperText: 'This control cannot be edited'
-  }
+    helperText: 'This control cannot be edited',
+  },
 }
 
 export const WithCharacterCount: StoryObj<TextAreaProps> = {
@@ -143,30 +143,22 @@ export const WithCharacterCount: StoryObj<TextAreaProps> = {
     maxLength: 100,
     showCount: true,
     placeholder: 'Limited to 100 characters...',
-    helperText: 'Character count is shown below'
-  }
+    helperText: 'Character count is shown below',
+  },
 }
 
 export const Sizes: StoryObj<TextAreaProps> = {
   render: () => (
     <div className="space-y-4" style={{ maxWidth: '600px' }}>
-      <TextArea
-        size="sm"
-        label="Small textarea"
-        placeholder="Small size"
-      />
+      <TextArea size="sm" label="Small textarea" placeholder="Small size" />
       <TextArea
         size="md"
         label="Medium textarea"
         placeholder="Medium size (default)"
       />
-      <TextArea
-        size="lg"
-        label="Large textarea"
-        placeholder="Large size"
-      />
+      <TextArea size="lg" label="Large textarea" placeholder="Large size" />
     </div>
-  )
+  ),
 }
 
 export const Variants: StoryObj<TextAreaProps> = {
@@ -188,7 +180,7 @@ export const Variants: StoryObj<TextAreaProps> = {
         placeholder="With transparent background"
       />
     </div>
-  )
+  ),
 }
 
 export const ResizeOptions: StoryObj<TextAreaProps> = {
@@ -215,7 +207,7 @@ export const ResizeOptions: StoryObj<TextAreaProps> = {
         placeholder="Can be resized in any direction"
       />
     </div>
-  )
+  ),
 }
 
 export const AutoGrow: StoryObj<TextAreaProps> = {
@@ -226,8 +218,8 @@ export const AutoGrow: StoryObj<TextAreaProps> = {
     minRows: 2,
     maxRows: 10,
     placeholder: 'Type to see this textarea grow automatically...',
-    helperText: 'This textarea will grow as you type, up to a maximum height'
-  }
+    helperText: 'This textarea will grow as you type, up to a maximum height',
+  },
 }
 
 export const CodeEditor: StoryObj<TextAreaProps> = {
@@ -238,8 +230,8 @@ export const CodeEditor: StoryObj<TextAreaProps> = {
     placeholder: 'function example() {\n  return "Write your code here";\n}',
     className: 'font-mono',
     helperText: 'Use for code snippets',
-    minRows: 5
-  }
+    minRows: 5,
+  },
 }
 
 export const JsonValidator: StoryObj<TextAreaProps> = {
@@ -250,6 +242,6 @@ export const JsonValidator: StoryObj<TextAreaProps> = {
     placeholder: '{\n  "key": "value"\n}',
     className: 'font-mono',
     helperText: 'Enter valid JSON. Will show error for invalid JSON.',
-    minRows: 5
-  }
+    minRows: 5,
+  },
 }

@@ -1,5 +1,5 @@
 import type { StoryObj, Meta } from '@storybook/react'
-import { Checkbox, CheckboxProps, Text, TextProps } from '@koaris/bloom-ui'
+import { Checkbox, CheckboxProps, Text } from '@koaris/bloom-ui'
 
 export default {
   title: 'Form/Checkbox',
@@ -20,12 +20,12 @@ export default {
   },
   decorators: [
     (Story) => (
-      <div className='flex gap-2'>
+      <div className="flex gap-2">
         <Story />
-        <Text tag="span" children="Aceite os termos de uso." />
+        <Text tag="span">Aceite os termos de uso.</Text>
       </div>
     ),
-  ]
+  ],
 } as Meta<CheckboxProps>
 
 export const Default: StoryObj<CheckboxProps> = {}

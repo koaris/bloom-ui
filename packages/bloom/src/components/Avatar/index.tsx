@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge'
-import { FaUser } from 'react-icons/fa'
+import { User } from 'lucide-react'
 
 export interface AvatarProps {
   src?: string
@@ -25,7 +25,7 @@ export const Avatar = ({ className, src, alt = '', ...rest }: AvatarProps) => {
           {...rest}
         />
       ) : (
-        <FaUser color="#FFFFFF" size={24} />
+        <User className="w-6 h-6 text-neutral" aria-hidden />
       )}
     </div>
   )

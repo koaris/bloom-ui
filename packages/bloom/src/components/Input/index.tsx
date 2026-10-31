@@ -8,7 +8,7 @@ import {
   ChangeEvent,
 } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { FiCheck, FiX } from 'react-icons/fi'
+import { Check, X } from 'lucide-react'
 
 const passwordMask = {
   password: [/^(?=.*[!@#$%^&*])/, /(?=.*[0-9])/, /.{8,}$/],
@@ -364,25 +364,25 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <ul className="py-1 text-sm" role="list">
           <li className="flex items-center px-2" role="listitem">
             {passwordValidation.hasEightCharacters ? (
-              <FiCheck className="text-green-500" />
+              <Check className="text-green-500" />
             ) : (
-              <FiX className="text-red-500" />
+              <X className="text-red-500" />
             )}
             <span className="px-1">Pelo menos 8 caracteres</span>
           </li>
           <li className="flex items-center px-2" role="listitem">
             {passwordValidation.hasSpecialCharacters ? (
-              <FiCheck className="text-green-500" />
+              <Check className="text-green-500" />
             ) : (
-              <FiX className="text-red-500" />
+              <X className="text-red-500" />
             )}
             <span className="px-1">Pelo menos 1 símbolo (@, !, $, etc)</span>
           </li>
           <li className="flex items-center px-2" role="listitem">
             {passwordValidation.hasNumber ? (
-              <FiCheck className="text-green-500" />
+              <Check className="text-green-500" />
             ) : (
-              <FiX className="text-red-500" />
+              <X className="text-red-500" />
             )}
             <span className="px-1">Deve conter 1 número</span>
           </li>

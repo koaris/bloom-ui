@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { FiCheck } from 'react-icons/fi'
+import { Check } from 'lucide-react'
 
 export type RadioOption = {
   id: number
@@ -59,7 +59,11 @@ export const RadioGroup = ({
               disabled={disabled}
             />
             {selectedOption === option.value && (
-              <FiCheck color="#FFFFFF" size={12} style={{ strokeWidth: 4 }} />
+              <Check
+                className="w-3 h-3 text-neutral"
+                strokeWidth={4}
+                aria-hidden
+              />
             )}
           </label>
           <span className="px-2">{option.label}</span>

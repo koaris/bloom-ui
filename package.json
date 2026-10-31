@@ -7,16 +7,22 @@
   "scripts": {
     "dev": "turbo run dev --parallel",
     "build": "turbo run build",
+    "test": "turbo run test",
+    "lint": "turbo run lint",
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "turbo run build --filter=!@koaris/docs && changeset publish"
   },
   "devDependencies": {
     "@changesets/cli": "^3.0.3",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "turbo": "^2.11.7",
     "typescript": "~5.9.3"
   },
   "overrides": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "typescript": "~5.9.3",
     "tar": "^7.5.22",
     "handlebars": "^4.7.10",

@@ -8,9 +8,10 @@
   "main": "./dist/index.mjs",
   "module": "./dist/index.mjs",
   "scripts": {
-    "build": "NODE_ENV=production npx tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts  --minify && tsup",
-    "dev": "concurrently --kill-others \"npx tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css -c ./tailwind.config.ts  --minify --watch \" \"tsup --watch\"",
-    "lint": "eslint src/**/*.ts* --fix"
+    "build": "NODE_ENV=production npx tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css --minify && tsup",
+    "dev": "concurrently --kill-others \"npx tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css --minify --watch\" \"tsup --watch\"",
+    "lint": "eslint src --fix",
+    "test": "vitest run"
   },
   "exports": {
     ".": {
@@ -41,8 +42,10 @@
     "@koaris/tokens": "*",
     "@koaris/ts-config": "*",
     "@tailwindcss/postcss": "^4.1.18",
-    "@types/react": "^18.2.42",
-    "@types/react-dom": "^18.2.17",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "@typescript-eslint/eslint-plugin": "^8.71.2",
     "@typescript-eslint/parser": "^8.71.2",
     "concurrently": "^9.2.1",
@@ -50,17 +53,24 @@
     "eslint-plugin-prettier": "^5.5.4",
     "postcss": "^8.5.30",
     "prettier": "^3.6.2",
-    "react": "^18.2.0",
-    "tailwind-merge": "^2.1.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.0.0",
-    "tsup": "^8.5.1"
+    "tsup": "^8.5.1",
+    "vitest": "^4.0.0",
+    "jsdom": "^27.0.0"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-toast": "^1.2.15",
     "@tailwindcss/cli": "^4.1.18",
-    "react-icons": "^4.12.0"
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.548.0"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "^19",
+    "react-dom": "^19"
   }
 }

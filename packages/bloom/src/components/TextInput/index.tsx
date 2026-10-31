@@ -5,7 +5,8 @@ import {
   useState,
   forwardRef,
 } from 'react'
-import { twMerge } from 'tailwind-merge'
+import { cva } from 'class-variance-authority'
+import { cn } from '../../lib/utils'
 
 export interface TextInputProps extends DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -21,6 +22,31 @@ export interface TextInputProps extends DetailedHTMLProps<
   required?: boolean
   type: 'text' | 'password' | 'date' | 'cpf' | 'phone' | 'cnpj' | 'cep'
 }
+
+const textInputVariants = cva(
+  'flex items-baseline border-2 rounded-xs box-border transition-colors duration-200 focus-within:outline-hidden focus-within:border-accent',
+  {
+    variants: {
+      variant: {
+        primary: 'border-border bg-muted text-ink hover:shadow-md',
+        secondary: 'border-neutral-800 bg-neutral-800 text-neutral',
+      },
+      error: {
+        true: 'border-danger',
+        false: '',
+      },
+      disabled: {
+        true: 'opacity-50 cursor-not-allowed',
+        false: '',
+      },
+    },
+    defaultVariants: {
+      variant: 'primary',
+      error: false,
+      disabled: false,
+    },
+  },
+)
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
   (
@@ -38,18 +64,9 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
     }: TextInputProps,
     ref,
   ) => {
-    const [selected, setSelected] = useState(false)
     const [inputValue, setInputValue] = useState(value)
 
-    const handleFocus = () => {
-      setSelected(!selected)
-    }
-
-    const handleBlur = () => {
-      setSelected(false)
-    }
-
-    const handleInput = (event: React.FocusEvent<HTMLInputElement>) => {
+    const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
       setInputValue(event.currentTarget.value)
     }
 
@@ -59,34 +76,29 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 
     return (
       <div
-        className={twMerge(
-          ' py-2 px-4 border-2 rounded-xs box-border flex items-baseline bg-neutral-200',
-          'hover:shadow-md hover:shadow-neutral-500 focus:outline-hidden',
-          variant === 'secondary' && 'bg-neutral-800 border-neutral-800 ',
-          selected === true && 'border-2 border-orange-500',
-          disabled === true && 'opacity-50 cursor-not-allowed',
-          error === true && 'border-2 border-red-900',
+        className={cn(
+          textInputVariants({ variant, error, disabled }),
+          'px-4 py-2',
+          className,
         )}
       >
         {!!prefix && (
-          <span className="text-neutral-500 sm:text-sm">{prefix}</span>
+          <span className="text-muted-foreground sm:text-sm">{prefix}</span>
         )}
         <input
           type={type}
           required={rest.required}
           onClick={onClick}
-          onFocus={handleFocus}
           onChange={handleInput}
-          onBlur={handleBlur}
           value={inputValue}
           placeholder={placeholder}
           disabled={disabled}
+          aria-invalid={error || undefined}
           ref={ref}
-          className={twMerge(
-            'flex items-center justify-center bg-neutral-200 rounded-xs w-full px-1 py-2 text-md',
-            'focus:outline-hidden text-neutral-800',
-            disabled === true && 'cursor-not-allowed',
-            variant === 'secondary' && 'bg-neutral-800 text-neutral',
+          className={cn(
+            'flex items-center justify-center w-full px-1 py-2 text-md bg-transparent rounded-xs focus:outline-hidden',
+            variant === 'primary' ? 'text-ink' : 'text-neutral',
+            disabled && 'cursor-not-allowed',
             className,
           )}
           {...rest}

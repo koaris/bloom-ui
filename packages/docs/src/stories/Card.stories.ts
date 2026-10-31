@@ -17,8 +17,9 @@ export default {
   },
   args: {
     title: 'Online Management',
-    content: 'Optimize your processes with our integrated online management solution. Monitor, analyze, and improve your results in real-time with our user-friendly platform.',
-    image: image,
+    content:
+      'Optimize your processes with our integrated online management solution. Monitor, analyze, and improve your results in real-time with our user-friendly platform.',
+    image,
     disabled: false,
     selected: false,
     direction: 'col',
@@ -91,7 +92,8 @@ export const Default: StoryObj<CardProps> = {
     direction: 'col',
     size: 'medium',
     title: 'Online Management',
-    content: 'Optimize your processes with our integrated online management solution.'
+    content:
+      'Optimize your processes with our integrated online management solution.',
   },
   parameters: {
     docs: {
@@ -107,18 +109,20 @@ export const WithFooter: StoryObj<CardProps> = {
     direction: 'col',
     size: 'medium',
     title: 'Online Management',
-    content: 'Optimize your processes with our integrated online management solution.'
-    /*footer: (
+    content:
+      'Optimize your processes with our integrated online management solution.',
+    /* footer: (
       <div className="flex justify-between items-center">
         <span className="text-sm text-gray-500">Saiba mais</span>
         <FiArrowRight className="text-orange-500" />
       </div>
-    ),*/
+    ), */
   },
   parameters: {
     docs: {
       description: {
-        story: 'Card with a custom footer that includes an action prompt and icon.',
+        story:
+          'Card with a custom footer that includes an action prompt and icon.',
       },
     },
   },
@@ -146,13 +150,15 @@ export const Medium: StoryObj<CardProps> = {
     direction: 'col',
     size: 'medium',
     title: 'Online Management',
-    content: 'Optimize your processes with our integrated online management solution.',
+    content:
+      'Optimize your processes with our integrated online management solution.',
     selected: false,
   },
   parameters: {
     docs: {
       description: {
-        story: 'Medium-sized card with column layout, suitable for feature showcases.',
+        story:
+          'Medium-sized card with column layout, suitable for feature showcases.',
       },
     },
   },
@@ -163,13 +169,15 @@ export const Large: StoryObj<CardProps> = {
     direction: 'row',
     size: 'large',
     title: 'Online Management',
-    content: 'Optimize your processes with our integrated online management solution. Monitor, analyze, and improve your results in real-time with our user-friendly platform.',
+    content:
+      'Optimize your processes with our integrated online management solution. Monitor, analyze, and improve your results in real-time with our user-friendly platform.',
     imageSize: '200px',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Large card with row layout, ideal for detailed content or primary features.',
+        story:
+          'Large card with row layout, ideal for detailed content or primary features.',
       },
     },
   },
@@ -180,7 +188,8 @@ export const FullWidth: StoryObj<CardProps> = {
     direction: 'row',
     size: 'full',
     title: 'Integrated Business Management',
-    content: 'Our solution provides a complete view of your business by integrating all departments into a single platform.',
+    content:
+      'Our solution provides a complete view of your business by integrating all departments into a single platform.',
     imageSize: '250px',
   },
   parameters: {
@@ -230,13 +239,14 @@ export const WithIcon: StoryObj<CardProps> = {
   args: {
     direction: 'col',
     size: 'medium',
-    /*title: (
+    /* title: (
       <div className="flex items-center gap-2">
         <FiSettings className="text-orange-500" />
         <span>Advanced Settings</span>
       </div>
-    ),*/
-    content: 'Customize your experience with our advanced management configuration options.',
+    ), */
+    content:
+      'Customize your experience with our advanced management configuration options.',
   },
   parameters: {
     docs: {
@@ -252,7 +262,7 @@ export const FeatureCard: StoryObj<CardProps> = {
     direction: 'col',
     size: 'medium',
     title: 'Reports in real-time',
-    /*content: (
+    /* content: (
       <div className="space-y-2">
         <p>Acesse relatórios detalhados instantaneamente:</p>
         <ul className="list-inside space-y-1">
@@ -275,12 +285,13 @@ export const FeatureCard: StoryObj<CardProps> = {
       <button className="bg-orange-500 text-white px-4 py-2 rounded w-full hover:bg-orange-600 transition-colors">
         Ativar recurso
       </button>
-    ),*/
+    ), */
   },
   parameters: {
     docs: {
       description: {
-        story: 'Feature highlight card with structured content and a call-to-action button.',
+        story:
+          'Feature highlight card with structured content and a call-to-action button.',
       },
     },
   },
@@ -293,12 +304,14 @@ export const NonInteractive: StoryObj<CardProps> = {
     hoverable: false,
     onClick: undefined,
     title: 'System Message',
-    content: 'This is an informational system notification that requires no user interaction.',
+    content:
+      'This is an informational system notification that requires no user interaction.',
   },
   parameters: {
     docs: {
       description: {
-        story: 'Non-interactive card without hover effects, used for displaying information only.',
+        story:
+          'Non-interactive card without hover effects, used for displaying information only.',
       },
     },
   },

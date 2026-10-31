@@ -1,0 +1,10 @@
+/*
+ * Koaris theme — overrides the accent with the Koaris brand rust.
+ * Import after '@koaris/tokens/theme.css'. Overrides only the accent.
+ */
+:root,
+:host,
+.dark,
+.light {
+  --accent: #c13f27;
+}

@@ -1,5 +1,5 @@
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
-import { FiCheck } from 'react-icons/fi'
+import { Check } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
 
 export interface CheckboxProps extends DetailedHTMLProps<
@@ -43,7 +43,11 @@ export const Checkbox = ({ className, required, disabled }: CheckboxProps) => {
           )}
         />
         {selected && (
-          <FiCheck color="#FFFFFF" size={14} style={{ strokeWidth: 4 }} />
+          <Check
+            className="w-3.5 h-3.5 text-neutral"
+            strokeWidth={4}
+            aria-hidden
+          />
         )}
       </label>
     </div>

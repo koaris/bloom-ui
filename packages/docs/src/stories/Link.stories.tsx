@@ -31,13 +31,12 @@ export default {
 } as Meta<LinkProps>
 
 export const Primary: StoryObj<LinkProps> = {
-  args: {
-  },
+  args: {},
 }
 
 export const SamePage: StoryObj<LinkProps> = {
   args: {
-    newPage: false
+    newPage: false,
   },
 }
 
