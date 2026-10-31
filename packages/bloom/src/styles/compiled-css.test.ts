@@ -25,6 +25,7 @@ const requiredUtilities = [
   'bg-accent',
   'text-accent',
   'text-accent-foreground',
+  'text-accent-text',
   'text-ink',
   'bg-surface',
   'bg-muted',

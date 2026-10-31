@@ -19,12 +19,14 @@ const buttonVariants = cva(
       variant: {
         primary:
           'bg-accent text-accent-foreground hover:brightness-110 active:brightness-95',
+        // Accent-colored text uses --color-accent-text (a darkened accent
+        // that passes AA on the surface), not the raw accent fill.
         secondary:
-          'border border-accent bg-surface text-accent hover:bg-accent hover:text-accent-foreground',
+          'border border-accent bg-surface text-accent-text hover:bg-accent hover:text-accent-foreground',
         outline:
-          'border border-accent bg-transparent text-accent hover:bg-muted',
-        ghost: 'bg-transparent text-accent hover:bg-muted',
-        link: 'bg-transparent text-accent underline-offset-4 hover:underline p-0 h-auto shadow-none focus-visible:ring-0',
+          'border border-accent bg-transparent text-accent-text hover:bg-muted',
+        ghost: 'bg-transparent text-accent-text hover:bg-muted',
+        link: 'bg-transparent text-accent-text underline-offset-4 hover:underline p-0 h-auto shadow-none focus-visible:ring-0',
       },
       size: {
         xs: 'px-3 py-1 text-xs',

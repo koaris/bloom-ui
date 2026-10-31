@@ -15,6 +15,22 @@ describe('Button', () => {
     expect(screen.getByRole('button')).toHaveClass('text-accent-foreground')
   })
 
+  it.each(['secondary', 'outline', 'ghost', 'link'] as const)(
+    'uses the text-safe accent for %s text',
+    (variant) => {
+      render(<Button variant={variant}>{variant}</Button>)
+      expect(screen.getByRole('button')).toHaveClass('text-accent-text')
+      expect(screen.getByRole('button')).not.toHaveClass('text-accent')
+    },
+  )
+
+  it('defaults to type="button" and allows overriding', () => {
+    const { rerender } = render(<Button>Type</Button>)
+    expect(screen.getByRole('button')).toHaveAttribute('type', 'button')
+    rerender(<Button type="submit">Type</Button>)
+    expect(screen.getByRole('button')).toHaveAttribute('type', 'submit')
+  })
+
   it('applies size classes', () => {
     render(<Button size="lg">Large</Button>)
     expect(screen.getByRole('button')).toHaveClass('px-8')
