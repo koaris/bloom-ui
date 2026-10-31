@@ -71,6 +71,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       endIcon,
       fullWidth = false,
       onClick,
+      type = 'button',
       children,
       ...rest
     },
@@ -90,6 +91,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             'opacity-50 cursor-not-allowed pointer-events-none',
           className,
         )}
+        type={type}
         onClick={handleClick}
         disabled={disabled || loading}
         aria-busy={loading || undefined}
@@ -100,7 +102,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
           </span>
         )}
-        <span className={loading ? 'invisible' : 'flex items-center gap-2'}>
+        {/* opacity-0 (not visibility:hidden) so the button keeps its
+            accessible name while loading */}
+        <span
+          className={cn(
+            'flex items-center gap-2',
+            loading && 'opacity-0',
+          )}
+        >
           {startIcon && <span className="mr-1">{startIcon}</span>}
           {children}
           {endIcon && <span className="ml-1">{endIcon}</span>}

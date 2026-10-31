@@ -2,6 +2,7 @@ import {
   DetailedHTMLProps,
   InputHTMLAttributes,
   useEffect,
+  useId,
   useRef,
   useState,
   forwardRef,
@@ -316,6 +317,9 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       }
     }, [value, type])
 
+    const generatedId = useId()
+    const inputId = id ?? generatedId
+
     const getInputType = (): string => {
       // Map our custom types to HTML input types
       switch (type) {
@@ -341,19 +345,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
       const format = phoneFormats[countryCode] || phoneFormats.BR
       return (
-        <span className="absolute left-3 top-1.5 text-gray-500">
+        <span className="absolute left-3 top-1.5 text-muted-foreground">
           {format.countryCode}
         </span>
       )
     }
 
     const inputClasses = twMerge(
-      'flex items-center justify-center border-2 border-gray-400 rounded-xs w-full px-3 py-1 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-hidden transition-all duration-200',
+      'flex items-center justify-center border-2 border-border rounded-xs w-full px-3 py-1 text-md hover:shadow-md hover:shadow-neutral-500 focus:outline-hidden transition-all duration-200',
       className,
       disabled && 'opacity-50 cursor-not-allowed',
-      selected && 'border-2 border-orange-500',
-      validated && isValid && 'border-2 border-green-900',
-      (error || (!isValid && inputValue !== '')) && 'border-2 border-red-900',
+      selected && 'border-2 border-accent',
+      validated && isValid && 'border-2 border-success',
+      (error || (!isValid && inputValue !== '')) && 'border-2 border-danger',
       type === 'phone' && 'pl-10',
     )
 
@@ -364,25 +368,25 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <ul className="py-1 text-sm" role="list">
           <li className="flex items-center px-2" role="listitem">
             {passwordValidation.hasEightCharacters ? (
-              <Check className="text-green-500" />
+              <Check className="w-4 h-4 text-success" />
             ) : (
-              <X className="text-red-500" />
+              <X className="w-4 h-4 text-danger" />
             )}
             <span className="px-1">Pelo menos 8 caracteres</span>
           </li>
           <li className="flex items-center px-2" role="listitem">
             {passwordValidation.hasSpecialCharacters ? (
-              <Check className="text-green-500" />
+              <Check className="w-4 h-4 text-success" />
             ) : (
-              <X className="text-red-500" />
+              <X className="w-4 h-4 text-danger" />
             )}
             <span className="px-1">Pelo menos 1 símbolo (@, !, $, etc)</span>
           </li>
           <li className="flex items-center px-2" role="listitem">
             {passwordValidation.hasNumber ? (
-              <Check className="text-green-500" />
+              <Check className="w-4 h-4 text-success" />
             ) : (
-              <X className="text-red-500" />
+              <X className="w-4 h-4 text-danger" />
             )}
             <span className="px-1">Deve conter 1 número</span>
           </li>
@@ -394,11 +398,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="w-full">
         {label && (
           <label
-            htmlFor={id}
-            className="block text-sm font-medium text-gray-700 mb-1"
+            htmlFor={inputId}
+            className="block text-sm font-medium text-ink mb-1"
           >
             {label}
-            {required && <span className="text-red-500 ml-1">*</span>}
+            {required && <span className="text-danger ml-1">*</span>}
           </label>
         )}
         <div className="relative">
@@ -408,7 +412,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             required={required}
             disabled={disabled}
             ref={ref}
-            id={id}
+            id={inputId}
             className={inputClasses}
             onClick={onClick}
             onFocus={handleFocus}
@@ -418,7 +422,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             value={inputValue}
             aria-invalid={error}
             aria-describedby={
-              error ? `${id}-error` : helperText ? `${id}-helper` : undefined
+              error
+                ? `${inputId}-error`
+                : helperText
+                  ? `${inputId}-helper`
+                  : undefined
             }
             {...rest}
           />
@@ -426,15 +434,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {renderPasswordValidation()}
         {error && (
           <p
-            id={`${id}-error`}
-            className="mt-1 text-sm text-red-900"
+            id={`${inputId}-error`}
+            className="mt-1 text-sm text-danger"
             role="alert"
           >
             {errorMessage || 'Invalid field.'}
           </p>
         )}
         {helperText && !error && (
-          <p id={`${id}-helper`} className="mt-1 text-sm text-gray-500">
+          <p
+            id={`${inputId}-helper`}
+            className="mt-1 text-sm text-muted-foreground"
+          >
             {helperText}
           </p>
         )}

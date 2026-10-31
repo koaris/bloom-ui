@@ -109,7 +109,7 @@ const Card = ({
           onClick()
         }
       }}
-      aria-disabled={disabled}
+      aria-disabled={disabled || undefined}
       {...rest}
     >
       {image && (

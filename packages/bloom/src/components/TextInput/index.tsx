@@ -24,7 +24,7 @@ export interface TextInputProps extends DetailedHTMLProps<
 }
 
 const textInputVariants = cva(
-  'flex items-baseline border-2 rounded-xs box-border transition-colors duration-200 focus-within:outline-hidden focus-within:border-accent',
+  'flex items-baseline border-2 rounded-xs box-border transition-colors duration-200 focus-within:outline-hidden',
   {
     variants: {
       variant: {
@@ -33,7 +33,7 @@ const textInputVariants = cva(
       },
       error: {
         true: 'border-danger',
-        false: '',
+        false: 'focus-within:border-accent',
       },
       disabled: {
         true: 'opacity-50 cursor-not-allowed',
@@ -99,7 +99,6 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
             'flex items-center justify-center w-full px-1 py-2 text-md bg-transparent rounded-xs focus:outline-hidden',
             variant === 'primary' ? 'text-ink' : 'text-neutral',
             disabled && 'cursor-not-allowed',
-            className,
           )}
           {...rest}
         />
