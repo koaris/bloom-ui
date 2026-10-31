@@ -102,14 +102,8 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
           </span>
         )}
-        {/* opacity-0 (not visibility:hidden) so the button keeps its
-            accessible name while loading */}
-        <span
-          className={cn(
-            'flex items-center gap-2',
-            loading && 'opacity-0',
-          )}
-        >
+        {/* opacity-0 (not visibility:hidden) keeps the accessible name */}
+        <span className={cn('flex items-center gap-2', loading && 'opacity-0')}>
           {startIcon && <span className="mr-1">{startIcon}</span>}
           {children}
           {endIcon && <span className="ml-1">{endIcon}</span>}

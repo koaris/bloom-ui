@@ -4,11 +4,10 @@ import { X } from 'lucide-react'
 import { cva } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 
-export interface ModalProps
-  extends Omit<
-    ComponentPropsWithoutRef<typeof Dialog.Content>,
-    'title' | 'children'
-  > {
+export interface ModalProps extends Omit<
+  ComponentPropsWithoutRef<typeof Dialog.Content>,
+  'title' | 'children'
+> {
   isOpen: boolean
   onClose: () => void
   title?: string
