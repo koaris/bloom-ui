@@ -23,7 +23,8 @@ Import it after Tailwind:
 | Token                   | Utility class         | Light value          |
 | ----------------------- | --------------------- | -------------------- |
 | `--color-accent`        | `bg-accent` etc.      | `#f36246` (orange500)|
-| `--color-accent-foreground` | `text-accent-foreground` | `#fefefe`     |
+| `--color-accent-foreground` | `text-accent-foreground` | `#1c2126`      |
+| `--color-accent-text`   | `text-accent-text`    | `#c2410c`            |
 | `--color-ink`           | `text-ink`            | `#1c2126`            |
 | `--color-surface`       | `bg-surface`          | `#ffffff`            |
 | `--color-muted`         | `bg-muted`            | `#f6f6f6`            |
@@ -36,10 +37,34 @@ Semantic tokens resolve to primitives (`--color-orange-500`, `--color-neutral-*`
 ...) which are still available, so existing palette utilities
 (`bg-orange-500`, `text-neutral-800`) keep working.
 
-**Known issue:** the default accent pair (`#fefefe` on `#f36246`) fails
-WCAG AA (3.13:1 / 3.16:1, AA needs 4.5:1) for the text sizes Button uses.
-This is a deliberate brand call for 2.0; a text-safe accent pair is
-planned for the next minor (see the TODO in `theme.css`).
+### Accent contrast (WCAG AA)
+
+The brand accent stays `#f36246` for fills (`bg-accent`). Accent-colored
+**text** uses a dedicated text-safe token, `--color-accent-text`, and the
+text on the accent fill (`--color-accent-foreground`) changed from
+near-white to dark ink. Ratios computed with the WCAG 2.x relative
+luminance formula (AA requires 4.5:1 for these text sizes):
+
+| Pair                                              | Before        | Now           |
+| ------------------------------------------------- | ------------- | ------------- |
+| `--accent-foreground` on the `#f36246` fill       | 3.13:1 ✗      | **5.13:1** ✓ (#1c2126) |
+| accent text on white (secondary/outline/ghost/link) | 3.16:1 ✗    | **5.18:1** ✓ (#c2410c) |
+| dark mode: accent text on the dark surface        | 3.16:1 ✗      | **5.13:1** ✓ (#f36246) |
+
+- **Default / Koris (orange) theme:** `--accent-text` is `#c2410c` in
+  light mode (same hue as the fill, darkened) and `#f36246` in dark mode
+  (on the `#1c2126` surface the darkened variant would fall back to
+  3.13:1). `--accent-foreground` is `#1c2126` in both modes (5.13:1 on
+  the fill).
+- **Koaris (rust `#c13f27`) theme:** white `#fefefe` on the rust fill
+  passes (5.24:1), so the fill keeps white text; `--accent-text` is the
+  rust itself in light mode (5.24:1 on white) and a lightened rust
+  `#f07361` in dark mode (5.66:1 on `#1c2126`; the raw rust would be
+  3.10:1 there).
+- **Breaking:** if you hard-coded `text-accent-foreground` as a light
+  color or used `text-accent` for text, migrate to `text-accent-text`
+  (Button's secondary/outline/ghost/link variants already do). The
+  `text-accent` utility still exists for non-text accent uses.
 
 ### Typography tokens
 
