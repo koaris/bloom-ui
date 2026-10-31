@@ -1,6 +1,14 @@
 {
   "extends": "@koaris/ts-config/react.json",
+  "compilerOptions": {
+    "types": [
+      "vitest/globals",
+      "@testing-library/jest-dom/vitest",
+      "node"
+    ]
+  },
   "include": [
-    "src"
+    "src",
+    "vitest.setup.ts"
   ]
 }
