@@ -11,6 +11,8 @@
     "build": "NODE_ENV=production npx tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css --minify && tsup",
     "dev": "concurrently --kill-others \"npx tailwindcss -i ./src/styles/tailwind.css -o ./tailwind.css --minify --watch\" \"tsup --watch\"",
     "lint": "eslint src --fix",
+    "lint:ci": "eslint src",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
     "test": "vitest run"
   },
   "exports": {
@@ -21,6 +23,9 @@
     },
     "./tailwind.css": "./tailwind.css"
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "keywords": [
     "design-system",
     "react"
@@ -41,9 +46,11 @@
     "@koaris/eslint-config": "*",
     "@koaris/tokens": "*",
     "@koaris/ts-config": "*",
+    "@tailwindcss/cli": "^4.1.18",
     "@tailwindcss/postcss": "^4.1.18",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.0",
+    "@types/node": "^24.0.0",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@typescript-eslint/eslint-plugin": "^8.71.2",
@@ -55,7 +62,6 @@
     "prettier": "^3.6.2",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
-    "tailwind-merge": "^3.4.0",
     "tailwindcss": "^4.0.0",
     "tsup": "^8.5.1",
     "vitest": "^4.0.0",
@@ -64,10 +70,10 @@
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
     "@radix-ui/react-toast": "^1.2.15",
-    "@tailwindcss/cli": "^4.1.18",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.548.0"
+    "lucide-react": "^0.548.0",
+    "tailwind-merge": "^3.4.0"
   },
   "peerDependencies": {
     "react": "^19",

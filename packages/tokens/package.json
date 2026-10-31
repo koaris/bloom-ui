@@ -18,8 +18,12 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm, cjs --dts",
     "dev": "tsup src/index.ts --format esm, cjs --dts --watch",
-    "lint": "eslint src --fix"
+    "lint": "eslint src --fix",
+    "lint:ci": "eslint src"
   },
+  "sideEffects": [
+    "*.css"
+  ],
   "files": [
     "dist",
     "src/theme.css",

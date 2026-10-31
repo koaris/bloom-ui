@@ -9,6 +9,10 @@ export default defineConfig({
   },
   dts: true,
   external: ["react"],
+  // tsup drops the source directive, so re-add 'use client' for RSC consumers.
+  banner: {
+    js: "'use client'",
+  },
 
   clean: true,
 });
