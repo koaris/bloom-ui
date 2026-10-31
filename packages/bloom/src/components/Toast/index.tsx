@@ -32,6 +32,14 @@ export interface ToastContainerProps {
 
 type ToastListener = (nextToasts: ToastProps[]) => void
 
+// Monotonic counter so two toasts created in the same millisecond never
+// share an id (and therefore a React key).
+let toastCount = 0
+const nextToastId = () => {
+  toastCount += 1
+  return `toast-${toastCount}`
+}
+
 // Toast service for global state management
 class ToastService {
   private listeners = new Set<ToastListener>()
@@ -49,7 +57,7 @@ class ToastService {
   }
 
   public showToast(toast: Omit<ToastProps, 'id' | 'onDismiss'>): string {
-    const id = `toast-${Date.now()}`
+    const id = nextToastId()
     this.toasts.push({
       ...toast,
       id,
@@ -130,36 +138,45 @@ const ToastItem: React.FC<ToastProps> = ({
   showCloseButton = true,
   onDismiss,
   className,
-}) => (
-  <ToastPrimitive.Root
-    open
-    duration={duration > 0 ? duration : Infinity}
-    onOpenChange={(open) => {
-      if (!open) onDismiss?.(id)
-    }}
-    className={cn(toastVariants({ variant }), className)}
-  >
-    <span className="shrink-0 mr-3 mt-0.5">{variantIcons[variant]}</span>
-    <div className="flex-1">
-      {title && (
-        <ToastPrimitive.Title className="font-medium text-sm">
-          {title}
-        </ToastPrimitive.Title>
+}) => {
+  // Local open state so a standalone <Toast> without onDismiss still
+  // removes itself from the DOM on timeout, swipe or close click.
+  const [open, setOpen] = React.useState(true)
+
+  return (
+    <ToastPrimitive.Root
+      open={open}
+      duration={duration > 0 ? duration : Infinity}
+      onOpenChange={(next) => {
+        if (!next) {
+          setOpen(false)
+          onDismiss?.(id)
+        }
+      }}
+      className={cn(toastVariants({ variant }), className)}
+    >
+      <span className="shrink-0 mr-3 mt-0.5">{variantIcons[variant]}</span>
+      <div className="flex-1">
+        {title && (
+          <ToastPrimitive.Title className="font-medium text-sm">
+            {title}
+          </ToastPrimitive.Title>
+        )}
+        <ToastPrimitive.Description className="text-sm">
+          {message}
+        </ToastPrimitive.Description>
+      </div>
+      {showCloseButton && (
+        <ToastPrimitive.Close
+          className="ml-3 p-1 text-muted-foreground hover:text-ink cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-xs"
+          aria-label="Close"
+        >
+          <X className="w-4 h-4" aria-hidden />
+        </ToastPrimitive.Close>
       )}
-      <ToastPrimitive.Description className="text-sm">
-        {message}
-      </ToastPrimitive.Description>
-    </div>
-    {showCloseButton && (
-      <ToastPrimitive.Close
-        className="ml-3 text-muted-foreground hover:text-ink cursor-pointer"
-        aria-label="Close"
-      >
-        <X className="w-4 h-4" aria-hidden />
-      </ToastPrimitive.Close>
-    )}
-  </ToastPrimitive.Root>
-)
+    </ToastPrimitive.Root>
+  )
+}
 
 export const Toast: React.FC<ToastProps> = (props) => {
   return (

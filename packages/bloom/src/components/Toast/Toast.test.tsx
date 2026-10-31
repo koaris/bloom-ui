@@ -50,4 +50,19 @@ describe('Toast', () => {
     expect(toastService.getToasts()).toHaveLength(0)
     unmount()
   })
+
+  it('closes itself even without onDismiss', async () => {
+    render(<Toast id="t6" message="Self closing" duration={0} />)
+    fireEvent.click(screen.getByRole('button', { name: 'Close' }))
+    await waitFor(() =>
+      expect(screen.queryByText('Self closing')).not.toBeInTheDocument(),
+    )
+  })
+
+  it('generates unique ids for toasts created back to back', () => {
+    const first = toastService.showToast({ message: 'One', duration: 0 })
+    const second = toastService.showToast({ message: 'Two', duration: 0 })
+    expect(first).not.toBe(second)
+    toastService.clearToasts()
+  })
 })
