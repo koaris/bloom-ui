@@ -4,7 +4,9 @@
  * Layers:
  *   1. Primitives — the raw Koaris palette exposed as CSS variables and
  *      Tailwind utilities (bg-orange-500, text-neutral-800, ...).
- *   2. Semantics — intent-based tokens (bg-accent, text-ink, border-border, ...)
+ *   2. Typography/radii — font sizes, weights and line heights ported from
+ *      the TS tokens, so utilities like `text-md` and `font-medium` exist.
+ *   3. Semantics — intent-based tokens (bg-accent, text-ink, border-border, ...)
  *      that reference the primitives and switch automatically in dark mode.
  *
  * Import with: `@import '@koaris/tokens/theme.css';` after `@import 'tailwindcss';`
@@ -53,10 +55,64 @@
 }
 
 /* ------------------------------------------------------------------ */
+/* Typography tokens (ported from the TS tokens)                       */
+/* ------------------------------------------------------------------ */
+@theme {
+  /* fontSizes */
+  --text-xxs: 0.625rem;
+  --text-xxs--line-height: 140%;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 140%;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 140%;
+  --text-md: 1rem;
+  --text-md--line-height: 160%;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 160%;
+  --text-xl: 1.25rem;
+  --text-xl--line-height: 160%;
+  --text-2xl: 1.5rem;
+  --text-2xl--line-height: 125%;
+  --text-3xl: 1.75rem;
+  --text-3xl--line-height: 125%;
+  --text-4xl: 2rem;
+  --text-4xl--line-height: 125%;
+  --text-5xl: 2.25rem;
+  --text-5xl--line-height: 125%;
+  --text-6xl: 3rem;
+  --text-6xl--line-height: 125%;
+  --text-7xl: 4rem;
+  --text-7xl--line-height: 125%;
+  --text-8xl: 4.5rem;
+  --text-8xl--line-height: 125%;
+  --text-9xl: 6rem;
+  --text-9xl--line-height: 125%;
+
+  /* fontWeights (Tailwind's built-in normal/medium/bold stay available) */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+
+  /* lineHeights */
+  --leading-shorter: 125%;
+  --leading-short: 140%;
+  --leading-base: 160%;
+  --leading-tall: 180%;
+}
+
+/* ------------------------------------------------------------------ */
 /* Semantic tokens — light theme (default)                             */
 /* ------------------------------------------------------------------ */
 :root,
 :host {
+  /* TODO(v2.1): the default accent pair fails WCAG AA for the text sizes
+   * Button uses: #fefefe on #f36246 = 3.13:1 (primary button text) and
+   * #f36246 on white = 3.16:1 (secondary/outline/ghost/link), where AA
+   * requires 4.5:1. Do NOT just darken the brand accent — ship a
+   * text-safe pair instead, e.g. a darker --accent-strong used for text
+   * and the primary background (the Koaris rust #c13f27 gives 5.2:1 with
+   * white). Tracked for the next minor; leaving the brand color as-is for
+   * the 2.0 release. */
   --accent: #f36246; /* orange-500 */
   --accent-foreground: #fefefe; /* neutral-100 */
   --ink: #1c2126; /* neutral-800 */
@@ -67,6 +123,22 @@
   --rule: var(--border); /* alias of --border */
   --danger: #e91e63; /* red-500 */
   --success: #46f2af; /* green-500 */
+  color-scheme: light;
+}
+
+/* `.light` re-lights a subtree inside a `.dark` ancestor. */
+.light {
+  --accent: #f36246;
+  --accent-foreground: #fefefe;
+  --ink: #1c2126;
+  --surface: #ffffff;
+  --muted: #f6f6f6;
+  --muted-foreground: #818484;
+  --border: #e3e3e2;
+  --rule: var(--border);
+  --danger: #e91e63;
+  --success: #46f2af;
+  color-scheme: light;
 }
 
 /* ------------------------------------------------------------------ */
@@ -84,21 +156,24 @@
   --rule: var(--border);
   --danger: #e91e63;
   --success: #46f2af;
+  color-scheme: dark;
 }
 
-/* Follow the system preference unless the user pinned a theme class. */
+/* Follow the system preference unless the user pinned a theme class.
+ * `:where(...)` keeps specificity at (0,0,0) so a product theme file
+ * (e.g. themes/koaris.css at (0,1,0)) always wins over this block —
+ * without it, OS dark mode re-set --accent over brand themes.
+ * Accent/foreground/danger/success are omitted because their dark values
+ * are identical to light; re-declaring them here would fight themes. */
 @media (prefers-color-scheme: dark) {
-  :root:not(.light):not(.dark) {
+  :where(:root:not(.light):not(.dark)) {
     --ink: #f6f6f6;
     --surface: #1c2126;
     --muted: #323c45;
     --muted-foreground: #9d9d9d;
     --border: #323c45;
     --rule: var(--border);
-    --accent: #f36246;
-    --accent-foreground: #fefefe;
-    --danger: #e91e63;
-    --success: #46f2af;
+    color-scheme: dark;
   }
 }
 
