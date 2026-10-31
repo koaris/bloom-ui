@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { render, screen, fireEvent } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import { Modal } from './index'
 
 describe('Modal', () => {
@@ -72,5 +72,47 @@ describe('Modal', () => {
       </Modal>,
     )
     expect(screen.getByText('Footer text')).toBeInTheDocument()
+  })
+
+  it('renders the visible title as a single Dialog.Title heading', () => {
+    render(
+      <Modal isOpen onClose={() => {}} title="My modal">
+        Body
+      </Modal>,
+    )
+    const headings = screen.getAllByRole('heading', { name: 'My modal' })
+    expect(headings).toHaveLength(1)
+    expect(headings[0]).not.toHaveClass('sr-only')
+  })
+
+  it('renders an sr-only title when no title is passed', () => {
+    render(
+      <Modal isOpen onClose={() => {}}>
+        Body
+      </Modal>,
+    )
+    expect(screen.getByRole('dialog', { name: 'Dialog' })).toBeInTheDocument()
+  })
+
+  it('renders the description as Dialog.Description', () => {
+    render(
+      <Modal isOpen onClose={() => {}} title="Titled" description="Extra info">
+        Body
+      </Modal>,
+    )
+    expect(screen.getByText('Extra info')).toBeInTheDocument()
+  })
+
+  it('moves focus into the dialog on open', async () => {
+    render(
+      <Modal isOpen onClose={() => {}} title="Focused">
+        <button>Inside</button>
+      </Modal>,
+    )
+    const dialog = screen.getByRole('dialog')
+    await waitFor(() => {
+      expect(document.activeElement).not.toBeNull()
+      expect(dialog.contains(document.activeElement)).toBe(true)
+    })
   })
 })

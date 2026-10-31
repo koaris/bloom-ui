@@ -1,18 +1,20 @@
-import { DetailedHTMLProps, HTMLAttributes, ReactNode } from 'react'
+import { ReactNode, ComponentPropsWithoutRef } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
 import { X } from 'lucide-react'
 import { cva } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 
-export interface ModalProps extends DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
-> {
+export interface ModalProps
+  extends Omit<
+    ComponentPropsWithoutRef<typeof Dialog.Content>,
+    'title' | 'children'
+  > {
   isOpen: boolean
   onClose: () => void
   title?: string
+  description?: string
   size?: 'sm' | 'md' | 'lg' | 'xl'
-  children: ReactNode
+  children?: ReactNode
   showCloseButton?: boolean
   closeOnOutsideClick?: boolean
   closeOnEsc?: boolean
@@ -20,14 +22,16 @@ export interface ModalProps extends DetailedHTMLProps<
 }
 
 const modalVariants = cva(
-  'relative bg-surface text-ink rounded-lg shadow-xl w-full max-h-[70vh] overflow-y-auto focus:outline-hidden',
+  // Fixed, centered and above the overlay (z-50). max-h lives here so the
+  // body below is the only scrolling region (no double scrollbars).
+  'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 flex flex-col max-h-[85vh] bg-surface text-ink rounded-lg shadow-xl focus:outline-hidden',
   {
     variants: {
       size: {
-        sm: 'max-w-sm',
-        md: 'max-w-md',
-        lg: 'max-w-lg',
-        xl: 'max-w-xl',
+        sm: 'max-w-sm w-[calc(100%-2rem)]',
+        md: 'max-w-md w-[calc(100%-2rem)]',
+        lg: 'max-w-lg w-[calc(100%-2rem)]',
+        xl: 'max-w-xl w-[calc(100%-2rem)]',
       },
     },
     defaultVariants: {
@@ -41,6 +45,7 @@ export const Modal = ({
   isOpen,
   onClose,
   title,
+  description,
   size = 'md',
   children,
   showCloseButton = true,
@@ -65,15 +70,17 @@ export const Modal = ({
           onInteractOutside={(e) => {
             if (!closeOnOutsideClick) e.preventDefault()
           }}
-          onOpenAutoFocus={(e) => e.preventDefault()}
-          {...(rest as Record<string, unknown>)}
+          aria-describedby={undefined}
+          {...rest}
         >
-          <Dialog.Title className="sr-only">{title ?? 'Dialog'}</Dialog.Title>
-
           {(title || showCloseButton) && (
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border">
-              {title && (
-                <h3 className="text-lg font-medium text-ink">{title}</h3>
+            <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
+              {title ? (
+                <Dialog.Title className="text-lg font-medium text-ink">
+                  {title}
+                </Dialog.Title>
+              ) : (
+                <Dialog.Title className="sr-only">Dialog</Dialog.Title>
               )}
               {showCloseButton && (
                 <Dialog.Close
@@ -87,12 +94,23 @@ export const Modal = ({
             </div>
           )}
 
-          <div className="px-6 py-4 max-h-[70vh] overflow-y-auto">
+          {!title && !showCloseButton && (
+            <Dialog.Title className="sr-only">Dialog</Dialog.Title>
+          )}
+
+          <div className="px-6 py-4 overflow-y-auto">
+            {description && (
+              <Dialog.Description className="mb-2 text-sm text-muted-foreground">
+                {description}
+              </Dialog.Description>
+            )}
             {children}
           </div>
 
           {footer ? (
-            <div className="px-6 py-4 border-t border-border">{footer}</div>
+            <div className="px-6 py-4 border-t border-border shrink-0">
+              {footer}
+            </div>
           ) : null}
         </Dialog.Content>
       </Dialog.Portal>
