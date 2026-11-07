@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export type ToastVariant = 'success' | 'error' | 'warning' | 'info'
@@ -73,6 +73,61 @@ class ToastService {
 
 export const toastService = new ToastService()
 
+// Keep in sync with the toast-out animation in src/styles/tailwind.css
+const EXIT_DURATION = 200
+
+const variantStyles: Record<ToastVariant, { badge: string; progress: string }> =
+  {
+    success: {
+      badge:
+        'bg-emerald-100 text-emerald-600 ring-emerald-50 dark:bg-emerald-500/15 dark:text-emerald-400 dark:ring-emerald-500/10',
+      progress: 'bg-emerald-500',
+    },
+    error: {
+      badge:
+        'bg-rose-100 text-rose-600 ring-rose-50 dark:bg-rose-500/15 dark:text-rose-400 dark:ring-rose-500/10',
+      progress: 'bg-rose-500',
+    },
+    warning: {
+      badge:
+        'bg-amber-100 text-amber-600 ring-amber-50 dark:bg-amber-500/15 dark:text-amber-400 dark:ring-amber-500/10',
+      progress: 'bg-amber-500',
+    },
+    info: {
+      badge:
+        'bg-sky-100 text-sky-600 ring-sky-50 dark:bg-sky-500/15 dark:text-sky-400 dark:ring-sky-500/10',
+      progress: 'bg-sky-500',
+    },
+  }
+
+const iconPaths: Record<ToastVariant, string[]> = {
+  success: ['M20 6 9 17l-5-5'],
+  error: ['M12 5.5v8', 'M12 18.5h.01'],
+  warning: [
+    'M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z',
+    'M12 9v4',
+    'M12 17h.01',
+  ],
+  info: ['M12 18.5v-8', 'M12 5.5h.01'],
+}
+
+// The bare "!" and "i" glyphs need a heavier stroke to match the other icons
+const ToastIcon = ({ variant }: { variant: ToastVariant }) => (
+  <svg
+    className="size-[18px]"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={variant === 'error' || variant === 'info' ? 3 : 2.25}
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    {iconPaths[variant].map((d) => (
+      <path key={d} d={d} />
+    ))}
+  </svg>
+)
+
 export const Toast: React.FC<ToastProps> = ({
   id,
   message,
@@ -84,112 +139,137 @@ export const Toast: React.FC<ToastProps> = ({
   className,
 }) => {
   const [isRemoving, setIsRemoving] = useState(false)
-  const timerRef = useRef<number>()
+  const [isHovered, setIsHovered] = useState(false)
+  const [isFocused, setIsFocused] = useState(false)
+  const remainingRef = useRef(duration)
+  const removingRef = useRef(false)
   const onDismissRef = useRef(onDismiss)
   onDismissRef.current = onDismiss
 
-  const handleDismiss = () => {
+  const isPaused = isHovered || isFocused
+
+  const dismiss = useCallback(() => {
+    if (removingRef.current) return
+    removingRef.current = true
     setIsRemoving(true)
-    setTimeout(() => onDismissRef.current?.(id), 300)
-  }
+    window.setTimeout(() => onDismissRef.current?.(id), EXIT_DURATION)
+  }, [id])
 
+  // Restart the countdown whenever the duration changes
   useEffect(() => {
-    if (duration > 0) {
-      timerRef.current = window.setTimeout(() => {
-        setIsRemoving(true)
-        setTimeout(() => onDismissRef.current?.(id), 300)
-      }, duration)
+    remainingRef.current = duration
+  }, [duration])
+
+  // Count down while visible; hovering or focusing the toast pauses it
+  useEffect(() => {
+    if (duration <= 0 || isPaused || isRemoving) return
+    const startedAt = Date.now()
+    const timer = window.setTimeout(dismiss, remainingRef.current)
+    return () => {
+      window.clearTimeout(timer)
+      remainingRef.current -= Date.now() - startedAt
     }
-    return () => window.clearTimeout(timerRef.current)
-  }, [duration, id])
+  }, [duration, isPaused, isRemoving, dismiss])
 
-  const variantStyles = {
-    success: 'bg-green-100 border-green-500 text-green-800',
-    error: 'bg-red-100 border-red-500 text-red-800',
-    warning: 'bg-yellow-100 border-yellow-500 text-yellow-800',
-    info: 'bg-blue-100 border-blue-500 text-blue-800',
-  }
-
-  const icons = {
-    success: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-        <path
-          fillRule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-    error: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-        <path
-          fillRule="evenodd"
-          d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-    warning: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-        <path
-          fillRule="evenodd"
-          d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-    info: (
-      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-        <path
-          fillRule="evenodd"
-          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-          clipRule="evenodd"
-        />
-      </svg>
-    ),
-  }
+  const styles = variantStyles[variant]
+  const isUrgent = variant === 'error' || variant === 'warning'
 
   return (
     <div
+      role={isUrgent ? 'alert' : 'status'}
+      aria-atomic="true"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      onFocus={() => setIsFocused(true)}
+      onBlur={(e) => {
+        if (!e.currentTarget.contains(e.relatedTarget as Node | null)) {
+          setIsFocused(false)
+        }
+      }}
       className={twMerge(
-        'flex items-start p-4 mb-3 w-full max-w-xs rounded-md shadow-md border-l-4 transform transition-all duration-300',
-        variantStyles[variant],
-        isRemoving ? 'translate-x-full opacity-0' : 'translate-x-0 opacity-100',
+        'pointer-events-auto relative flex w-[22rem] max-w-[calc(100vw-2rem)] items-start gap-3 overflow-hidden rounded-xl bg-white p-4',
+        'shadow-lg shadow-gray-900/10 ring-1 ring-gray-900/5',
+        'dark:bg-gray-900 dark:shadow-black/40 dark:ring-white/10',
+        isRemoving ? 'animate-toast-out' : 'animate-toast-in',
         className,
       )}
-      role="alert"
     >
-      <div className={`shrink-0 mr-3 text-${variant}-500`}>
-        {icons[variant]}
+      <span
+        aria-hidden="true"
+        className={twMerge(
+          'flex size-8 shrink-0 items-center justify-center rounded-full ring-4',
+          styles.badge,
+        )}
+      >
+        <ToastIcon variant={variant} />
+      </span>
+
+      <div className="min-w-0 flex-1 pt-1.5">
+        {title && (
+          <p className="text-sm leading-5 font-semibold text-gray-900 dark:text-gray-50">
+            {title}
+          </p>
+        )}
+        <p
+          className={twMerge(
+            'text-sm leading-5 break-words',
+            title
+              ? 'mt-0.5 text-gray-600 dark:text-gray-300'
+              : 'font-medium text-gray-800 dark:text-gray-100',
+          )}
+        >
+          {message}
+        </p>
       </div>
-      <div className="flex-1">
-        {title && <h3 className="font-medium text-sm">{title}</h3>}
-        <div className="text-sm">{message}</div>
-      </div>
+
       {showCloseButton && (
         <button
           type="button"
-          className="ml-3 text-gray-400 hover:text-gray-900"
-          onClick={handleDismiss}
+          onClick={dismiss}
           aria-label="Close"
+          className="-mr-1 mt-1 shrink-0 rounded-md p-1 text-gray-400 transition-colors hover:cursor-pointer hover:bg-gray-100 hover:text-gray-700 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-orange-500 dark:hover:bg-white/10 dark:hover:text-gray-200"
         >
           <svg
-            className="w-4 h-4"
+            className="size-4"
+            viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            viewBox="0 0 24 24"
+            strokeWidth={2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
+            <path d="M18 6 6 18M6 6l12 12" />
           </svg>
         </button>
       )}
+
+      {duration > 0 && (
+        <span
+          key={duration}
+          aria-hidden="true"
+          className={twMerge(
+            'absolute inset-x-0 bottom-0 h-1 origin-left animate-toast-progress',
+            styles.progress,
+          )}
+          style={{
+            animationDuration: `${duration}ms`,
+            animationPlayState: isPaused || isRemoving ? 'paused' : 'running',
+          }}
+        />
+      )}
     </div>
   )
+}
+
+// Newest toast sits closest to the screen edge; bottom toasts rise into view
+const positionClasses: Record<ToastPosition, string> = {
+  'top-right': 'top-0 right-0 flex-col-reverse',
+  'top-left': 'top-0 left-0 flex-col-reverse',
+  'top-center': 'top-0 left-1/2 -translate-x-1/2 flex-col-reverse',
+  'bottom-right': 'bottom-0 right-0 flex-col [--toast-enter-y:0.75rem]',
+  'bottom-left': 'bottom-0 left-0 flex-col [--toast-enter-y:0.75rem]',
+  'bottom-center':
+    'bottom-0 left-1/2 -translate-x-1/2 flex-col [--toast-enter-y:0.75rem]',
 }
 
 export const ToastContainer: React.FC<ToastContainerProps> = ({
@@ -216,21 +296,12 @@ export const ToastContainer: React.FC<ToastContainerProps> = ({
     }
   }, [])
 
-  const positionClasses = {
-    'top-right': 'top-0 right-0',
-    'top-left': 'top-0 left-0',
-    'bottom-right': 'bottom-0 right-0',
-    'bottom-left': 'bottom-0 left-0',
-    'top-center': 'top-0 left-1/2 -translate-x-1/2',
-    'bottom-center': 'bottom-0 left-1/2 -translate-x-1/2',
-  }
-
   if (!isMounted || !containerRef.current) return null
 
   return (
     <div
       className={twMerge(
-        'fixed z-50 p-4 flex flex-col items-end',
+        'pointer-events-none fixed z-50 flex gap-3 p-4',
         positionClasses[position],
         className,
       )}
