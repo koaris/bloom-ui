@@ -36,15 +36,17 @@ jobs:
       - name: Version packages
         id: version
         run: |
-          npx changeset version
-          if git diff --quiet; then
+          # changeset version exits with an error when there is nothing to version
+          if [ -z "$(find .changeset -maxdepth 1 -name '*.md' ! -name README.md)" ]; then
+            echo "No pending changesets"
             echo "changed=false" >> "$GITHUB_OUTPUT"
-          else
-            # changeset version leaves the lockfile alone, but it records
-            # workspace versions, so sync it before committing
-            npm install --package-lock-only --ignore-scripts --no-audit --no-fund
-            echo "changed=true" >> "$GITHUB_OUTPUT"
+            exit 0
           fi
+          npx changeset version
+          # changeset version leaves the lockfile alone, but it records
+          # workspace versions, so sync it before committing
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Commit version bump
         if: steps.version.outputs.changed == 'true'
