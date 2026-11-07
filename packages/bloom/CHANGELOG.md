@@ -1,6 +1,8 @@
 # @koaris/bloom-ui
 
-## 3.0.0
+## 3.2.0
+
+npm does not accept 3.0.0 or 3.1.0 again (both were published in 2023 and later unpublished), so this major release is 3.2.0.
 
 ### Major Changes
 

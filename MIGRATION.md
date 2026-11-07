@@ -1,8 +1,9 @@
-# Migrating to bloom-ui 3.0
+# Migrating to bloom-ui 3.x
 
-3.0 changes two components: Modal is built on Radix Dialog, and Card is a
-theme surface card. Everything else is compatible with 2.x. For the 2.x
-changes (theme roles, Button's default variant, the Toast redesign), see
+3.2.0, the first 3.x release, changes two components: Modal is built on
+Radix Dialog, and Card is a theme surface card. Everything else is
+compatible with 2.x. For the 2.x changes (theme roles, Button's default
+variant, the Toast redesign), see
 [the bloom-ui CHANGELOG](packages/bloom/CHANGELOG.md).
 
 React 18 and 19 are both still supported, and theming still comes from
