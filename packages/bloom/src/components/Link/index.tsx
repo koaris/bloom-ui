@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, AnchorHTMLAttributes } from 'react'
+import { DetailedHTMLProps, AnchorHTMLAttributes, ReactNode } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 /**
@@ -9,9 +9,10 @@ export interface LinkProps extends DetailedHTMLProps<
   HTMLAnchorElement
 > {
   url: string
-  newPage: boolean
+  /** Opens in a new tab with `rel="noopener noreferrer"`. Defaults to true. */
+  newPage?: boolean
   disabled?: boolean
-  children: string | JSX.Element
+  children: ReactNode
 }
 
 export const Link = ({
@@ -24,7 +25,7 @@ export const Link = ({
   return (
     <a
       className={twMerge(
-        'text-blue-800 font-bold',
+        'font-bold text-accent underline-offset-2 hover:text-accent-hover hover:underline',
         typeof rest.children !== 'string' && 'px-4',
         disabled === true && 'opacity-50 cursor-not-allowed',
         className,
