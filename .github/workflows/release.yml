@@ -63,5 +63,8 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
 
+      # Also runs when some packages failed to publish, so the ones that did
+      # publish still get their tags
       - name: Push release tags
+        if: ${{ !cancelled() }}
         run: git push origin --tags
