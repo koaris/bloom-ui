@@ -1,5 +1,8 @@
 name: Release
 
+# Every push to main versions any pending changesets, commits the version bump
+# back to main, and publishes the new versions to npm. There is no
+# "Version Packages" pull request.
 on:
   push:
     branches:
@@ -14,7 +17,6 @@ jobs:
 
     permissions:
       contents: write
-      pull-requests: write
 
     steps:
       - name: Checkout
@@ -23,20 +25,43 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-            node-version: '22'
-            cache: 'npm'
-            cache-dependency-path: '**/package-lock.json'
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install
         run: npm ci
 
-      - name: Publish to NPM
-        id: changesets
-        uses: changesets/action@v1
-        with:
-            # This expects you to have a script called release which does a build for your packages and calls changeset publish
-            publish: npm run release
+      - name: Version packages
+        id: version
+        run: |
+          npx changeset version
+          if git diff --quiet; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+          else
+            # changeset version leaves the lockfile alone, but it records
+            # workspace versions, so sync it before committing
+            npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit version bump
+        if: steps.version.outputs.changed == 'true'
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'chore(release): version packages [skip ci]'
+          git push origin HEAD:main
+
+      # Publishes every package whose version is not on npm yet, so a failed
+      # publish is retried automatically by the next push.
+      - name: Publish to npm
+        run: npm run release
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
+      - name: Push release tags
+        run: git push origin --tags
