@@ -33,6 +33,13 @@ jobs:
       - name: Install
         run: npm ci
 
+      # Needed for the version commit and for the annotated release tags that
+      # changeset publish creates (tagging fails silently without it)
+      - name: Configure git identity
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
       - name: Version packages
         id: version
         run: |
@@ -51,8 +58,6 @@ jobs:
       - name: Commit version bump
         if: steps.version.outputs.changed == 'true'
         run: |
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add -A
           git commit -m 'chore(release): version packages [skip ci]'
           git push origin HEAD:main
