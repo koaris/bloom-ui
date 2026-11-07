@@ -1,4 +1,6 @@
+import { fontStacks } from './theme'
+
 export const fonts = {
-  default: 'Open Sans, sans-serif',
-  code: 'monospace',
+  default: fontStacks.sans,
+  code: fontStacks.mono,
 }

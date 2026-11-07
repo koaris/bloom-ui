@@ -86,7 +86,7 @@ export const Heading = ({
     <Tag
       className={twMerge(
         fontSize,
-        'text-neutral-900',
+        'text-ink',
         fontWeight,
         letterTracking,
         textAlignment,

@@ -15,8 +15,14 @@ const preview: Preview = {
     docs: {
       theme: themes.light,
     },
+    // The canvas follows the bloom-ui theme (light or dark from the OS), the
+    // same way an app's body does, instead of a fixed light background.
     backgrounds: {
-      default: 'light'
+      default: 'theme',
+      values: [
+        { name: 'theme', value: 'rgb(var(--bg))' },
+        { name: 'surface', value: 'rgb(var(--surface))' },
+      ],
     },
   },
 };

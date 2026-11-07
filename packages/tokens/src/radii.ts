@@ -1,4 +1,4 @@
-export const raddi = {
+export const radii = {
   px: '1px',
   xs: '4px',
   sm: '6px',
@@ -6,3 +6,6 @@ export const raddi = {
   lg: '16px',
   full: '99999px',
 }
+
+/** @deprecated Misspelled alias of `radii`, kept for existing imports. */
+export const raddi = radii

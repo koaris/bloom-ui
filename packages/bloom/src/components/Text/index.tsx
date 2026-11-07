@@ -116,7 +116,7 @@ const Text = ({
   return (
     <Tag
       className={twMerge(
-        (className = 'text-neutral-900'),
+        'text-ink',
         fontSize,
         fontWeight,
         lineHeight,

@@ -27,7 +27,8 @@ export default {
       control: {
         type: 'select',
       },
-      description: 'Defines the visual style of the button'
+      description:
+        'Defines the visual style of the button. `secondary` is the default; keep `primary` for the one accent action on a screen.'
     },
     disabled: {
       control: {
@@ -75,6 +76,16 @@ export const Secondary: StoryObj<ButtonProps> = {
     variant: 'secondary',
     children: 'Ignorar',
   },
+}
+
+export const Groups: StoryObj<ButtonProps> = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      <Button variant="primary">Run</Button>
+      <Button>Clear</Button>
+      <Button variant="ghost">Cancel</Button>
+    </div>
+  ),
 }
 
 export const Outline: StoryObj<ButtonProps> = {
