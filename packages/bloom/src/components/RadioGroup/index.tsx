@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { FiCheck } from 'react-icons/fi'
+import { CheckIcon } from '../icons'
 
 export type RadioOption = {
   id: number
@@ -59,7 +59,7 @@ export const RadioGroup = ({
               disabled={disabled}
             />
             {selectedOption === option.value && (
-              <FiCheck color="#FFFFFF" size={12} style={{ strokeWidth: 4 }} />
+              <CheckIcon color="#FFFFFF" size={12} style={{ strokeWidth: 4 }} />
             )}
           </label>
           <span className="px-2">{option.label}</span>

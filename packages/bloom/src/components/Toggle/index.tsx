@@ -1,4 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes } from 'react'
+import { DetailedHTMLProps, HTMLAttributes, KeyboardEvent, useId } from 'react'
 import { twMerge } from 'tailwind-merge'
 
 export interface ToggleProps extends DetailedHTMLProps<
@@ -14,6 +14,12 @@ export interface ToggleProps extends DetailedHTMLProps<
   id?: string
 }
 
+const sizeClasses = {
+  sm: { track: 'h-5 w-9', knob: 'h-3 w-3', on: 'translate-x-5' },
+  md: { track: 'h-6 w-11', knob: 'h-4 w-4', on: 'translate-x-6' },
+  lg: { track: 'h-7 w-14', knob: 'h-5 w-5', on: 'translate-x-8' },
+}
+
 export const Toggle = ({
   className,
   disabled,
@@ -25,32 +31,13 @@ export const Toggle = ({
   id,
   ...rest
 }: ToggleProps) => {
-  // Generate a unique ID if none is provided
-  const toggleId = id || `toggle-${Math.random().toString(36).substring(2, 9)}`
-
-  // Size variants
-  const sizeClasses = {
-    sm: {
-      toggle: 'h-5 w-9',
-      knob: 'h-3 w-3',
-      translate: active ? 'translate-x-5' : 'translate-x-1',
-    },
-    md: {
-      toggle: 'h-6 w-11',
-      knob: 'h-4 w-4',
-      translate: active ? 'translate-x-6' : 'translate-x-1',
-    },
-    lg: {
-      toggle: 'h-7 w-14',
-      knob: 'h-5 w-5',
-      translate: active ? 'translate-x-8' : 'translate-x-1',
-    },
-  }
-
+  // useId is stable between server and client renders, unlike a random id.
+  const generatedId = useId()
+  const toggleId = id || `toggle-${generatedId}`
   const selectedSize = sizeClasses[size]
 
   // Handle keyboard events for accessibility
-  const handleKeyDown = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: KeyboardEvent) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
       if (!disabled) {
@@ -71,29 +58,30 @@ export const Toggle = ({
         disabled={disabled}
         onClick={() => setActive(!active)}
         onKeyDown={handleKeyDown}
-        className={twMerge(`
-          relative inline-flex items-center rounded-full
-          ${selectedSize.toggle}
-          ${active ? 'bg-blue-600' : 'bg-gray-300 dark:bg-gray-600'}
-          ${disabled ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}
-          transition-colors duration-300 ease-in-out 
-          focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-        `)}
+        className={twMerge(
+          'relative inline-flex shrink-0 items-center rounded-full transition-colors duration-200 ease-in-out',
+          'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-1 focus-visible:ring-offset-bg',
+          selectedSize.track,
+          active ? 'bg-accent' : 'bg-rule',
+          disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+        )}
       >
         <span
-          className={`
-          inline-block transform rounded-full bg-white shadow-md
-          ${selectedSize.knob}
-          ${selectedSize.translate}
-          transition-transform duration-300 ease-in-out
-        `}
+          className={twMerge(
+            'inline-block transform rounded-full bg-white shadow-sm transition-transform duration-200 ease-in-out',
+            selectedSize.knob,
+            active ? selectedSize.on : 'translate-x-1',
+          )}
         />
       </button>
       {!hideLabel && (
         <label
           id={`${toggleId}-label`}
           htmlFor={toggleId}
-          className={`text-sm font-medium text-gray-700 dark:text-gray-300 ${disabled ? 'opacity-50' : ''}`}
+          className={twMerge(
+            'cursor-pointer select-none text-sm font-medium text-ink',
+            disabled && 'cursor-not-allowed opacity-50',
+          )}
         >
           {label}
         </label>

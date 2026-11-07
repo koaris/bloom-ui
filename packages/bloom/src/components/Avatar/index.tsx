@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge'
-import { FaUser } from 'react-icons/fa'
+import { UserIcon } from '../icons'
 
 export interface AvatarProps {
   src?: string
@@ -25,7 +25,7 @@ export const Avatar = ({ className, src, alt = '', ...rest }: AvatarProps) => {
           {...rest}
         />
       ) : (
-        <FaUser color="#FFFFFF" size={24} />
+        <UserIcon color="#FFFFFF" size={24} />
       )}
     </div>
   )
