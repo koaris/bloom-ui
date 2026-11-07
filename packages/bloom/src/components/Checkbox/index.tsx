@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
-import { Check } from 'lucide-react'
 import { twMerge } from 'tailwind-merge'
+import { CheckIcon } from '../icons'
 
 export interface CheckboxProps extends DetailedHTMLProps<
   HTMLAttributes<HTMLDivElement>,
@@ -43,11 +43,7 @@ export const Checkbox = ({ className, required, disabled }: CheckboxProps) => {
           )}
         />
         {selected && (
-          <Check
-            className="w-3.5 h-3.5 text-neutral"
-            strokeWidth={4}
-            aria-hidden
-          />
+          <CheckIcon color="#FFFFFF" size={14} style={{ strokeWidth: 4 }} />
         )}
       </label>
     </div>

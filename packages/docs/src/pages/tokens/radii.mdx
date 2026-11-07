@@ -1,13 +1,24 @@
 import { Meta, Unstyled } from '@storybook/addon-docs'
 import { TokensGrid } from '../../components/TokensGrid'
-import { raddi } from '@koaris/tokens'
+import { radii, themeRadii } from '@koaris/tokens'
 
-<Meta title="Tokens/Raddi" />
+<Meta title="Tokens/Radii" />
 
-# Raddi
+# Radii
 
 Arredondamento das bordas utilizadas na Koaris.
 
+## Theme
+
+`rounded` uses `--radius-sm` (controls) and `rounded-lg` uses `--radius`
+(cards and frames). Nothing in the theme goes rounder than that.
+
 <Unstyled>
-    <TokensGrid tokens={raddi} />
+    <TokensGrid tokens={themeRadii} />
+</Unstyled>
+
+## Scale
+
+<Unstyled>
+    <TokensGrid tokens={radii} />
 </Unstyled>

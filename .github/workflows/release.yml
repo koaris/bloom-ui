@@ -1,5 +1,8 @@
 name: Release
 
+# Every push to main versions any pending changesets, commits the version bump
+# back to main, and publishes the new versions to npm. There is no
+# "Version Packages" pull request.
 on:
   push:
     branches:
@@ -14,7 +17,6 @@ jobs:
 
     permissions:
       contents: write
-      pull-requests: write
 
     steps:
       - name: Checkout
@@ -23,20 +25,53 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v7
         with:
-            node-version: '22'
-            cache: 'npm'
-            cache-dependency-path: '**/package-lock.json'
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: '**/package-lock.json'
+          registry-url: 'https://registry.npmjs.org'
 
       - name: Install
         run: npm ci
 
-      - name: Publish to NPM
-        id: changesets
-        uses: changesets/action@v1
-        with:
-            # This expects you to have a script called release which does a build for your packages and calls changeset publish
-            publish: npm run release
+      # Needed for the version commit and for the annotated release tags that
+      # changeset publish creates (tagging fails silently without it)
+      - name: Configure git identity
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+
+      - name: Version packages
+        id: version
+        run: |
+          # changeset version exits with an error when there is nothing to version
+          if [ -z "$(find .changeset -maxdepth 1 -name '*.md' ! -name README.md)" ]; then
+            echo "No pending changesets"
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          npx changeset version
+          # changeset version leaves the lockfile alone, but it records
+          # workspace versions, so sync it before committing
+          npm install --package-lock-only --ignore-scripts --no-audit --no-fund
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit version bump
+        if: steps.version.outputs.changed == 'true'
+        run: |
+          git add -A
+          git commit -m 'chore(release): version packages [skip ci]'
+          git push origin HEAD:main
+
+      # Publishes every package whose version is not on npm yet, so a failed
+      # publish is retried automatically by the next push.
+      - name: Publish to npm
+        run: npm run release
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-            TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
+
+      # Also runs when some packages failed to publish, so the ones that did
+      # publish still get their tags
+      - name: Push release tags
+        if: ${{ !cancelled() }}
+        run: git push origin --tags

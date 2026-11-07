@@ -22,13 +22,6 @@ export default {
       },
     },
     controls: { sort: 'requiredFirst' },
-    backgrounds: {
-      default: 'light',
-      values: [
-        { name: 'light', value: '#fff' },
-        { name: 'dark', value: '#1f2937' },
-      ],
-    },
   },
   args: {
     disabled: false,

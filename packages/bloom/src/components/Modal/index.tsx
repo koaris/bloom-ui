@@ -1,6 +1,6 @@
 import { ReactNode, ComponentPropsWithoutRef } from 'react'
 import * as Dialog from '@radix-ui/react-dialog'
-import { X } from 'lucide-react'
+import { XIcon } from '../icons'
 import { cva } from 'class-variance-authority'
 import { cn } from '../../lib/utils'
 
@@ -73,7 +73,7 @@ export const Modal = ({
           {...rest}
         >
           {(title || showCloseButton) && (
-            <div className="flex items-center justify-between px-6 py-4 border-b border-border shrink-0">
+            <div className="flex items-center justify-between px-6 py-4 border-b border-rule shrink-0">
               {title ? (
                 <Dialog.Title className="text-lg font-medium text-ink">
                   {title}
@@ -85,9 +85,9 @@ export const Modal = ({
                 <Dialog.Close
                   type="button"
                   aria-label="Close modal"
-                  className="p-1 text-muted-foreground hover:text-ink focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-full cursor-pointer"
+                  className="p-1 text-ink-muted hover:text-ink focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-full cursor-pointer"
                 >
-                  <X className="h-5 w-5" aria-hidden />
+                  <XIcon className="h-5 w-5" />
                 </Dialog.Close>
               )}
             </div>
@@ -99,7 +99,7 @@ export const Modal = ({
 
           <div className="px-6 py-4 overflow-y-auto">
             {description && (
-              <Dialog.Description className="mb-2 text-sm text-muted-foreground">
+              <Dialog.Description className="mb-2 text-sm text-ink-muted">
                 {description}
               </Dialog.Description>
             )}
@@ -107,7 +107,7 @@ export const Modal = ({
           </div>
 
           {footer ? (
-            <div className="px-6 py-4 border-t border-border shrink-0">
+            <div className="px-6 py-4 border-t border-rule shrink-0">
               {footer}
             </div>
           ) : null}

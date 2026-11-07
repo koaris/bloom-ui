@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { Button, ButtonProps } from '@koaris/bloom-ui'
-import { ArrowRight } from 'lucide-react'
+import { GrLinkNext } from 'react-icons/gr'
 
 export default {
   title: 'Form/Button',
@@ -27,7 +27,8 @@ export default {
       control: {
         type: 'select',
       },
-      description: 'Defines the visual style of the button',
+      description:
+        'Defines the visual style of the button. `secondary` is the default; keep `primary` for the one accent action on a screen.',
     },
     disabled: {
       control: {
@@ -75,6 +76,16 @@ export const Secondary: StoryObj<ButtonProps> = {
     variant: 'secondary',
     children: 'Ignorar',
   },
+}
+
+export const Groups: StoryObj<ButtonProps> = {
+  render: () => (
+    <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+      <Button variant="primary">Run</Button>
+      <Button>Clear</Button>
+      <Button variant="ghost">Cancel</Button>
+    </div>
+  ),
 }
 
 export const Outline: StoryObj<ButtonProps> = {
@@ -129,22 +140,22 @@ export const Large: StoryObj<ButtonProps> = {
 export const WithStartIcon: StoryObj<ButtonProps> = {
   args: {
     children: 'Start Icon',
-    startIcon: <ArrowRight />,
+    startIcon: <GrLinkNext />,
   },
 }
 
 export const WithEndIcon: StoryObj<ButtonProps> = {
   args: {
     children: 'Próximo',
-    endIcon: <ArrowRight />,
+    endIcon: <GrLinkNext />,
   },
 }
 
 export const WithBothIcons: StoryObj<ButtonProps> = {
   args: {
     children: 'Both Icons',
-    startIcon: <ArrowRight />,
-    endIcon: <ArrowRight />,
+    startIcon: <GrLinkNext />,
+    endIcon: <GrLinkNext />,
   },
 }
 

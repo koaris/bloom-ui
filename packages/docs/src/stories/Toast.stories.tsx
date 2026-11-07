@@ -100,6 +100,47 @@ export const WithTitle: StoryObj<ToastProps> = {
   },
 }
 
+export const AllVariants: StoryObj<ToastProps> = {
+  render: () => (
+    <div className="flex flex-col gap-3">
+      <Toast
+        id="toast-success"
+        variant="success"
+        title="Changes saved"
+        message="Your profile has been updated successfully."
+        duration={0}
+      />
+      <Toast
+        id="toast-info"
+        variant="info"
+        title="New version available"
+        message="Refresh the page to get the latest features."
+        duration={0}
+      />
+      <Toast
+        id="toast-warning"
+        variant="warning"
+        title="Storage almost full"
+        message="You have used 90% of your available space."
+        duration={0}
+      />
+      <Toast
+        id="toast-error"
+        variant="error"
+        title="Upload failed"
+        message="The file is too large. Try one under 10 MB."
+        duration={0}
+      />
+      <Toast
+        id="toast-plain"
+        variant="success"
+        message="Link copied to clipboard"
+        duration={0}
+      />
+    </div>
+  ),
+}
+
 export const LongDuration: StoryObj<ToastProps> = {
   args: {
     message: 'This toast will stay for 10 seconds',

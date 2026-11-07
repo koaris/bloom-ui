@@ -1,6 +1,6 @@
 import { DetailedHTMLProps, HTMLAttributes, useState } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { Check } from 'lucide-react'
+import { CheckIcon } from '../icons'
 
 export type RadioOption = {
   id: number
@@ -59,11 +59,7 @@ export const RadioGroup = ({
               disabled={disabled}
             />
             {selectedOption === option.value && (
-              <Check
-                className="w-3 h-3 text-neutral"
-                strokeWidth={4}
-                aria-hidden
-              />
+              <CheckIcon color="#FFFFFF" size={12} style={{ strokeWidth: 4 }} />
             )}
           </label>
           <span className="px-2">{option.label}</span>

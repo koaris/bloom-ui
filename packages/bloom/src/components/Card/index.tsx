@@ -24,7 +24,7 @@ export interface CardProps extends Omit<
 }
 
 const cardVariants = cva(
-  'flex rounded-lg bg-surface text-ink border border-border shadow-md transition-all duration-200',
+  'flex rounded-lg bg-surface text-ink border border-rule shadow-md transition-all duration-200',
   {
     variants: {
       direction: {
@@ -147,7 +147,7 @@ const Card = ({
         {content ? <div className="text-sm text-left">{content}</div> : null}
 
         {footer ? (
-          <div className="pt-2 text-sm border-t border-border text-left">
+          <div className="pt-2 text-sm border-t border-rule text-left">
             {footer}
           </div>
         ) : null}

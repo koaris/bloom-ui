@@ -4,56 +4,25 @@ import {
   ReactNode,
   forwardRef,
 } from 'react'
-import { cva } from 'class-variance-authority'
-import { Loader2 } from 'lucide-react'
-import { cn } from '../../lib/utils'
+import { twMerge } from 'tailwind-merge'
+import { Spinner } from '../icons'
 
 export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg'
 export type ButtonVariant =
   'primary' | 'secondary' | 'outline' | 'ghost' | 'link'
-
-const buttonVariants = cva(
-  'relative inline-flex items-center justify-center gap-2 font-medium rounded-md transition-all duration-200 cursor-pointer focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-surface',
-  {
-    variants: {
-      variant: {
-        primary:
-          'bg-accent text-accent-foreground hover:brightness-110 active:brightness-95',
-        // Accent-colored text uses --color-accent-text (a darkened accent
-        // that passes AA on the surface), not the raw accent fill.
-        secondary:
-          'border border-accent bg-surface text-accent-text hover:bg-accent hover:text-accent-foreground',
-        outline:
-          'border border-accent bg-transparent text-accent-text hover:bg-muted',
-        ghost: 'bg-transparent text-accent-text hover:bg-muted',
-        link: 'bg-transparent text-accent-text underline-offset-4 hover:underline p-0 h-auto shadow-none focus-visible:ring-0',
-      },
-      size: {
-        xs: 'px-3 py-1 text-xs',
-        sm: 'px-5 py-1.5 text-sm',
-        md: 'px-6 py-2 text-md',
-        lg: 'px-8 py-3 text-lg',
-      },
-      fullWidth: {
-        true: 'w-full',
-        false: 'max-w-[180px]',
-      },
-    },
-    defaultVariants: {
-      variant: 'primary',
-      size: 'md',
-      fullWidth: false,
-    },
-  },
-)
 
 export interface ButtonProps extends DetailedHTMLProps<
   ButtonHTMLAttributes<HTMLButtonElement>,
   HTMLButtonElement
 > {
   size?: ButtonSize
+  /**
+   * `primary` is the one accent action on a screen; everything else stays
+   * `secondary` (the default) or `ghost`.
+   */
   variant?: ButtonVariant
   disabled?: boolean
+  /** Shows a spinner, disables the button and keeps the label visible. */
   loading?: boolean
   startIcon?: ReactNode
   endIcon?: ReactNode
@@ -61,55 +30,65 @@ export interface ButtonProps extends DetailedHTMLProps<
   children: ReactNode
 }
 
+const base =
+  'inline-flex cursor-pointer items-center justify-center gap-2 rounded font-medium transition-colors ' +
+  'focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-1 focus-visible:ring-offset-bg ' +
+  'disabled:cursor-not-allowed disabled:opacity-50'
+
+const variantClasses: Record<ButtonVariant, string> = {
+  primary: 'bg-accent text-accent-contrast hover:bg-accent-hover',
+  secondary: 'bg-surface text-ink border border-rule hover:bg-surface-sunken',
+  outline:
+    'bg-transparent text-accent border border-accent hover:bg-accent-wash',
+  ghost: 'bg-transparent text-ink-muted hover:bg-surface-sunken hover:text-ink',
+  link: 'bg-transparent text-accent underline-offset-2 hover:underline hover:text-accent-hover',
+}
+
+const sizeClasses: Record<ButtonSize, string> = {
+  xs: 'px-2 py-1 text-xs',
+  sm: 'px-3 py-1.5 text-sm',
+  md: 'px-5 py-2.5 text-sm',
+  lg: 'px-6 py-3 text-base',
+}
+
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       className,
-      variant = 'primary',
+      variant = 'secondary',
       size = 'md',
       disabled = false,
       loading = false,
       startIcon,
       endIcon,
       fullWidth = false,
-      onClick,
-      type = 'button',
       children,
       ...rest
     },
     ref,
   ) => {
-    const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      if (loading || disabled) return
-      onClick?.(e)
-    }
-
     return (
       <button
         ref={ref}
-        className={cn(
-          buttonVariants({ variant, size, fullWidth }),
-          (disabled || loading) &&
-            'opacity-50 cursor-not-allowed pointer-events-none',
+        className={twMerge(
+          base,
+          variantClasses[variant],
+          sizeClasses[size],
+          variant === 'link' && 'p-0',
+          fullWidth && 'w-full',
           className,
         )}
-        type={type}
-        onClick={handleClick}
         disabled={disabled || loading}
         aria-busy={loading || undefined}
         {...rest}
       >
-        {loading && (
-          <span className="absolute inset-0 flex items-center justify-center">
-            <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
-          </span>
+        {loading ? (
+          <Spinner className="h-4 w-4 motion-reduce:hidden" />
+        ) : (
+          startIcon
         )}
-        {/* opacity-0 (not visibility:hidden) keeps the accessible name */}
-        <span className={cn('flex items-center gap-2', loading && 'opacity-0')}>
-          {startIcon && <span className="mr-1">{startIcon}</span>}
-          {children}
-          {endIcon && <span className="ml-1">{endIcon}</span>}
-        </span>
+        {children}
+        {endIcon}
       </button>
     )
   },

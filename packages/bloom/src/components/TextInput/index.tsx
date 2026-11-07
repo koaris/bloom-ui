@@ -28,11 +28,11 @@ const textInputVariants = cva(
   {
     variants: {
       variant: {
-        primary: 'border-border bg-muted text-ink hover:shadow-md',
+        primary: 'border-rule bg-surface-sunken text-ink hover:shadow-md',
         secondary: 'border-neutral-800 bg-neutral-800 text-neutral',
       },
       error: {
-        true: 'border-danger',
+        true: 'border-red-900',
         false: 'focus-within:border-accent',
       },
       disabled: {
@@ -83,7 +83,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
         )}
       >
         {!!prefix && (
-          <span className="text-muted-foreground sm:text-sm">{prefix}</span>
+          <span className="text-ink-muted sm:text-sm">{prefix}</span>
         )}
         <input
           type={type}

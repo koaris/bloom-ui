@@ -1,4 +1,5 @@
 export * from './colors'
+export * from './theme'
 
 export * from './font-sizes'
 export * from './font-weights'

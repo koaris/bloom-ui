@@ -1,5 +1,6 @@
 import { Meta, Unstyled } from '@storybook/addon-docs'
 import { ColorsGrid } from '../../components/ColorsGrid'
+import { ThemeGrid } from '../../components/ThemeGrid'
 
 <Meta title="Tokens/Colors" />
 
@@ -7,17 +8,60 @@ import { ColorsGrid } from '../../components/ColorsGrid'
 
 Cores utilizadas na Koaris.
 
-## Neutrals
+## Theme roles
+
+Components use these roles, never palette values. Each role is a CSS variable
+holding RGB channels (`--accent: 193 63 39`), so alpha works in CSS
+(`rgb(var(--accent) / 0.4)`) and in Tailwind (`bg-accent/40`). The dark values
+apply automatically under `prefers-color-scheme: dark`; no `dark:` variants or
+class toggles are needed.
+
+Tailwind classes: `bg-bg` · `bg-surface` · `bg-surface-sunken` · `text-ink` ·
+`text-ink-muted` · `text-ink-faint` · `border-rule` · `bg-accent` /
+`text-accent` / `hover:bg-accent-hover` · `text-accent-contrast` ·
+`bg-accent-wash`.
+
+<Unstyled>
+    <ThemeGrid />
+</Unstyled>
+
+### Using the roles in your own Tailwind config
+
+`@koaris/bloom-ui/tailwind.css` defines the variables. To get the same utility
+classes in a Tailwind v3 project, extend the theme from `@koaris/tokens`:
+
+```ts
+import { semanticColors, semanticFonts, semanticRadii, semanticShadows } from '@koaris/tokens'
+
+export default {
+  darkMode: 'media',
+  theme: {
+    extend: {
+      colors: semanticColors,
+      fontFamily: semanticFonts,
+      borderRadius: semanticRadii,
+      boxShadow: semanticShadows,
+    },
+  },
+}
+```
+
+Radius: `rounded` (6px) for controls, `rounded-lg` (10px) for cards and frames.
+Fonts: Ubuntu Sans for text, `font-mono` (IBM Plex Mono) for data and code.
+
+## Palette
+
+### Neutrals
 <Unstyled>
     <ColorsGrid type="neutral" />
 </Unstyled>
 
-## Primary
+### Primary
 <Unstyled>
     <ColorsGrid type="orange"/>
 </Unstyled>
 
-## Others
+### Others
 <Unstyled>
     <ColorsGrid type="red"/>
     <ColorsGrid type="blue"/>

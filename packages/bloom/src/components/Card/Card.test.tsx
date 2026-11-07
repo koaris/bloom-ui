@@ -18,7 +18,7 @@ describe('Card', () => {
       'text-ink',
     )
     expect(screen.getByText('Styled').parentElement?.parentElement).toHaveClass(
-      'border-border',
+      'border-rule',
     )
   })
 

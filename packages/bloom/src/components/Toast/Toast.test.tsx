@@ -9,9 +9,11 @@ describe('Toast', () => {
     expect(screen.getByText('Success')).toBeInTheDocument()
   })
 
-  it('applies variant border classes', () => {
-    render(<Toast id="t2" message="Boom" variant="error" />)
-    expect(screen.getByText('Boom').closest('li')).toHaveClass('border-danger')
+  it('announces errors and warnings assertively, others politely', () => {
+    render(<Toast id="t2" message="Boom" variant="error" duration={0} />)
+    expect(screen.getByRole('alert')).toHaveTextContent('Boom')
+    render(<Toast id="t2b" message="Heads up" variant="info" duration={0} />)
+    expect(screen.getByRole('status')).toHaveTextContent('Heads up')
   })
 
   it('calls onDismiss when the close button is clicked', async () => {

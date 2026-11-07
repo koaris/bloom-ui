@@ -1,33 +1,18 @@
 {
   "name": "@koaris/tokens",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "Design tokens for the Koaris Technologies's bloom-ui design system. These tokens define the visual design primitives such as colors, typography, spacing, etc., providing a consistent style across the entire bloom-ui design system.",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
   "types": "./dist/index.d.ts",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
-    },
-    "./theme.css": "./src/theme.css",
-    "./themes/koaris.css": "./themes/koaris.css",
-    "./themes/koris.css": "./themes/koris.css"
-  },
   "scripts": {
     "build": "tsup src/index.ts --format esm, cjs --dts",
     "dev": "tsup src/index.ts --format esm, cjs --dts --watch",
     "lint": "eslint src --fix",
     "lint:ci": "eslint src"
   },
-  "sideEffects": [
-    "*.css"
-  ],
   "files": [
-    "dist",
-    "src/theme.css",
-    "themes"
+    "dist"
   ],
   "author": "guilhermesalviano",
   "homepage": "https://koaris.github.io/bloom-ui",

@@ -1,5 +1,5 @@
 import { twMerge } from 'tailwind-merge'
-import { User } from 'lucide-react'
+import { UserIcon } from '../icons'
 
 export interface AvatarProps {
   src?: string
@@ -25,7 +25,7 @@ export const Avatar = ({ className, src, alt = '', ...rest }: AvatarProps) => {
           {...rest}
         />
       ) : (
-        <User className="w-6 h-6 text-neutral" aria-hidden />
+        <UserIcon color="#FFFFFF" size={24} />
       )}
     </div>
   )
