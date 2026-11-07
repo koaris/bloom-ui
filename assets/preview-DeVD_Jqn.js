@@ -1,5 +1,5 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/DocsRenderer-CFRXHY34-4R4vhMBw.js","assets/iframe-BLCftX7p.js","assets/index-hC87BHQs.js","assets/_commonjsHelpers-CUmg6egw.js","assets/index-DpAlniPV.js","assets/jsx-runtime-x-ThabpI.js","assets/index-D0dBaOty.js","assets/index-DKJM7FmN.js","assets/index-CzFfxzC7.js","assets/react-18-CiQBUqTy.js"])))=>i.map(i=>d[i]);
-import { _ as __vitePreload } from "./iframe-BLCftX7p.js";
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/DocsRenderer-CFRXHY34-CcEr8t_K.js","assets/iframe-j4P_Rs-r.js","assets/index-hC87BHQs.js","assets/_commonjsHelpers-CUmg6egw.js","assets/index-DpAlniPV.js","assets/jsx-runtime-x-ThabpI.js","assets/index-D0dBaOty.js","assets/index-DKJM7FmN.js","assets/index-CzFfxzC7.js","assets/react-18-CiQBUqTy.js"])))=>i.map(i=>d[i]);
+import { _ as __vitePreload } from "./iframe-j4P_Rs-r.js";
 var __defProp = Object.defineProperty;
 var __export = (target, all) => {
   for (var name in all) __defProp(target, name, { get: all[name], enumerable: true });
@@ -10,7 +10,7 @@ var excludeTags = Object.entries(globalThis.TAGS_OPTIONS ?? {}).reduce((acc, ent
   let [tag, option] = entry;
   return option.excludeFromDocsStories && (acc[tag] = true), acc;
 }, {}), parameters = { docs: { renderer: async () => {
-  let { DocsRenderer } = await __vitePreload(() => import("./DocsRenderer-CFRXHY34-4R4vhMBw.js").then((n) => n.D), true ? __vite__mapDeps([0,1,2,3,4,5,6,7,8,9]) : void 0);
+  let { DocsRenderer } = await __vitePreload(() => import("./DocsRenderer-CFRXHY34-CcEr8t_K.js").then((n) => n.D), true ? __vite__mapDeps([0,1,2,3,4,5,6,7,8,9]) : void 0);
   return new DocsRenderer();
 }, stories: { filter: (story) => {
   var _a;
