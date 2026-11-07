@@ -6,6 +6,7 @@
   "license": "MIT",
   "scripts": {
     "lint": "eslint . --fix",
+    "lint:ci": "eslint .",
     "dev": "storybook dev -p 6006",
     "build": "storybook build -o docs-build && touch docs-build/.nojekyll",
     "build-storybook": "storybook build"
@@ -17,8 +18,8 @@
     "@koaris/ts-config": "*",
     "@storybook/addon-a11y": "8.6.19",
     "polished": "^4.2.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
     "react-icons": "^4.12.0"
   },
   "devDependencies": {
@@ -28,8 +29,8 @@
     "@storybook/react": "8.6.19",
     "@storybook/react-vite": "8.6.19",
     "@storybook/test": "8.6.19",
-    "@types/react": "^18.2.15",
-    "@types/react-dom": "^18.2.7",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^8.57.1",
     "storybook": "8.6.19",

@@ -1,6 +1,6 @@
 import type { StoryObj, Meta } from '@storybook/react'
 import { Button, ButtonProps } from '@koaris/bloom-ui'
-import { GrLinkNext } from "react-icons/gr"
+import { GrLinkNext } from 'react-icons/gr'
 
 export default {
   title: 'Form/Button',
@@ -12,7 +12,7 @@ export default {
     disabled: false,
     variant: 'primary',
     loading: false,
-    fullWidth: false
+    fullWidth: false,
   },
   argTypes: {
     size: {
@@ -20,7 +20,7 @@ export default {
       control: {
         type: 'select',
       },
-      description: 'Defines the size of the button'
+      description: 'Defines the size of the button',
     },
     variant: {
       options: ['primary', 'secondary', 'outline', 'ghost', 'link'],
@@ -28,33 +28,33 @@ export default {
         type: 'select',
       },
       description:
-        'Defines the visual style of the button. `secondary` is the default; keep `primary` for the one accent action on a screen.'
+        'Defines the visual style of the button. `secondary` is the default; keep `primary` for the one accent action on a screen.',
     },
     disabled: {
       control: {
         type: 'boolean',
       },
-      description: 'Whether the button is disabled'
+      description: 'Whether the button is disabled',
     },
     loading: {
       control: {
         type: 'boolean',
       },
-      description: 'Whether the button is in loading state'
+      description: 'Whether the button is in loading state',
     },
     fullWidth: {
       control: {
         type: 'boolean',
       },
-      description: 'Whether the button should take full width of its container'
+      description: 'Whether the button should take full width of its container',
     },
     startIcon: {
       control: false,
-      description: 'Icon to display at the start of the button'
+      description: 'Icon to display at the start of the button',
     },
     endIcon: {
       control: false,
-      description: 'Icon to display at the end of the button'
+      description: 'Icon to display at the end of the button',
     },
     onClick: {
       action: 'clicked',
@@ -66,7 +66,7 @@ export default {
         <Story />
       </div>
     ),
-  ]
+  ],
 } as Meta<ButtonProps>
 
 export const Primary: StoryObj<ButtonProps> = {}
@@ -140,14 +140,14 @@ export const Large: StoryObj<ButtonProps> = {
 export const WithStartIcon: StoryObj<ButtonProps> = {
   args: {
     children: 'Start Icon',
-    startIcon: <GrLinkNext />
+    startIcon: <GrLinkNext />,
   },
 }
 
 export const WithEndIcon: StoryObj<ButtonProps> = {
   args: {
     children: 'Próximo',
-    endIcon: <GrLinkNext />
+    endIcon: <GrLinkNext />,
   },
 }
 
@@ -155,7 +155,7 @@ export const WithBothIcons: StoryObj<ButtonProps> = {
   args: {
     children: 'Both Icons',
     startIcon: <GrLinkNext />,
-    endIcon: <GrLinkNext />
+    endIcon: <GrLinkNext />,
   },
 }
 
@@ -182,5 +182,5 @@ export const FullWidth: StoryObj<ButtonProps> = {
         <Story />
       </div>
     ),
-  ]
+  ],
 }

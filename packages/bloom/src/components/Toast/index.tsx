@@ -33,6 +33,9 @@ type ToastListener = (nextToasts: ToastProps[]) => void
 class ToastService {
   private listeners = new Set<ToastListener>()
   private toasts: ToastProps[] = []
+  // Monotonic counter so two toasts created in the same millisecond never
+  // share an id (closing one would close both)
+  private nextId = 0
 
   public subscribe(listener: ToastListener): () => void {
     this.listeners.add(listener)
@@ -46,7 +49,7 @@ class ToastService {
   }
 
   public showToast(toast: Omit<ToastProps, 'id' | 'onDismiss'>): string {
-    const id = `toast-${Date.now()}`
+    const id = `toast-${Date.now()}-${this.nextId++}`
     this.toasts.push({
       ...toast,
       id,
@@ -139,6 +142,7 @@ export const Toast: React.FC<ToastProps> = ({
   className,
 }) => {
   const [isRemoving, setIsRemoving] = useState(false)
+  const [isClosed, setIsClosed] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const [isFocused, setIsFocused] = useState(false)
   const remainingRef = useRef(duration)
@@ -152,7 +156,11 @@ export const Toast: React.FC<ToastProps> = ({
     if (removingRef.current) return
     removingRef.current = true
     setIsRemoving(true)
-    window.setTimeout(() => onDismissRef.current?.(id), EXIT_DURATION)
+    window.setTimeout(() => {
+      // Hide even without onDismiss, so a standalone <Toast> can close itself
+      setIsClosed(true)
+      onDismissRef.current?.(id)
+    }, EXIT_DURATION)
   }, [id])
 
   // Restart the countdown whenever the duration changes
@@ -170,6 +178,8 @@ export const Toast: React.FC<ToastProps> = ({
       remainingRef.current -= Date.now() - startedAt
     }
   }, [duration, isPaused, isRemoving, dismiss])
+
+  if (isClosed) return null
 
   const styles = variantStyles[variant]
   const isUrgent = variant === 'error' || variant === 'warning'

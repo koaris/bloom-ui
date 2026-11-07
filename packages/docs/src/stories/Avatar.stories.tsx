@@ -6,7 +6,7 @@ export default {
   component: Avatar,
   tags: ['autodocs'],
   args: {
-    src: "https://avatars.githubusercontent.com/u/36766110?v=4",
+    src: 'https://avatars.githubusercontent.com/u/36766110?v=4',
     alt: 'Guilherme',
   },
 } as Meta<AvatarProps>
@@ -18,5 +18,3 @@ export const WithFallback: StoryObj<AvatarProps> = {
     src: undefined,
   },
 }
-
-

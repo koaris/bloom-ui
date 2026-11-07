@@ -2,18 +2,12 @@ import type { StoryObj, Meta } from '@storybook/react'
 import { Toggle, ToggleProps } from '@koaris/bloom-ui'
 import { useState } from 'react'
 
-type ToggleWrapperProps = Omit<ToggleProps, "setActive">; 
+type ToggleWrapperProps = Omit<ToggleProps, 'setActive'>
 
 // A wrapper component to manage state for the Toggle in Storybook
 const ToggleWrapper = (args: ToggleWrapperProps) => {
   const [active, setActive] = useState(args.active)
-  return (
-    <Toggle
-      {...args}
-      active={active}
-      setActive={setActive}
-    />
-  )
+  return <Toggle {...args} active={active} setActive={setActive} />
 }
 
 export default {
@@ -23,7 +17,8 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'A customizable toggle switch component that can be used to switch between two states.'
+        component:
+          'A customizable toggle switch component that can be used to switch between two states.',
       },
     },
     controls: { sort: 'requiredFirst' },
@@ -77,7 +72,8 @@ export default {
     },
     hideLabel: {
       control: 'boolean',
-      description: 'Whether to hide the visual label (still accessible via ARIA)',
+      description:
+        'Whether to hide the visual label (still accessible via ARIA)',
       table: {
         type: { summary: 'boolean' },
         defaultValue: { summary: false },
@@ -92,7 +88,8 @@ export default {
     },
     id: {
       control: 'text',
-      description: 'Optional ID for the toggle (auto-generated if not provided)',
+      description:
+        'Optional ID for the toggle (auto-generated if not provided)',
       table: {
         type: { summary: 'string' },
       },
@@ -127,8 +124,16 @@ export const States: StoryObj<ToggleProps> = {
   render: () => (
     <div className="flex flex-col gap-4">
       <ToggleWrapper label="Active toggle" active={true} />
-      <ToggleWrapper label="Disabled toggle (off)" disabled={true} active={false} />
-      <ToggleWrapper label="Disabled toggle (on)" disabled={true} active={true} />
+      <ToggleWrapper
+        label="Disabled toggle (off)"
+        disabled={true}
+        active={false}
+      />
+      <ToggleWrapper
+        label="Disabled toggle (on)"
+        disabled={true}
+        active={true}
+      />
     </div>
   ),
 }
@@ -137,7 +142,7 @@ export const States: StoryObj<ToggleProps> = {
 export const HiddenLabel: StoryObj<ToggleProps> = {
   args: {
     hideLabel: true,
-    label: "Screen reader only label",
+    label: 'Screen reader only label',
   },
 }
 

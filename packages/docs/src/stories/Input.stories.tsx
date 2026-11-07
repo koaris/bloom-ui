@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Input, InputProps } from '@koaris/bloom-ui'
 
-
 export default {
   title: 'Components/Input',
   component: Input,
@@ -196,4 +195,4 @@ export const WithErrorAndHelper: StoryObj<InputProps> = {
     helperText: 'We will use this email to send you important updates',
     placeholder: 'Enter your email',
   },
-} 
+}

@@ -9,16 +9,14 @@ export default {
     size: 4,
     currentStep: 1,
   },
-  argTypes: {
-    
-  },
+  argTypes: {},
   decorators: [
     (Story) => (
       <Box>
         <Story />
       </Box>
     ),
-  ]
+  ],
 } as Meta<MultiStepProps>
 
 export const Default: StoryObj<MultiStepProps> = {}

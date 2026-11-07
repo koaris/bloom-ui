@@ -1,33 +1,50 @@
-import {
-  DetailedHTMLProps,
-  HTMLAttributes,
-  ReactNode,
-  useEffect,
-  useState,
-  useRef,
-} from 'react'
-import { twMerge } from 'tailwind-merge'
+import { ReactNode, ComponentPropsWithoutRef } from 'react'
+import * as Dialog from '@radix-ui/react-dialog'
+import { XIcon } from '../icons'
+import { cva } from 'class-variance-authority'
+import { cn } from '../../lib/utils'
 
-export interface ModalProps extends DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
+export interface ModalProps extends Omit<
+  ComponentPropsWithoutRef<typeof Dialog.Content>,
+  'title' | 'children'
 > {
   isOpen: boolean
   onClose: () => void
   title?: string
+  description?: string
   size?: 'sm' | 'md' | 'lg' | 'xl'
-  children: ReactNode
+  children?: ReactNode
   showCloseButton?: boolean
   closeOnOutsideClick?: boolean
   closeOnEsc?: boolean
   footer?: ReactNode
 }
 
+const modalVariants = cva(
+  // Fixed, centered and above the overlay (z-50). max-h lives here so the
+  // body below is the only scrolling region (no double scrollbars).
+  'fixed left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 flex flex-col max-h-[85vh] bg-surface text-ink rounded-lg shadow-xl focus:outline-hidden',
+  {
+    variants: {
+      size: {
+        sm: 'max-w-sm w-[calc(100%-2rem)]',
+        md: 'max-w-md w-[calc(100%-2rem)]',
+        lg: 'max-w-lg w-[calc(100%-2rem)]',
+        xl: 'max-w-xl w-[calc(100%-2rem)]',
+      },
+    },
+    defaultVariants: {
+      size: 'md',
+    },
+  },
+)
+
 export const Modal = ({
   className,
   isOpen,
   onClose,
   title,
+  description,
   size = 'md',
   children,
   showCloseButton = true,
@@ -36,119 +53,66 @@ export const Modal = ({
   footer,
   ...rest
 }: ModalProps) => {
-  const modalRef = useRef<HTMLDivElement>(null)
-  const portalRoot = useRef<HTMLElement | null>(null)
-  const [mounted, setMounted] = useState(false)
-
-  // Create portal root and manage body styles
-  useEffect(() => {
-    portalRoot.current = document.createElement('div')
-    portalRoot.current.id = 'bloom-ui-portal-root'
-    document.body.appendChild(portalRoot.current)
-    setMounted(true)
-
-    return () => {
-      portalRoot.current?.remove()
-      document.body.style.overflow = ''
-    }
-  }, [])
-
-  // Handle body overflow
-  useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
-    }
-  }, [isOpen])
-
-  // Handle ESC key press
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (isOpen && closeOnEsc && e.key === 'Escape') onClose()
-    }
-
-    document.addEventListener('keydown', handleKeyDown)
-    return () => document.removeEventListener('keydown', handleKeyDown)
-  }, [isOpen, onClose, closeOnEsc])
-
-  // Handle outside click
-  const handleBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (
-      closeOnOutsideClick &&
-      modalRef.current &&
-      !modalRef.current.contains(e.target as Node)
-    ) {
-      onClose()
-    }
+  const handleOpenChange = (open: boolean) => {
+    if (!open) onClose()
   }
-
-  // Size variants
-  const sizeClasses = {
-    sm: 'max-w-sm',
-    md: 'max-w-md',
-    lg: 'max-w-lg',
-    xl: 'max-w-xl',
-  }
-
-  if (!isOpen || !mounted || !portalRoot.current) return null
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black bg-opacity-50 transition-opacity duration-300"
-      onClick={handleBackdropClick}
-      aria-modal="true"
-      role="dialog"
-      {...rest}
-    >
-      <div
-        ref={modalRef}
-        className={twMerge(
-          `relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full 
-                    ${sizeClasses[size]} opacity-100 scale-100 
-                    transition-all duration-300 ease-in-out`,
-          className,
-        )}
-      >
-        {(title || showCloseButton) && (
-          <div className="flex items-center justify-between px-6 py-4 border-b border-gray-200 dark:border-gray-700">
-            {title && (
-              <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">
-                {title}
-              </h3>
-            )}
-            {showCloseButton && (
-              <button
-                type="button"
-                aria-label="Close modal"
-                onClick={onClose}
-                className="p-1 text-gray-400 hover:text-gray-500 focus:outline-hidden focus:ring-2 focus:ring-blue-500 rounded-full"
-              >
-                <svg
-                  className="h-5 w-5"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
+    <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
+      <Dialog.Portal>
+        <Dialog.Overlay className="fixed inset-0 z-50 bg-black/50 transition-opacity duration-300" />
+        <Dialog.Content
+          className={cn(modalVariants({ size }), className)}
+          onEscapeKeyDown={(e) => {
+            if (!closeOnEsc) e.preventDefault()
+          }}
+          onInteractOutside={(e) => {
+            if (!closeOnOutsideClick) e.preventDefault()
+          }}
+          aria-describedby={undefined}
+          {...rest}
+        >
+          {(title || showCloseButton) && (
+            <div className="flex items-center justify-between px-6 py-4 border-b border-rule shrink-0">
+              {title ? (
+                <Dialog.Title className="text-lg font-medium text-ink">
+                  {title}
+                </Dialog.Title>
+              ) : (
+                <Dialog.Title className="sr-only">Dialog</Dialog.Title>
+              )}
+              {showCloseButton && (
+                <Dialog.Close
+                  type="button"
+                  aria-label="Close modal"
+                  className="p-1 text-ink-muted hover:text-ink focus:outline-hidden focus-visible:ring-2 focus-visible:ring-accent rounded-full cursor-pointer"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </button>
+                  <XIcon className="h-5 w-5" />
+                </Dialog.Close>
+              )}
+            </div>
+          )}
+
+          {!title && !showCloseButton && (
+            <Dialog.Title className="sr-only">Dialog</Dialog.Title>
+          )}
+
+          <div className="px-6 py-4 overflow-y-auto">
+            {description && (
+              <Dialog.Description className="mb-2 text-sm text-ink-muted">
+                {description}
+              </Dialog.Description>
             )}
+            {children}
           </div>
-        )}
 
-        <div className="px-6 py-4 max-h-[70vh] overflow-y-auto">{children}</div>
-
-        {footer && (
-          <div className="px-6 py-4 border-t border-gray-200 dark:border-gray-700">
-            {footer}
-          </div>
-        )}
-      </div>
-    </div>
+          {footer ? (
+            <div className="px-6 py-4 border-t border-rule shrink-0">
+              {footer}
+            </div>
+          ) : null}
+        </Dialog.Content>
+      </Dialog.Portal>
+    </Dialog.Root>
   )
 }

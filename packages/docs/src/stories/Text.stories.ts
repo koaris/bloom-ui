@@ -1,6 +1,5 @@
-import type { Meta, StoryObj } from '@storybook/react';
-import { Text, TextProps } from '@koaris/bloom-ui';
-
+import type { Meta, StoryObj } from '@storybook/react'
+import { Text, TextProps } from '@koaris/bloom-ui'
 
 const meta: Meta<typeof Text> = {
   title: 'Components/Typography/Text',
@@ -25,14 +24,38 @@ const meta: Meta<typeof Text> = {
       description: 'Text content to be displayed',
     },
     color: {
-      options: ['primary', 'secondary', 'accent', 'neutral', 'success', 'warning', 'error', 'info'],
+      options: [
+        'primary',
+        'secondary',
+        'accent',
+        'neutral',
+        'success',
+        'warning',
+        'error',
+        'info',
+      ],
       control: {
         type: 'select',
       },
       description: 'Color theme of the text',
     },
     size: {
-      options: ['xxs', 'xs', 'sm', 'md', 'lg', 'xl', '2xl', '3xl', '4xl', '5xl', '6xl', '7xl', '8xl', '9xl'],
+      options: [
+        'xxs',
+        'xs',
+        'sm',
+        'md',
+        'lg',
+        'xl',
+        '2xl',
+        '3xl',
+        '4xl',
+        '5xl',
+        '6xl',
+        '7xl',
+        '8xl',
+        '9xl',
+      ],
       control: {
         type: 'select',
       },
@@ -46,7 +69,17 @@ const meta: Meta<typeof Text> = {
       description: 'HTML tag to be used for the text element',
     },
     weight: {
-      options: ['thin', 'extralight', 'light', 'normal', 'medium', 'semibold', 'bold', 'extrabold', 'black'],
+      options: [
+        'thin',
+        'extralight',
+        'light',
+        'normal',
+        'medium',
+        'semibold',
+        'bold',
+        'extrabold',
+        'black',
+      ],
       control: {
         type: 'select',
       },
@@ -92,25 +125,26 @@ const meta: Meta<typeof Text> = {
     },
     htmlFor: {
       control: 'text',
-      description: 'For label elements, specifies which form element it is bound to',
+      description:
+        'For label elements, specifies which form element it is bound to',
     },
-  }
-};
+  },
+}
 
-export default meta;
+export default meta
 
-type Story = StoryObj<typeof Text>;
+type Story = StoryObj<typeof Text>
 
 // Base Story
 export const Default: Story = {
   args: {
     children: 'Default text styling with neutral color and normal weight',
   },
-};
+}
 
 export const Playground: StoryObj<TextProps> = {
   args: {},
-};
+}
 
 export const InteractiveDemo: StoryObj<TextProps> = {
   args: {
@@ -125,4 +159,4 @@ export const InteractiveDemo: StoryObj<TextProps> = {
   parameters: {
     controls: { expanded: true },
   },
-};
+}

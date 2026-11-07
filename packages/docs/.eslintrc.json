@@ -1,3 +1,9 @@
 {
-  "extends": "@koaris/eslint-config"
+    "extends": "@koaris/eslint-config",
+    "ignorePatterns": [
+        "docs-build",
+        "storybook-static",
+        "node_modules",
+        "dist"
+    ]
 }

@@ -4,6 +4,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useId,
   forwardRef,
   ChangeEvent,
 } from 'react'
@@ -85,6 +86,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     }: InputProps,
     ref,
   ) => {
+    // Fall back to a generated id so the label, error and helper text stay
+    // linked to the input when no id is passed
+    const generatedId = useId()
+    const inputId = id ?? generatedId
     const [selected, setSelected] = useState(false)
     const [inputValue, setInputValue] = useState(value || '')
     const [passwordValidation, setPasswordValidation] =
@@ -394,7 +399,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       <div className="w-full">
         {label && (
           <label
-            htmlFor={id}
+            htmlFor={inputId}
             className="block text-sm font-medium text-gray-700 mb-1"
           >
             {label}
@@ -408,7 +413,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             required={required}
             disabled={disabled}
             ref={ref}
-            id={id}
+            id={inputId}
             className={inputClasses}
             onClick={onClick}
             onFocus={handleFocus}
@@ -418,7 +423,11 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
             value={inputValue}
             aria-invalid={error}
             aria-describedby={
-              error ? `${id}-error` : helperText ? `${id}-helper` : undefined
+              error
+                ? `${inputId}-error`
+                : helperText
+                  ? `${inputId}-helper`
+                  : undefined
             }
             {...rest}
           />
@@ -426,7 +435,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         {renderPasswordValidation()}
         {error && (
           <p
-            id={`${id}-error`}
+            id={`${inputId}-error`}
             className="mt-1 text-sm text-red-900"
             role="alert"
           >
@@ -434,7 +443,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           </p>
         )}
         {helperText && !error && (
-          <p id={`${id}-helper`} className="mt-1 text-sm text-gray-500">
+          <p id={`${inputId}-helper`} className="mt-1 text-sm text-gray-500">
             {helperText}
           </p>
         )}

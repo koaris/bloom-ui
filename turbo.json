@@ -8,12 +8,29 @@
         "build": {
             "outputs": [
                 "dist/**",
+                "tailwind.css",
                 "storybook-static/**",
                 "docs-build/**"
             ],
             "dependsOn": [
                 "^build"
             ]
-        }
+        },
+        "typecheck": {
+            "dependsOn": [
+                "^build"
+            ]
+        },
+        "test": {
+            "dependsOn": [
+                "build"
+            ]
+        },
+        "lint": {
+            "dependsOn": [
+                "^lint"
+            ]
+        },
+        "lint:ci": {}
     }
 }

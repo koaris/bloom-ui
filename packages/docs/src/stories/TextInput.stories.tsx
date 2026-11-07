@@ -7,7 +7,7 @@ export default {
   tags: ['autodocs'],
   args: {
     value: '',
-    type: "text",
+    type: 'text',
     prefix: 'koaris.com.br/appointment/',
     placeholder: 'seu-user',
   },
@@ -25,14 +25,14 @@ export default {
     onClick: {
       action: 'click',
     },
-  }
+  },
 } as Meta<TextInputProps>
 
 export const Primary: StoryObj<TextInputProps> = {}
 
 export const secondary: StoryObj<TextInputProps> = {
   args: {
-    variant: "secondary",
+    variant: 'secondary',
   },
 }
 
